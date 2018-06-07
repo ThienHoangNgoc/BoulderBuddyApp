@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDark2">
+
+
+    <RelativeLayout
+        android:id="@+id/card_view_r_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center">
+
+
+        <RelativeLayout
+            android:id="@+id/ratingBar_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <RatingBar
+                android:id="@+id/ratingBarEntry"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="3.5"
+                android:theme="@style/RatingBar2" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/halle_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_text"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:id="@+id/text_halle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black1_24dp"
+                android:text="Halle"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/text_halle_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Südbloc"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_halle_value"
+                android:background="@color/semiTransparent" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/datum_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/halle_rLayout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/text_datum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black1_24dp"
+                android:text="Datum"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/text_datum_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="25. Okt. 2017"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_datum_value"
+                android:background="@color/semiTransparent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/start_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/datum_rLayout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/text_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black1_24dp"
+                android:text="Start"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/text_start_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="11:30"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_start_value"
+                android:background="@color/semiTransparent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ende_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_rLayout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/text_ende"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black1_24dp"
+                android:text="Ende"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/text_ende_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="13:30"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_ende_value"
+                android:background="@color/semiTransparent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/erfahrung_rLayout"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ende_rLayout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/text_erfahrung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_location_on_black1_24dp"
+                android:text="Erfahrung"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/text_erfahrung_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="15 EXP"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_erfahrung_value"
+                android:layout_marginBottom="25dp"
+                android:background="@color/semiTransparent" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">BoulderBuddy</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="hallen">
+
+        <item>Südbloc</item>
+        <item>Ostbloc</item>
+        <item>BrightSide</item>
+        <item>Bouldergarten</item>
+        <item>Boulderclub</item>
+
+    </string-array>
+
+</resources>
