@@ -48,12 +48,13 @@
 
         <TextView
             android:id="@+id/lvl_id"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_corner"
             android:gravity="center"
+            android:textSize="10dp"
             android:text="121"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />

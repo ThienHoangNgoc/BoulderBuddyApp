@@ -92,14 +92,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void drawItemSelected(MenuItem item) {
 
-
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.profile:
-                progressBar.setProgress(10);
-                Toast.makeText(getApplicationContext(), "event", duration).show();
+                /*progressBar.setProgress(10);
+                Toast.makeText(getApplicationContext(), "event", duration).show();*/
+                intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.entries:
-                Intent intent = new Intent(getApplicationContext(), show_details_v2.class);
+                intent = new Intent(getApplicationContext(), show_details_v2.class);
                 startActivity(intent);
             case R.id.statistics:
             default:
@@ -132,8 +135,11 @@ public class MainActivity extends AppCompatActivity {
         entryCounter.add(item3);
         entryCounter.add(item4);
 
+
+
+
         int j;
-        for (j = 0; j < entryCounter.size(); j++) {
+        for (j = entryCounter.size() - 1; j >= 0; j--) {
             entryAdapter.add(entryCounter.get(j));
         }
 

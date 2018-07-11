@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rLayout_profile_1"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/background">
+
+        <Button
+            android:id="@+id/profile_cancel_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_arrow_back_black_24dp" />
+
+        <Button
+            android:id="@+id/profile_edit_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_edit_black_24dp" />
+
+        <TextView
+            android:id="@+id/profile_header_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Profile"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+
+        <RelativeLayout
+            android:id="@+id/profile_view_image_id"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:id="@+id/profile_view_image_id_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/profile_image_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="5dp">
+
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:baselineAlignBottom="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/photo" />
+
+
+                </android.support.v7.widget.CardView>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/lvl_id"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/rounded_corner"
+                android:gravity="center"
+                android:text="121"
+                android:textColor="@color/colorWhite"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/profile_name_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_view_image_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Chopperman"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+    <GridLayout
+        android:id="@+id/rLayout_profile_2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/rLayout_profile_1"
+        android:columnCount="2">
+
+        <RelativeLayout
+            android:id="@+id/rLayout_Current_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1"
+            android:background="@color/colorDark2">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/current_exp_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:text="345"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/current_exp_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/current_exp_value"
+                    android:text="Current Exp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10dp" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rLayout_next_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1"
+            android:background="@color/colorBackground2">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/next_exp_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:text="5"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/next_exp_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/next_exp_value"
+                    android:text="Exp for next LVL"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10dp" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </GridLayout>
+
+    <RelativeLayout
+        android:id="@+id/rLayout_profile_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rLayout_profile_2"
+        android:background="@color/colorGrayDark">
+
+
+
+        <Button
+            android:id="@+id/rank_info"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_info_outline_black_24dp" />
+
+        <TextView
+            android:id="@+id/rank_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="Rank"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:id="@+id/rank_symbol_id"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_below="@id/rank_text_id"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_spa_black_24dp" />
+
+        <TextView
+            android:id="@+id/rank_tier_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rank_symbol_id"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:text="Amethyst 3"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rank_lp_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rank_tier_id"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="2dp"
+            android:text="20 LP"
+            android:textColor="@color/colorWhite"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

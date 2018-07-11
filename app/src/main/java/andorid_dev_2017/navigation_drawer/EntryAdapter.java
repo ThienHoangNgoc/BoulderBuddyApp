@@ -64,7 +64,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getContext().getColor(R.color.colorGrayDark));
-                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getContext().getColor(R.color.colorGrayDark));
                     }
                 });
 
