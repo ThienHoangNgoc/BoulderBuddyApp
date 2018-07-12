@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(entryAdapter);
 
 
-
     }
 
 
@@ -104,7 +103,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.entries:
                 intent = new Intent(getApplicationContext(), show_details_v2.class);
                 startActivity(intent);
-            case R.id.statistics:
+            case R.id.search:
+                intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+
             default:
                 break;
         }
@@ -122,20 +125,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void createEntries(EntryAdapter entryAdapter){
+    public void createEntries(EntryAdapter entryAdapter) {
         final ArrayList<EntryItem> entryCounter = new ArrayList<>();
 
-        EntryItem item1 = new EntryItem("1","Südbloc","28.01.17",2.5f);
-        EntryItem item2 = new EntryItem("2","Ostbloc","04.03.17",3f);
-        EntryItem item3 = new EntryItem("3","Südbloc","07.04.17",3.5f);
-        EntryItem item4 = new EntryItem("4","Südbloc","28.04.17",3f);
+        EntryItem item1 = new EntryItem("1", "Südbloc", "28.01.17", 2.5f);
+        EntryItem item2 = new EntryItem("2", "Ostbloc", "04.03.17", 3f);
+        EntryItem item3 = new EntryItem("3", "Südbloc", "07.04.17", 3.5f);
+        EntryItem item4 = new EntryItem("4", "Südbloc", "28.04.17", 3f);
 
         entryCounter.add(item1);
         entryCounter.add(item2);
         entryCounter.add(item3);
         entryCounter.add(item4);
-
-
 
 
         int j;
@@ -144,11 +145,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
     }
-
-
 
 
 }
