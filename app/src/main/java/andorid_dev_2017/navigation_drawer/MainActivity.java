@@ -98,16 +98,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "event", duration).show();*/
                 intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
-
                 break;
-            case R.id.entries:
-                intent = new Intent(getApplicationContext(), show_details_v2.class);
-                startActivity(intent);
             case R.id.search:
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(intent);
-
-
+                break;
+            case R.id.achievements:
+                intent = new Intent(getApplicationContext(), AchievementActivity.class);
+                startActivity(intent);
             default:
                 break;
         }

@@ -19,6 +19,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText editText;
     Button searchBtn;
     Button clearBtn;
+    Button backBtn;
     final String LOGTAG = "SearchActivity";
     private ListView listView;
     private int duration = Toast.LENGTH_SHORT;
@@ -29,6 +30,14 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        backBtn = findViewById(R.id.search_back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
 
