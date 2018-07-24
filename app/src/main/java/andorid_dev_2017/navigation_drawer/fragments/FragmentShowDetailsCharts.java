@@ -30,7 +30,7 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.chart_fragment, container, false);
+        view = inflater.inflate(R.layout.show_details_chart_fragment, container, false);
 
         barChart = view.findViewById(R.id.horBarChart_02);
         barChart.getDescription().setEnabled(false);

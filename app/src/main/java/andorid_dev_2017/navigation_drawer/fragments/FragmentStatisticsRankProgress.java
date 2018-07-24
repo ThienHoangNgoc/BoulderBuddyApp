@@ -20,7 +20,7 @@ public class FragmentStatisticsRankProgress extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.rank_progress_chart_fragment,container,false);
+        view = inflater.inflate(R.layout.statistics_rank_progress_chart_fragment,container,false);
         return view;
     }
 

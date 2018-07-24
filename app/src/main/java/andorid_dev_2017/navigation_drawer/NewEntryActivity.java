@@ -2,6 +2,7 @@ package andorid_dev_2017.navigation_drawer;
 
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,37 +10,24 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
-import andorid_dev_2017.navigation_drawer.DatePicker;
-import andorid_dev_2017.navigation_drawer.R;
-import andorid_dev_2017.navigation_drawer.TimePickerFragment;
+import java.util.ArrayList;
 
 public class NewEntryActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    private final String LOGTAG = "NEW_ENTRY";
-
-    private AutoCompleteTextView autoCompleteTextView;
-    private String[] hall_names;
-    private EditText veryEasyValue;
-    private EditText easyValue;
-    private EditText startValue;
-    private EditText endValue;
-    private Button veryEasyPlus;
-    private Button veryEasyMinus;
-    private Button easyPlus;
-    private Button easyMinus;
-    private Button cancel_btn;
-    private String hour;
-    private String minute;
-
-    private DatePicker datePicker;
-
-
-
-    private int i;
-    private boolean isPlus;
-    private boolean timepickerOnStart;
+    private AutoCompleteTextView location;
+    private String[] location_names;
+    private DatePicker date;
+    private EditText startTime;
+    private EditText endTime;
+    //lets onTimeSet know for which view it has to set the text
+    private boolean timeViewPosition = true;
+    private EditText veryEasy;
+    private Button veryEasyClearBtn;
+    private EditText easy;
+    private Button easyClearBtn;
 
 
     @Override
@@ -47,118 +35,167 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_entry);
 
+        //location autocomplete setup
+        location = findViewById(R.id.step_1_location_autoComTextV_id);
+        location_names = getResources().getStringArray(R.array.hallen);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, location_names);
+        location.setAdapter(adapter);
 
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.test_autocomplete);
-        hall_names = getResources().getStringArray(R.array.hallen);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hall_names);
-        autoCompleteTextView.setAdapter(adapter);
+        //setup Datepicker
+        date = new DatePicker(this, findViewById(R.id.step_1_date_editText_id).getId());
 
-        datePicker = new DatePicker(this, findViewById(R.id.nE_date).getId());
-
-        cancel_btn = (Button) findViewById(R.id.cancel_btn_nE);
-        cancel_btn.setOnClickListener(new View.OnClickListener() {
+        //starting time
+        startTime = findViewById(R.id.step_1_startTime_editText_id);
+        startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        startValue = (EditText) findViewById(R.id.nE_start);
-        startValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timepickerOnStart = true;
+                timeViewPosition = true;
                 DialogFragment dialogFragment = new TimePickerFragment();
                 dialogFragment.show(getFragmentManager(), "time picker");
             }
         });
 
-        endValue = (EditText) findViewById(R.id.nE_end);
-        endValue.setOnClickListener(new View.OnClickListener() {
+        //ending time
+        endTime = findViewById(R.id.step_1_endTime_editText_id);
+        endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timepickerOnStart = false;
+                timeViewPosition = false;
                 DialogFragment dialogFragment = new TimePickerFragment();
                 dialogFragment.show(getFragmentManager(), "time picker");
             }
         });
 
-        veryEasyPlus = (Button) findViewById(R.id.btn_plus);
-        veryEasyMinus = (Button) findViewById(R.id.btn_minus);
-        veryEasyValue = (EditText) findViewById(R.id.vE_EdTex);
-
-        easyPlus = (Button) findViewById(R.id.btn_plus1);
-        easyMinus = (Button) findViewById(R.id.btn_minus1);
-        easyValue = (EditText) findViewById(R.id.vE_EdTex1);
-
-        easyPlus.setOnClickListener(new View.OnClickListener() {
+        //create dialog for veryEasy difficulty
+        veryEasy = findViewById(R.id.step_2_veryEasy_editText_id);
+        veryEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isPlus = true;
-                onOperatorClick(easyValue);
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(NewEntryActivity.this);
+                final View mView = getLayoutInflater().inflate(R.layout.new_entry_very_easy_dialog, null);
+                final NumberPicker picker = mView.findViewById(R.id.veryEasy_number_picker_id);
+                //create the range for the NumberPicker
+                ArrayList<String> numbers = new ArrayList<>();
+                for (int i = 0; i <= 100; i++) {
+                    numbers.add(i + "");
+                }
+                String[] data = numbers.toArray(new String[numbers.size()]);
+                picker.setMinValue(0);
+                picker.setMaxValue(99);
+                if(!veryEasy.getText().toString().equals("")){
+                    picker.setValue(Integer.parseInt(veryEasy.getText().toString()));
+                }
+                picker.setDisplayedValues(data);
+                //initialize select and cancel Buttons with mView
+                Button sBtn = mView.findViewById(R.id.new_entry_dialog_veryEasy_select_btn_id);
+                Button cBtn = mView.findViewById(R.id.new_entry_dialog_veryEasy_cancel_btn_id);
+                //create the Dialog
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                sBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        veryEasy.setText(picker.getValue() + "");
+                        dialog.cancel();
+                    }
+                });
+                cBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+
+                    }
+                });
+
+            }
+        });
+        //clear content from very easy
+        veryEasyClearBtn = findViewById(R.id.reset_btn_veryEasy);
+        veryEasyClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                veryEasy.setText("");
             }
         });
 
-        easyMinus.setOnClickListener(new View.OnClickListener() {
+        //create dialog for easy difficulty
+        easy = findViewById(R.id.step_2_easy_editText_id);
+        easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isPlus = false;
-                onOperatorClick(easyValue);
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(NewEntryActivity.this);
+                final View mView = getLayoutInflater().inflate(R.layout.new_entry_easy_dialog, null);
+                final NumberPicker picker = mView.findViewById(R.id.easy_number_picker_id);
+                //create the range for the NumberPicker
+                ArrayList<String> numbers = new ArrayList<>();
+                for (int i = 0; i <= 100; i++) {
+                    numbers.add(i + "");
+                }
+                String[] data = numbers.toArray(new String[numbers.size()]);
+                picker.setMinValue(0);
+                picker.setMaxValue(99);
+                if(!easy.getText().toString().equals("")){
+                    picker.setValue(Integer.parseInt(easy.getText().toString()));
+                }
+                picker.setDisplayedValues(data);
+                //initialize select and cancel Buttons with mView
+                Button sBtn = mView.findViewById(R.id.new_entry_dialog_easy_select_btn_id);
+                Button cBtn = mView.findViewById(R.id.new_entry_dialog_easy_cancel_btn_id);
+                //create the Dialog
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                sBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        easy.setText(picker.getValue() + "");
+                        dialog.cancel();
+                    }
+                });
+                cBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+
+                    }
+                });
+
+            }
+        });
+        //clear content from easy
+        easyClearBtn = findViewById(R.id.reset_btn_easy);
+        easyClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                easy.setText("");
             }
         });
 
-        veryEasyPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isPlus = true;
-                onOperatorClick(veryEasyValue);
-            }
-        });
-
-        veryEasyMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isPlus = false;
-                onOperatorClick(veryEasyValue);
-            }
-        });
 
 
     }
 
 
-    private void onOperatorClick(EditText difValue) {
-        if (isPlus) {
-            i = Integer.parseInt(difValue.getText() + "");
-            i++;
-            difValue.setText(i + "");
-        } else {
-            if (i > 0) {
-                i = Integer.parseInt(difValue.getText() + "");
-                i--;
-            }
-
-            difValue.setText(i + "");
-        }
-    }
-
+    //sets the text from the TimePicker
     @Override
-    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+    public void onTimeSet(TimePicker timePicker, int h, int m) {
 
-        hour = i + "";
-        minute = i1 + "";
+        String hour = h + "";
+        String minute = m + "";
 
-        if (i < 10) {
-            hour = "0" + i;
+        if (h < 10) {
+            hour = "0" + h;
         }
-        if (i1 < 10) {
-            minute = "0" + i1;
+
+        if (m < 10) {
+            minute = "0" + m;
         }
-        if (timepickerOnStart) {
-            startValue.setText(hour + ":" + minute);
+
+        if (timeViewPosition) {
+            startTime.setText(hour + ":" + minute);
         } else {
-            endValue.setText(hour + ":" + minute);
+            endTime.setText(hour + ":" + minute);
         }
-
     }
 }

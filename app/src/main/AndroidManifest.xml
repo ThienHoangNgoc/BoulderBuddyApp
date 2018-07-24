@@ -17,14 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewEntryActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".ShowDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".show_details_v2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
@@ -40,7 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SettingsActivity" />
         <activity
-            android:name=".NewEntryV2"
+            android:name=".NewEntryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

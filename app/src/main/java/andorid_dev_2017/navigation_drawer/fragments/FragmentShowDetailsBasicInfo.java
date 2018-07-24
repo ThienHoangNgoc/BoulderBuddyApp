@@ -19,7 +19,7 @@ public class FragmentShowDetailsBasicInfo extends android.support.v4.app.Fragmen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.basic_info_fragment,container,false);
+        view = inflater.inflate(R.layout.show_details_basic_info_fragment,container,false);
         return view;
     }
 }

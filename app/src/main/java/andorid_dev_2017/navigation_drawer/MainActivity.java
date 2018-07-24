@@ -43,24 +43,26 @@ public class MainActivity extends AppCompatActivity {
         mDrawlayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setupDrawerContent(nView);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NewEntryV2.class);
-                startActivity(intent);
-            }
-        });
+
 
         headerView = nView.getHeaderView(0);
         progressBar = (ProgressBar) headerView.findViewById(R.id.progressBar);
         progressBar.setProgress(45);
 
 
-        //create Entries
+        //new entry button
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewEntryActivity.class);
+                startActivity(intent);
+            }
+        });
 
+
+        //create Entries
         ArrayList<EntryItem> arrayOfEntryItems = new ArrayList<>();
         EntryAdapter entryAdapter = new EntryAdapter(this, arrayOfEntryItems);
         createEntries(entryAdapter);
@@ -85,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.profile:
-                /*progressBar.setProgress(10);
-                Toast.makeText(getApplicationContext(), "event", duration).show();*/
                 intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
                 break;
@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.logout:
-                intent = new Intent(getApplicationContext(), NewEntryActivity.class);
-                startActivity(intent);
                 break;
             default:
                 break;

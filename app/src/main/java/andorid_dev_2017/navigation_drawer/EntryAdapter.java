@@ -73,7 +73,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), show_details_v2.class);
+                Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
                 getContext().startActivity(intent);
             }
         });

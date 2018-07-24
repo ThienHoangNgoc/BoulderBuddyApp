@@ -33,7 +33,7 @@ public class FragmentAchievementTrophyCase extends Fragment {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
-                View mView = getLayoutInflater().inflate(R.layout.achievement_1_description, null);
+                View mView = getLayoutInflater().inflate(R.layout.achievement_1_description_dialog, null);
                 mBuilder.setView(mView);
 
                 AlertDialog dialog = mBuilder.create();
