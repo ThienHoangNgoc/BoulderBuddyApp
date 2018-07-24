@@ -6,6 +6,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.ViewPagerAdapter;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsBasicInfo;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsChartProgress;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsRankProgress;
+
 public class StatisticsActivity extends AppCompatActivity {
 
 
@@ -24,7 +30,7 @@ public class StatisticsActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //Adding Fragments
         adapter.AddFragment(new FragmentStatisticsBasicInfo(),"Basic Stats");
-        adapter.AddFragment(new FragmentStatisticsRankProgress(),"Progress");
+        adapter.AddFragment(new FragmentStatisticsChartProgress(),"Progress");
         adapter.AddFragment(new FragmentStatisticsRankProgress(),"Rank");
 
 

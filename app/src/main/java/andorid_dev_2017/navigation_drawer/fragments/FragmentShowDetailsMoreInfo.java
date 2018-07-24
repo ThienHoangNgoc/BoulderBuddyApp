@@ -1,16 +1,17 @@
-package andorid_dev_2017.navigation_drawer;
+package andorid_dev_2017.navigation_drawer.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentMoreInfo extends android.support.v4.app.Fragment {
+import andorid_dev_2017.navigation_drawer.R;
+
+public class FragmentShowDetailsMoreInfo extends android.support.v4.app.Fragment {
     View view;
 
-    public FragmentMoreInfo() {
+    public FragmentShowDetailsMoreInfo() {
 
     }
 

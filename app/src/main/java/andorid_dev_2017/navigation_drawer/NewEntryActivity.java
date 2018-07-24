@@ -2,17 +2,18 @@ package andorid_dev_2017.navigation_drawer;
 
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import andorid_dev_2017.navigation_drawer.DatePicker;
+import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.TimePickerFragment;
 
 public class NewEntryActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 

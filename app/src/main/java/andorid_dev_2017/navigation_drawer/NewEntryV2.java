@@ -2,9 +2,6 @@ package andorid_dev_2017.navigation_drawer;
 
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +11,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;

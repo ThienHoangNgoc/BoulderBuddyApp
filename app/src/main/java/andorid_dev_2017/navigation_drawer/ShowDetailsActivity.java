@@ -1,6 +1,5 @@
 package andorid_dev_2017.navigation_drawer;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,9 +10,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+
+import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.XAxisFormatter;
+import andorid_dev_2017.navigation_drawer.YAxisValueFormatter;
 
 public class ShowDetailsActivity extends AppCompatActivity {
 

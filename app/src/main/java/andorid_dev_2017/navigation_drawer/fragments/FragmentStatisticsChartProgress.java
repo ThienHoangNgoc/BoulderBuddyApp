@@ -1,4 +1,4 @@
-package andorid_dev_2017.navigation_drawer;
+package andorid_dev_2017.navigation_drawer.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,19 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentStatisticsRankProgress extends Fragment {
+import andorid_dev_2017.navigation_drawer.R;
+
+public class FragmentStatisticsChartProgress extends Fragment{
 
     View view;
 
-    public FragmentStatisticsRankProgress(){
+    public FragmentStatisticsChartProgress(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.rank_progress_chart_fragment,container,false);
+        view = inflater.inflate(R.layout.statistics_chart_progress_fragment,container,false);
         return view;
     }
-
 }

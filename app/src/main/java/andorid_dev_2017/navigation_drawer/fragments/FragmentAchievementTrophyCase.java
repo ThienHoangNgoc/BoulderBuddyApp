@@ -1,4 +1,4 @@
-package andorid_dev_2017.navigation_drawer;
+package andorid_dev_2017.navigation_drawer.fragments;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class FragmentTrophyCase extends Fragment {
+import andorid_dev_2017.navigation_drawer.R;
+
+public class FragmentAchievementTrophyCase extends Fragment {
 
     View view;
     ImageView imageView;
 
-    public FragmentTrophyCase() {
+    public FragmentAchievementTrophyCase() {
 
     }
 

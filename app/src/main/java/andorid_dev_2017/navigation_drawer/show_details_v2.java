@@ -5,18 +5,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-
-import java.util.ArrayList;
+import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.ViewPagerAdapter;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsBasicInfo;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsCharts;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsMoreInfo;
 
 public class show_details_v2 extends AppCompatActivity {
 
@@ -35,9 +29,9 @@ public class show_details_v2 extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager_id);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //Adding Fragments
-        adapter.AddFragment(new FragmentBasicInfo(),"Basic Info");
-        adapter.AddFragment(new FragmentChart(),"Chart");
-        adapter.AddFragment(new FragmentMoreInfo(), "More Info");
+        adapter.AddFragment(new FragmentShowDetailsBasicInfo(),"Basic Info");
+        adapter.AddFragment(new FragmentShowDetailsCharts(),"Chart");
+        adapter.AddFragment(new FragmentShowDetailsMoreInfo(), "More Info");
         //adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
