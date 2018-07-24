@@ -5,23 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AchievementActivity">
+    tools:context=".StatisticsActivity">
 
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/achievement_appBar_id"
+        android:id="@+id/Statistic_appBar_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/achievements_header_text_id"
+            android:id="@+id/Statistics_header_text_id"
             android:layout_width="275dp"
             android:layout_height="50dp"
 
             android:gravity="center"
-            android:text="Achievements"
+            android:text="Statistics"
             android:textColor="@color/colorWhite"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -30,10 +30,10 @@
 
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/achievement_table_layout_id"
+        android:id="@+id/Statistic_table_layout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/achievement_appBar_id"
+        android:layout_below="@id/Statistic_appBar_id"
         android:background="@color/colorBackground2"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorWhite"
@@ -46,10 +46,10 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/achievement_viewPager_id"
+        android:id="@+id/Statistic_viewPager_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/achievement_table_layout_id"
+        android:layout_below="@id/Statistic_table_layout_id"
         android:background="@color/colorDark2">
 
 

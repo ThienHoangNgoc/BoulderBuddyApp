@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), NewEntryActivity.class);
+                Intent intent = new Intent(getApplicationContext(), NewEntryV2.class);
                 startActivity(intent);
             }
         });
@@ -106,6 +106,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.achievements:
                 intent = new Intent(getApplicationContext(), AchievementActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.statistics:
+                intent = new Intent(getApplicationContext(), StatisticsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.settings:
+                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logout:
+                intent = new Intent(getApplicationContext(), NewEntryActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

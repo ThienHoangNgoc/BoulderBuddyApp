@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/header_search"
+        android:id="@+id/header_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Selecet Date"
+        android:text="Select Quantity"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -16,82 +16,46 @@
         android:id="@+id/view_id"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/header_search"
+        android:layout_below="@id/header_id"
         android:layout_marginTop="3dp"
         android:background="@color/colorDark2" />
 
 
-    <GridLayout
-        android:id="@+id/grid_layout"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rLayout_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view_id"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:columnCount="2">
-
-
-        <TextView
-            android:layout_columnWeight="1"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:text="Month"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="Year"
-            android:textSize="20dp"
-            android:textStyle="bold"
-
-            />
+        android:layout_below="@id/view_id">
 
         <NumberPicker
-            android:id="@+id/picker"
+            android:id="@+id/easy_number_picker_id"
             android:layout_width="wrap_content"
             android:layout_height="163dp"
-            android:layout_columnWeight="1"
-            android:layout_marginRight="10dp"
-            android:descendantFocusability="blocksDescendants"
-            android:focusable="false"
-            android:focusableInTouchMode="false">
-
-
-        </NumberPicker>
-
-        <NumberPicker
-            android:id="@+id/picker2"
-            android:layout_width="wrap_content"
-            android:layout_height="163dp"
-            android:layout_columnWeight="1"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:descendantFocusability="blocksDescendants">
 
-
         </NumberPicker>
 
+    </RelativeLayout>
 
-    </GridLayout>
 
     <View
-        android:id="@+id/view_id2"
+        android:id="@+id/view2_id"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/grid_layout"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/rLayout_id"
+
         android:background="@color/semiTransparent2" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/view_id2"
+        android:layout_below="@id/view2_id"
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/cancel_btn_1"
+            android:id="@+id/new_entry_dialog_easy_cancel_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -101,7 +65,7 @@
             android:text="Cancel" />
 
         <Button
-            android:id="@+id/select_btn_1"
+            android:id="@+id/new_entry_dialog_easy_select_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

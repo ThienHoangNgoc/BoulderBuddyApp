@@ -74,9 +74,10 @@
 
             <Button
                 android:id="@+id/search_btn_go"
-                android:layout_width="40dp"
+                android:layout_width="41dp"
                 android:layout_height="40dp"
                 android:layout_below="@id/view_id_3"
+                android:layout_marginLeft="-1dp"
                 android:layout_toRightOf="@id/reset_btn"
                 android:background="@color/colorDark2"
                 android:drawableStart="@drawable/ic_search2_black_24dp" />

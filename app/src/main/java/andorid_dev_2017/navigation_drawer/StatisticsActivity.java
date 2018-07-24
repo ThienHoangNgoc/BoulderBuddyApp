@@ -6,7 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class AchievementActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity {
+
 
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
@@ -15,15 +16,17 @@ public class AchievementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_achievement);
+        setContentView(R.layout.activity_statistics);
 
-        tabLayout = (TabLayout) findViewById(R.id.achievement_table_layout_id);
-        appBarLayout = (AppBarLayout) findViewById(R.id.achievement_appBar_id);
-        viewPager = (ViewPager) findViewById(R.id.achievement_viewPager_id);
+        tabLayout = (TabLayout) findViewById(R.id.Statistic_table_layout_id);
+        appBarLayout = (AppBarLayout) findViewById(R.id.Statistic_appBar_id);
+        viewPager = (ViewPager) findViewById(R.id.Statistic_viewPager_id);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //Adding Fragments
-        adapter.AddFragment(new FragmentTrophyCase(),"Trophy Case");
-        adapter.AddFragment(new FragmentProgress(),"Progress");
+        adapter.AddFragment(new FragmentStatisticsBasicInfo(),"Basic Stats");
+        adapter.AddFragment(new FragmentStatisticsRankProgress(),"Progress");
+        adapter.AddFragment(new FragmentStatisticsRankProgress(),"Rank");
+
 
         //adapter Setup
         viewPager.setAdapter(adapter);

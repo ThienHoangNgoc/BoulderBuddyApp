@@ -20,8 +20,7 @@ import java.util.ArrayList;
 
 public class show_details_v2 extends AppCompatActivity {
 
-    private BarChart barChart;
-    private HorizontalBarChart hBarChart;
+
 
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
