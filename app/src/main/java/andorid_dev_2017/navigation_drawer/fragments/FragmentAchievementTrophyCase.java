@@ -35,15 +35,12 @@ public class FragmentAchievementTrophyCase extends Fragment {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
                 View mView = getLayoutInflater().inflate(R.layout.achievement_1_description_dialog, null);
                 mBuilder.setView(mView);
-
                 AlertDialog dialog = mBuilder.create();
+                //show the background color of the XML
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                //width and height
-                /* dialog.getWindow().setLayout(550,900);*/
+                //change dialog window size - width and height
 
                 dialog.show();
-
-
 
 
             }

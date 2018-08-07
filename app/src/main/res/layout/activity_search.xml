@@ -8,13 +8,14 @@
     <RelativeLayout
         android:id="@+id/rLayout_main_search"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
 
 
         <RelativeLayout
             android:id="@+id/header_search_rLayout"
             android:layout_width="match_parent"
+            android:background="@color/colorPrimaryDark"
             android:layout_height="60dp">
 
 
@@ -45,7 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header_search_rLayout"
             android:layout_centerInParent="true"
-            android:layout_marginTop="10dp">
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
 
             <View
                 android:id="@+id/view_id_3"

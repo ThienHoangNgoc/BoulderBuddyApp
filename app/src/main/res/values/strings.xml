@@ -2,6 +2,32 @@
     <string name="app_name">BoulderBuddy</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="rank_text_size_1">15dp</string>
+    <string name="rank_text_size_2">15dp</string>
+    <string name="rankInfo">
+        Rank Tiers: \n
+        Silver - Very Easy\n
+        Gold - Easy\n
+        Amethyst - Advanced\n
+        Ruby - Hard\n
+        Emerald - Very Hard\n
+        Diamond - Extremely Hard\n
+        \n
+        Every league has 5 division reaching from 1 to 5, where 1 is the highest and 5 the lowest.
+        \n
+        Gain LP (league points): \n
+        Complete enough routes according to your rank in one session. \n
+        Loose LP: \n
+        Not able to complete enough routes according to your rank in one session. \n
+        Ranking up in divisions: \n
+        Reach 100 LP and rank up automatically in to the next higher division. \n
+        Fall in divisions: \n
+        Reach 0 LP and fall automatically in to the next lower division. \n
+        Promotion: \n
+        Reach 100 LP at the highest division and complete 3 routes of the next rank tier within the next 3 sessions. \n
+        Demotion: \n
+        Reach 0 LP at the lowest division and if you fail to complete 3 routes of your current rank tier within the next 2 sessions. \n
+    </string>
 
     <string-array name="hallen">
 

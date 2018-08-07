@@ -1,6 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="20dp">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/rank_info_title_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Rank Info"
+                android:textColor="@color/colorBlack"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_1_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_title_id"
+                android:layout_marginTop="10dp"
+                android:text="Rank Tiers:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_1_id"
+                android:layout_marginTop="5dp"
+                android:text="Silver = Very Easy"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_2"
+                android:layout_marginTop="5dp"
+                android:text="Gold = Easy"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_3"
+                android:layout_marginTop="5dp"
+                android:text="Amethyst = Advanced"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_4"
+                android:layout_marginTop="5dp"
+                android:text="Ruby = Hard"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_5"
+                android:layout_marginTop="5dp"
+                android:text="Emerald = Very Hard"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_6"
+                android:layout_marginTop="5dp"
+                android:text="Diamond = Extremely Hard"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_7"
+                android:layout_marginTop="5dp"
+                android:text="Every league has 5 division reaching from 1 to 5, where 1 is the highest and 5 the lowest."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_8"
+                android:layout_marginTop="5dp"
+                android:text="Gain LP (league points): "
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_9"
+                android:layout_marginTop="5dp"
+                android:text="Complete enough routes according to your rank in one session."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_10"
+                android:layout_marginTop="5dp"
+                android:text="Loose LP:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_11"
+                android:layout_marginTop="5dp"
+                android:text="Not able to complete enough routes according to your rank in one session."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_12"
+                android:layout_marginTop="5dp"
+                android:text="Ranking up in divisions:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_13"
+                android:layout_marginTop="5dp"
+                android:text="Reach 100 LP and rank up automatically in to the next higher division."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_14"
+                android:layout_marginTop="5dp"
+                android:text="Fall in divisions:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_15"
+                android:layout_marginTop="5dp"
+                android:text="Reach 0 LP and fall automatically in to the next lower division."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_16"
+                android:layout_marginTop="5dp"
+                android:text="Promotion to next higher tier:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_17"
+                android:layout_marginTop="5dp"
+                android:text="Reach 100 LP at the highest division and complete 3 routes of the next rank tier within the next 3 sessions."
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rank_info_text_19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_18"
+                android:layout_marginTop="5dp"
+                android:text="Demotion to the next lower tier:"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rank_info_text_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rank_info_text_19"
+                android:layout_marginTop="5dp"
+                android:text="Reach 0 LP at the lowest division and if you fail to complete 3 routes of your current rank tier within the next 2 sessions."
+                android:textColor="@color/colorBlack"
+                android:layout_marginBottom="30dp"
+                android:textSize="15dp" />
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</android.support.v7.widget.CardView>
