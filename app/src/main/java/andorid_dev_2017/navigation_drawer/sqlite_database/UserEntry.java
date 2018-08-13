@@ -12,6 +12,10 @@ public abstract class UserEntry implements BaseColumns {
     public static final String COLUMN_NAME_EXP = "Exp";
     public static final String COLUMN_NAME_RANK = "Rank";
     public static final String COLUMN_NAME_RANK_POINTS = "RankPoints";
+    public static final String COLUMN_NAME_PROFILE_PICTURE = "ProfilePicture";
+    public static final String COLUMN_NAME_LOGIN_STATUS = "LoginStatus";
+
+
 
 
 }

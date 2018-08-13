@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+
+import java.io.ByteArrayOutputStream;
 
 public class SQLiteDbUserContract {
 
@@ -23,7 +26,7 @@ public class SQLiteDbUserContract {
     }
 
     public void insertEntry(String name, String password, String lastLogin, String exp,
-                            String rank, String rankPoints) {
+                            String rank, String rankPoints, Bitmap bitmap, String loginStatus) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         int id = getNumberOfEntries(UserEntry.TABLE_NAME) + 1;
         ContentValues values = new ContentValues();
@@ -34,6 +37,9 @@ public class SQLiteDbUserContract {
         values.put(UserEntry.COLUMN_NAME_EXP, exp);
         values.put(UserEntry.COLUMN_NAME_RANK, rank);
         values.put(UserEntry.COLUMN_NAME_RANK_POINTS, rankPoints);
+        values.put(UserEntry.COLUMN_NAME_PROFILE_PICTURE, getBitmapAsByteArray(bitmap));
+        values.put(UserEntry.COLUMN_NAME_LOGIN_STATUS, loginStatus);
+
 
         long newRowID;
         newRowID = db.insert(
@@ -43,28 +49,31 @@ public class SQLiteDbUserContract {
 
     }
 
-    public void updateOneColum(String columnName, String newValue, String rowID){
+    public void updateOneColum(String columnName, String newValue, String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         String columnNameDB = "";
-        switch (columnName){
-            case "name":
+        switch (columnName) {
+            case "Name":
                 columnNameDB = UserEntry.COLUMN_NAME_USERNAME;
                 break;
-            case "password":
+            case "Password":
                 columnNameDB = UserEntry.COLUMN_NAME_PASSWORD;
                 break;
-            case "lastLogin":
+            case "LastLogin":
                 columnNameDB = UserEntry.COLUMN_NAME_LAST_LOGIN;
                 break;
-            case "exp":
+            case "Exp":
                 columnNameDB = UserEntry.COLUMN_NAME_EXP;
                 break;
-            case "rank":
+            case "Rank":
                 columnNameDB = UserEntry.COLUMN_NAME_RANK;
                 break;
-            case "rankPoints":
+            case "RankPoints":
                 columnNameDB = UserEntry.COLUMN_NAME_RANK_POINTS;
+                break;
+            case "LoginStatus":
+                columnNameDB = UserEntry.COLUMN_NAME_PROFILE_PICTURE;
                 break;
             default:
                 columnNameDB = "invalid columnName";
@@ -75,18 +84,23 @@ public class SQLiteDbUserContract {
 
     }
 
-    public void deleteRow(String rowID){
+    public void updateImage(Bitmap img, String rowID) {
+        SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.COLUMN_NAME_PROFILE_PICTURE, getBitmapAsByteArray(img));
+        db.update(UserEntry.TABLE_NAME, values, "Id=" + rowID, null);
+    }
+
+    public void deleteRow(String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         db.delete(UserEntry.TABLE_NAME, "Id=" + rowID, null);
 
     }
 
-    public void deleteAllEntires(){
+    public void deleteAllEntires() {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         db.execSQL(SQLiteDbHelper.SQL_DELETE_ENTRIES_USER);
         db.execSQL(SQLiteDbHelper.SQL_CREATE_ENTRIES_USER);
-
-
     }
 
     public Cursor readEntry() {
@@ -99,6 +113,8 @@ public class SQLiteDbUserContract {
                 UserEntry.COLUMN_NAME_EXP,
                 UserEntry.COLUMN_NAME_RANK,
                 UserEntry.COLUMN_NAME_RANK_POINTS,
+                UserEntry.COLUMN_NAME_PROFILE_PICTURE,
+                UserEntry.COLUMN_NAME_LOGIN_STATUS,
         };
 
         String sortOrder = UserEntry.COLUMN_NAME_ENTRY_ID + " ASC";
@@ -112,6 +128,18 @@ public class SQLiteDbUserContract {
                 sortOrder
         );
         return c;
+    }
+
+
+    //Bitmap to ByteArray for BLOB
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        } else {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+            return outputStream.toByteArray();
+        }
     }
 
 

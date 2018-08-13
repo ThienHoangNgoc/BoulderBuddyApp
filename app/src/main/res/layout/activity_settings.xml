@@ -2,17 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDark2"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@color/colorDark2">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/stay_logged_in_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Stay Logged In"
+            android:layout_marginRight="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite" />
+
+        <Switch
+            android:id="@+id/login_status_switch_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/SwitchCompatTheme"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/stay_logged_in_text_id" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

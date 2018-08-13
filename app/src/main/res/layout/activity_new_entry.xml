@@ -74,7 +74,6 @@
                         android:layout_marginTop="30dp">
 
 
-
                         <AutoCompleteTextView
                             android:id="@+id/step_1_location_autoComTextV_id"
                             android:layout_width="match_parent"
@@ -512,7 +511,63 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
-                        android:text="Step 3: Rate Your Session"
+                        android:text="Step 3: Add Pictures"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rLayout_new_entry_pictures_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/step_3_text_header_id"
+                        android:layout_marginBottom="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="50dp">
+
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerInParent="true"
+                            android:adjustViewBounds="true"
+                            android:maxHeight="150dp"
+                            android:maxWidth="150dp"
+                            android:minHeight="10dp"
+                            android:minWidth="10dp"
+                            android:src="@drawable/ic_add_circle_black_24dp" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_step_4_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/card_view_step_3_id"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/colorDark2"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/step_4_text_header_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:text="Step 4: Rate Your Session"
                         android:textColor="@color/colorWhite"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -522,14 +577,14 @@
                         android:id="@+id/rLayout_new_entry_ratingBar_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/step_3_text_header_id"
+                        android:layout_below="@id/step_4_text_header_id"
                         android:layout_marginBottom="50dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="30dp">
 
                         <RatingBar
-                            android:id="@+id/step_3_ratingBar_id"
+                            android:id="@+id/step_4_ratingBar_id"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_centerHorizontal="true"
@@ -548,7 +603,7 @@
                 android:id="@+id/card_view_confirm_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_view_step_3_id"
+                android:layout_below="@id/card_view_step_4_id"
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp"

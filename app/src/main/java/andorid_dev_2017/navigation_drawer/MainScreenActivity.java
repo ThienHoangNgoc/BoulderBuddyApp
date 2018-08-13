@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainScreenActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawlayout;
     private ActionBarDrawerToggle mToggle;

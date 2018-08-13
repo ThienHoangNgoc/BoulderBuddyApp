@@ -24,4 +24,8 @@
         <item name="colorControlActivated">@color/StarColor2</item>
     </style>
 
+    <style name="SwitchCompatTheme" >
+        <item name="colorControlActivated">@color/colorBlue</item>
+    </style>
+
 </resources>

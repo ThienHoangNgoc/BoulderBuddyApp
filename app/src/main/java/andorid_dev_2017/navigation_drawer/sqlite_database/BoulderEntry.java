@@ -4,6 +4,8 @@ import android.provider.BaseColumns;
 
 public abstract class BoulderEntry implements BaseColumns{
 
+
+
     public static final String TABLE_NAME = "boulder_entries";
     public static final String COLUMN_NAME_ENTRY_ID = "Id";
     public static final String COLUMN_NAME_LOCATION = "Location";
@@ -19,7 +21,7 @@ public abstract class BoulderEntry implements BaseColumns{
     public static final String COLUMN_NAME_SURPRISING = "Surprising";
     public static final String COLUMN_NAME_RATING = "Rating";
     public static final String COLUMN_NAME_EXP = "Exp";
-    public static final String COLUMN_NAME_NOTES = "Notes";
+    public static final String COLUMN_NAME_CREATOR = "Creator";
 
 
 }

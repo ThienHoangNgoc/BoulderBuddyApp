@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+
 public class SQLiteDbEntryContract {
 
     SQLiteDbHelper sqLiteDbHelper;
@@ -24,12 +26,12 @@ public class SQLiteDbEntryContract {
     }
 
 
-    public void insertEntry(String creator, String location, String date, String startTime,
+    public void insertEntry(String location, String date, String startTime,
                             String endTime,
                             String veryEasy, String easy, String advanced,
                             String hard, String veryHard, String extremelyHard,
                             String surprising,
-                            String rating, String exp, String notes) {
+                            String rating, String exp, String creator) {
 
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         int id = getNumberOfEntries(BoulderEntry.TABLE_NAME) + 1;
@@ -49,7 +51,7 @@ public class SQLiteDbEntryContract {
         values.put(BoulderEntry.COLUMN_NAME_SURPRISING, surprising);
         values.put(BoulderEntry.COLUMN_NAME_RATING, rating);
         values.put(BoulderEntry.COLUMN_NAME_EXP, exp);
-        values.put(BoulderEntry.COLUMN_NAME_NOTES, notes);
+        values.put(BoulderEntry.COLUMN_NAME_CREATOR, creator);
 
 
         long newRowID;
@@ -60,7 +62,8 @@ public class SQLiteDbEntryContract {
 
     }
 
-    public void deleteRow(String rowID){
+
+    public void deleteRow(String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         db.delete(BoulderEntry.TABLE_NAME, "Id=" + rowID, null);
 
@@ -90,7 +93,7 @@ public class SQLiteDbEntryContract {
                 BoulderEntry.COLUMN_NAME_SURPRISING,
                 BoulderEntry.COLUMN_NAME_RATING,
                 BoulderEntry.COLUMN_NAME_EXP,
-                BoulderEntry.COLUMN_NAME_NOTES,
+                BoulderEntry.COLUMN_NAME_CREATOR,
         };
 
         String sortOrder = BoulderEntry.COLUMN_NAME_ENTRY_ID + " ASC";
@@ -105,4 +108,6 @@ public class SQLiteDbEntryContract {
         );
         return c;
     }
+
+
 }

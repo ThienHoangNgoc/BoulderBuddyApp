@@ -6,11 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "boulder_entries.db";
 
     public static final String COMMA_SEP = ",";
     public static final String TEXT_TYPE = " TEXT";
+    public static final String IMAGE_TYPE = " BLOB";
 
 
     //Table for entries
@@ -30,7 +31,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                     BoulderEntry.COLUMN_NAME_SURPRISING + TEXT_TYPE + COMMA_SEP +
                     BoulderEntry.COLUMN_NAME_RATING + TEXT_TYPE + COMMA_SEP +
                     BoulderEntry.COLUMN_NAME_EXP + TEXT_TYPE + COMMA_SEP +
-                    BoulderEntry.COLUMN_NAME_NOTES + TEXT_TYPE +
+                    BoulderEntry.COLUMN_NAME_CREATOR + TEXT_TYPE +
                     " )";
 
     //Create Table String for User_entries
@@ -42,8 +43,20 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                     UserEntry.COLUMN_NAME_LAST_LOGIN + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_EXP + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_RANK + TEXT_TYPE + COMMA_SEP +
-                    UserEntry.COLUMN_NAME_RANK_POINTS + TEXT_TYPE +
+                    UserEntry.COLUMN_NAME_RANK_POINTS + TEXT_TYPE + COMMA_SEP +
+                    UserEntry.COLUMN_NAME_PROFILE_PICTURE + IMAGE_TYPE + COMMA_SEP +
+                    UserEntry.COLUMN_NAME_LOGIN_STATUS + TEXT_TYPE +
                     " )";
+
+    //Create Table String for Image_db
+    public static final String SQL_CREATE_IMAGE_DB =
+            "CREATE TABLE " + ImageDB.TABLE_NAME + " (" +
+                    ImageDB.COLUMN_NAME_IMAGE_ID + " INTENGER PRIMARY KEY," +
+                    ImageDB.COLUMN_NAME_CREATOR + TEXT_TYPE + COMMA_SEP +
+                    ImageDB.COLUMN_NAME_ENTRY_NUMBER + TEXT_TYPE + COMMA_SEP +
+                    ImageDB.COLUMN_NAME_IMAGE + IMAGE_TYPE +
+                    " )";
+
 
     //Delete Table String for entries
     public static final String SQL_DELETE_ENTRIES =
@@ -53,6 +66,10 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //Delete Table String for User_entries
     public static final String SQL_DELETE_ENTRIES_USER =
             "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
+
+    //Delete Table String for User_entries
+    public static final String SQL_DELETE_IMAGE_DB =
+            "DROP TABLE IF EXISTS " + ImageDB.TABLE_NAME;
 
 
     public SQLiteDbHelper(Context context) {
@@ -64,12 +81,15 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES_USER);
+        db.execSQL(SQL_CREATE_IMAGE_DB);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(SQL_CREATE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES_USER);
+        db.execSQL(SQL_DELETE_ENTRIES_USER);
+        db.execSQL(SQL_DELETE_ENTRIES);
+        db.execSQL(SQL_DELETE_IMAGE_DB);
+        onCreate(db);
     }
 }
