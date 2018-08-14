@@ -107,6 +107,8 @@ public class MainScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.logout:
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

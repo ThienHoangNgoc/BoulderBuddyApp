@@ -527,17 +527,52 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="50dp">
 
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                        <GridLayout
+                            android:id="@+id/step_3_image_grid_view_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:adjustViewBounds="true"
-                            android:maxHeight="150dp"
-                            android:maxWidth="150dp"
-                            android:minHeight="10dp"
-                            android:minWidth="10dp"
-                            android:src="@drawable/ic_add_circle_black_24dp" />
+                            android:columnCount="4">
+
+
+                            <Button
+                                android:id="@+id/step_3_image_grid_view_add_btn_id"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_columnWeight="1"
+                                android:background="@drawable/ic_add_black_24dp"
+                                android:padding="0.5dp" />
+
+                            <ImageView
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_columnWeight="1"
+                                android:padding="0.5dp"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <ImageView
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_columnWeight="1"
+                                android:padding="0.5dp"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <ImageView
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_columnWeight="1"
+                                android:padding="0.5dp"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <ImageView
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
+                                android:layout_columnWeight="1"
+                                android:padding="0.5dp"
+                                android:src="@mipmap/ic_launcher" />
+
+
+                        </GridLayout>
 
 
                     </RelativeLayout>
