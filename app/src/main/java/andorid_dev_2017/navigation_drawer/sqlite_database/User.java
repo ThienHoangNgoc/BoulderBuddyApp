@@ -1,6 +1,11 @@
 package andorid_dev_2017.navigation_drawer.sqlite_database;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class User {
+
 
     String id;
     String username;
@@ -9,11 +14,13 @@ public class User {
     String exp;
     String rank;
     String rankPoints;
+    Bitmap profileImage;
     String loginStatus;
+
 
     public User(String id, String username, String password,
                 String lastLogin, String exp, String rank,
-                String rankPoints, String loginStatus) {
+                String rankPoints, Bitmap profileImage, String loginStatus) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -21,6 +28,8 @@ public class User {
         this.exp = exp;
         this.rank = rank;
         this.rankPoints = rankPoints;
+        this.profileImage = profileImage;
+
         this.loginStatus = loginStatus;
     }
 
@@ -84,7 +93,17 @@ public class User {
         return loginStatus;
     }
 
+    public Bitmap getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(Bitmap profileImage) {
+        this.profileImage = profileImage;
+    }
+
     public void setLoginStatus(String loginStatus) {
         this.loginStatus = loginStatus;
     }
+
+
 }

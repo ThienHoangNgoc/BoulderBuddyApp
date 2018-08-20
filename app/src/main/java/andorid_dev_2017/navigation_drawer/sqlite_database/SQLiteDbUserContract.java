@@ -30,7 +30,7 @@ public class SQLiteDbUserContract {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         int id = getNumberOfEntries(UserEntry.TABLE_NAME) + 1;
         ContentValues values = new ContentValues();
-        values.put(UserEntry.COLUMN_NAME_ENTRY_ID, id);
+        values.put(UserEntry.COLUMN_NAME_USER_ID, id);
         values.put(UserEntry.COLUMN_NAME_USERNAME, name);
         values.put(UserEntry.COLUMN_NAME_PASSWORD, password);
         values.put(UserEntry.COLUMN_NAME_LAST_LOGIN, lastLogin);
@@ -106,7 +106,7 @@ public class SQLiteDbUserContract {
     public Cursor readEntry() {
         SQLiteDatabase db = sqLiteDbHelper.getReadableDatabase();
         String[] projection = {
-                UserEntry.COLUMN_NAME_ENTRY_ID,
+                UserEntry.COLUMN_NAME_USER_ID,
                 UserEntry.COLUMN_NAME_USERNAME,
                 UserEntry.COLUMN_NAME_PASSWORD,
                 UserEntry.COLUMN_NAME_LAST_LOGIN,
@@ -117,7 +117,7 @@ public class SQLiteDbUserContract {
                 UserEntry.COLUMN_NAME_LOGIN_STATUS,
         };
 
-        String sortOrder = UserEntry.COLUMN_NAME_ENTRY_ID + " ASC";
+        String sortOrder = UserEntry.COLUMN_NAME_USER_ID + " ASC";
         Cursor c = db.query(
                 UserEntry.TABLE_NAME,
                 projection,

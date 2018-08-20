@@ -21,7 +21,7 @@
             android:gravity="center">
 
             <RatingBar
-                android:id="@+id/ratingBarEntry"
+                android:id="@+id/show_details_fragment_1_rating_bar_id"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,16 +43,15 @@
             android:layout_marginTop="40dp">
 
             <TextView
-                android:id="@+id/text_halle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location_on_black1_24dp"
-                android:text="Halle"
+                android:text="Location"
                 android:textColor="@color/colorWhite"
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_halle_value"
+                android:id="@+id/show_details_fragment_1_location_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -63,7 +62,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/text_halle_value"
+                android:layout_below="@id/show_details_fragment_1_location_text_id"
                 android:background="@color/semiTransparent" />
 
 
@@ -77,16 +76,15 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/text_datum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location_on_black1_24dp"
-                android:text="Datum"
+                android:text="Date"
                 android:textColor="@color/colorWhite"
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_datum_value"
+                android:id="@+id/show_details_fragment_1_date_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -97,7 +95,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/text_datum_value"
+                android:layout_below="@id/show_details_fragment_1_date_text_id"
                 android:background="@color/semiTransparent" />
 
         </RelativeLayout>
@@ -110,7 +108,6 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/text_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location_on_black1_24dp"
@@ -119,7 +116,7 @@
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_start_value"
+                android:id="@+id/show_details_fragment_1_start_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -130,7 +127,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/text_start_value"
+                android:layout_below="@id/show_details_fragment_1_start_text_id"
                 android:background="@color/semiTransparent" />
 
         </RelativeLayout>
@@ -143,16 +140,15 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/text_ende"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location_on_black1_24dp"
-                android:text="Ende"
+                android:text="End"
                 android:textColor="@color/colorWhite"
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_ende_value"
+                android:id="@+id/show_details_fragment_1_end_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -163,7 +159,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/text_ende_value"
+                android:layout_below="@id/show_details_fragment_1_end_text_id"
                 android:background="@color/semiTransparent" />
 
         </RelativeLayout>
@@ -176,16 +172,15 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/text_erfahrung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_location_on_black1_24dp"
-                android:text="Erfahrung"
+                android:text="Exp"
                 android:textColor="@color/colorWhite"
                 android:textSize="25dp" />
 
             <TextView
-                android:id="@+id/text_erfahrung_value"
+                android:id="@+id/show_details_fragment_1_exp_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -196,7 +191,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/text_erfahrung_value"
+                android:layout_below="@id/show_details_fragment_1_exp_text_id"
                 android:layout_marginBottom="25dp"
                 android:background="@color/semiTransparent" />
 

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,46 +18,64 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.User;
+import andorid_dev_2017.navigation_drawer.sqlite_database.UserEntry;
+
 public class EntryAdapter extends ArrayAdapter<EntryItem> {
+
+    private SQLiteDbEntryContract sqLiteDbEntryContract = new SQLiteDbEntryContract(getContext());
+    private SQLiteDbUserContract sqLiteDbUserContract = new SQLiteDbUserContract(getContext());
 
 
     public EntryAdapter(Context context, ArrayList<EntryItem> entryList) {
         super(context, 0, entryList);
     }
 
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+
         final EntryItem entryItem = getItem(position);
+
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main_list_item, parent, false);
         }
 
-        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar_inMain_id);
-        TextView entryNumber = (TextView) convertView.findViewById(R.id.entry_number_id);
-        TextView hallName = (TextView) convertView.findViewById(R.id.hall_id);
-        TextView date = (TextView) convertView.findViewById(R.id.date_id);
-        Button deleteBtn = (Button) convertView.findViewById(R.id.delete_btn_inMain_id);
-        RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.list_item_main_rLayout_id);
+        RatingBar ratingBar = convertView.findViewById(R.id.ratingBar_inMain_id);
+        TextView entryNumber = convertView.findViewById(R.id.entry_number_id);
+        TextView hallName = convertView.findViewById(R.id.hall_id);
+        TextView date = convertView.findViewById(R.id.date_id);
+        Button deleteBtn = convertView.findViewById(R.id.delete_btn_inMain_id);
+        RelativeLayout relativeLayout = convertView.findViewById(R.id.list_item_main_rLayout_id);
 
         ratingBar.setRating(entryItem.getRating());
         entryNumber.setText("Eintrag #" + entryItem.getId());
         hallName.setText(entryItem.getHall());
         date.setText(entryItem.getDate());
+
+
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-                final AlertDialog dialog = builder.setMessage("Eintrag löschen?")
+                final AlertDialog dialog = builder.setMessage("Delete entry?")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getContext(), "Eintrag wurde gelöscht.(Dummy Text)", Toast.LENGTH_SHORT).show();
+                                sqLiteDbEntryContract.deleteRow(getBoulderEntry(entryItem.getId()).getId());
+                                //call method from mainScreenActivity
+                                ((MainScreenActivity) getContext()).onDeleteClick();
+                                Toast.makeText(getContext(), "Entry has been deleted.", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton("Cancel", null).create();
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -74,6 +94,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ShowDetailsActivity.class);
+                intent.putExtra("entry_id_key", entryItem.getId());
                 getContext().startActivity(intent);
             }
         });
@@ -81,4 +102,61 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
 
         return convertView;
     }
+
+
+    //gets an entry from the db based on the id
+    public Entry getBoulderEntry(String id) {
+        Entry entry;
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)).equals(id)) {
+                entry = new Entry(id,
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_LOCATION)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_DATE)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_START_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_END_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ADVANCED)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXTREMELY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_SURPRISING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXP)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR))
+                );
+                return entry;
+            }
+            cursor.moveToNext();
+        }
+        return null;
+    }
+
+    //create Entries
+    public ArrayList<EntryItem> createEntries(String loggedInUser) {
+        ArrayList<EntryItem> entryList = new ArrayList<>();
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
+                    Entry boulderEntry = getBoulderEntry(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
+                    EntryItem entryItem = new EntryItem(boulderEntry.getId(), boulderEntry.getLocation(),
+                            boulderEntry.getDate(), Float.parseFloat(boulderEntry.getRating()));
+                    entryList.add(entryItem);
+                }
+                cursor.moveToNext();
+
+            }
+
+        }
+        //newest entries first
+        return entryList;
+
+
+    }
+
+
 }

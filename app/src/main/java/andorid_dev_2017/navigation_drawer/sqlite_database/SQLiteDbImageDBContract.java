@@ -68,7 +68,7 @@ public class SQLiteDbImageDBContract {
                 ImageDB.COLUMN_NAME_IMAGE,
         };
 
-        String sortOrder = UserEntry.COLUMN_NAME_ENTRY_ID + " ASC";
+        String sortOrder = UserEntry.COLUMN_NAME_USER_ID + " ASC";
         Cursor c = db.query(
                 UserEntry.TABLE_NAME,
                 projection,

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "boulder_entries.db";
 
     public static final String COMMA_SEP = ",";
@@ -17,7 +17,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //Table for entries
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + BoulderEntry.TABLE_NAME + " (" +
-                    BoulderEntry.COLUMN_NAME_ENTRY_ID + " INTENGER PRIMARY KEY," +
+                    BoulderEntry.COLUMN_NAME_ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     BoulderEntry.COLUMN_NAME_LOCATION + TEXT_TYPE + COMMA_SEP +
                     BoulderEntry.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
                     BoulderEntry.COLUMN_NAME_START_TIME + TEXT_TYPE + COMMA_SEP +
@@ -37,7 +37,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //Create Table String for User_entries
     public static final String SQL_CREATE_ENTRIES_USER =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
-                    UserEntry.COLUMN_NAME_ENTRY_ID + " INTENGER PRIMARY KEY," +
+                    UserEntry.COLUMN_NAME_USER_ID + " INTEGER PRIMARY KEY," +
                     UserEntry.COLUMN_NAME_USERNAME + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_PASSWORD + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_LAST_LOGIN + TEXT_TYPE + COMMA_SEP +
@@ -51,7 +51,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //Create Table String for Image_db
     public static final String SQL_CREATE_IMAGE_DB =
             "CREATE TABLE " + ImageDB.TABLE_NAME + " (" +
-                    ImageDB.COLUMN_NAME_IMAGE_ID + " INTENGER PRIMARY KEY," +
+                    ImageDB.COLUMN_NAME_IMAGE_ID + " INTEGER PRIMARY KEY," +
                     ImageDB.COLUMN_NAME_CREATOR + TEXT_TYPE + COMMA_SEP +
                     ImageDB.COLUMN_NAME_ENTRY_NUMBER + TEXT_TYPE + COMMA_SEP +
                     ImageDB.COLUMN_NAME_IMAGE + IMAGE_TYPE +

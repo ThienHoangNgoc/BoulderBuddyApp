@@ -18,10 +18,14 @@ public class ShowDetailsActivity extends AppCompatActivity {
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_details);
+
+
+
         tabLayout = (TabLayout) findViewById(R.id.tablelayout_id);
         appBarLayout = (AppBarLayout) findViewById(R.id.appBar_id);
         viewPager = (ViewPager) findViewById(R.id.viewPager_id);
@@ -29,15 +33,16 @@ public class ShowDetailsActivity extends AppCompatActivity {
         //Adding Fragments
         adapter.AddFragment(new FragmentShowDetailsBasicInfo(),"Basic Info");
         adapter.AddFragment(new FragmentShowDetailsCharts(),"Chart");
-        adapter.AddFragment(new FragmentShowDetailsMoreInfo(), "More Info");
+        adapter.AddFragment(new FragmentShowDetailsMoreInfo(), "Pictures");
         //adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
         //chart Setup
 
 
 
 
     }
+
+
 }

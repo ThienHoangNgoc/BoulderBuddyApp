@@ -12,8 +12,9 @@ import java.util.List;
 
 public class NewEntryGridViewEntryAdapter extends ArrayAdapter<NewEntryGridViewItem> {
 
-    public NewEntryGridViewEntryAdapter(@NonNull Context context, int resource, @NonNull List<NewEntryGridViewItem> objects) {
-        super(context, resource, objects);
+
+    public NewEntryGridViewEntryAdapter(@NonNull Context context, @NonNull List<NewEntryGridViewItem> objects) {
+        super(context, 0, objects);
     }
 
     @NonNull

@@ -12,6 +12,12 @@
         android:background="@drawable/background">
 
         <ImageView
+            android:id="@+id/register_dummy_image_id"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:visibility="invisible" />
+
+        <ImageView
             android:id="@+id/register_app_icon_image_view_id"
             android:layout_width="120dp"
             android:layout_height="120dp"

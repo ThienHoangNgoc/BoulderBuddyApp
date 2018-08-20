@@ -26,6 +26,8 @@ public class SQLiteDbEntryContract {
     }
 
 
+
+
     public void insertEntry(String location, String date, String startTime,
                             String endTime,
                             String veryEasy, String easy, String advanced,
@@ -34,10 +36,7 @@ public class SQLiteDbEntryContract {
                             String rating, String exp, String creator) {
 
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
-        int id = getNumberOfEntries(BoulderEntry.TABLE_NAME) + 1;
-        Log.d("id", "getNumberOfEntries " + id);
         ContentValues values = new ContentValues();
-        values.put(BoulderEntry.COLUMN_NAME_ENTRY_ID, id);
         values.put(BoulderEntry.COLUMN_NAME_LOCATION, location);
         values.put(BoulderEntry.COLUMN_NAME_DATE, date);
         values.put(BoulderEntry.COLUMN_NAME_START_TIME, startTime);

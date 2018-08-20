@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.io.ByteArrayOutputStream;
 
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.User;
@@ -28,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private SQLiteDbUserContract sqLiteDbUserContract;
 
     private User user;
-    private String userId;
+    private String lastActiveUserId;
 
     private int toastDuration = Toast.LENGTH_SHORT;
 
@@ -38,26 +40,30 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //User Database Setup
+        sqLiteDbUserContract = new SQLiteDbUserContract(getApplicationContext());
+
         //setup views
         usernameEditText = findViewById(R.id.login_username_edit_text_id);
         passwordEditText = findViewById(R.id.login_password_edit_text_id);
         loginBtn = findViewById(R.id.login_login_btn_id);
         createAccTextView = findViewById(R.id.login_create_new_acc_text_id);
 
-        //User Database Setup
-        sqLiteDbUserContract = new SQLiteDbUserContract(getApplicationContext());
 
         //Check if last user wanted to stay logged in
-        SharedPreferences prefsUserId = this.getSharedPreferences(
-                "lastUserId", Context.MODE_PRIVATE);
-
-        userId = prefsUserId.getString("user_id_key", "");
-
-        if (!userId.equals("")) {
-            user = getUserEntry(userId);
-            if (user.getLoginStatus().equals("stayLogged")) {
-                startActivity(new Intent(getApplicationContext(), MainScreenActivity.class));
-                finish();
+        Cursor cursor = sqLiteDbUserContract.readEntry();
+        if (cursor.getCount() > 0) {
+            SharedPreferences prefsUserId = this.getSharedPreferences(
+                    "lastUserId", Context.MODE_PRIVATE);
+            lastActiveUserId = prefsUserId.getString("user_id_key", "");
+            if (!lastActiveUserId.equals("")) {
+                user = getUserEntry(lastActiveUserId);
+                if (user.getLoginStatus().equals("stayLogged")) {
+                    Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                    intent.putExtra("username_key", getUserEntry(lastActiveUserId).getUsername());
+                    startActivity(intent);
+                    finish();
+                }
             }
         }
 
@@ -80,21 +86,23 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //gets a user from the db
+    //gets a user from the db based on the id
     public User getUserEntry(String id) {
         User user;
         Cursor cursor = sqLiteDbUserContract.readEntry();
         cursor.moveToFirst();
         for (int i = 0; i < cursor.getCount(); i++) {
-            if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_ENTRY_ID)).equals(id)) {
+            if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USER_ID)).equals(id)) {
                 user = new User(id,
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PASSWORD)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LAST_LOGIN)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
-                        cursor.getColumnName(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PASSWORD)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LAST_LOGIN)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
+                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
+                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
                 );
                 return user;
             }
@@ -160,4 +168,6 @@ public class LoginActivity extends AppCompatActivity {
     public void toastCreator(String toastText) {
         Toast.makeText(getApplicationContext(), toastText, toastDuration).show();
     }
+
+
 }
