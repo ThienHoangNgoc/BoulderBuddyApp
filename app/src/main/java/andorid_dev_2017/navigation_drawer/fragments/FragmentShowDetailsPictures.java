@@ -1,44 +1,54 @@
 package andorid_dev_2017.navigation_drawer.fragments;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
+import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import andorid_dev_2017.navigation_drawer.ImageGridViewItem;
 import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.ShowPicturesFragmentGridViewEntryAdapter;
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.ImageDB;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbImageDBContract;
 
-public class FragmentShowDetailsBasicInfo extends android.support.v4.app.Fragment {
-
-
+public class FragmentShowDetailsPictures extends android.support.v4.app.Fragment {
     View view;
-    TextView locationText;
-    TextView dateText;
-    TextView startText;
-    TextView endText;
-    TextView expText;
-    RatingBar ratingBar;
-
     String entryId;
-
+    String creator;
+    Bitmap bitmap;
+    TextView noImageText;
+    GridView imageGridView;
+    SQLiteDbImageDBContract sqLiteDbImageDBContract;
     SQLiteDbEntryContract sqLiteDbEntryContract;
+    private final static String LOGTAG = "ShowDetailsPicFragment";
 
-    public FragmentShowDetailsBasicInfo() {
+
+    private ArrayList<ImageGridViewItem> arrayOfImages;
+    private ShowPicturesFragmentGridViewEntryAdapter gridViewEntryAdapter;
+
+    public FragmentShowDetailsPictures() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.show_details_basic_info_fragment, container, false);
+        view = inflater.inflate(R.layout.show_details_pictures_fragment, container, false);
 
-        //setup database
+        //Setup Database
+        sqLiteDbImageDBContract = new SQLiteDbImageDBContract(getContext());
         sqLiteDbEntryContract = new SQLiteDbEntryContract(getContext());
 
         //get the extras from the Activity
@@ -47,32 +57,40 @@ public class FragmentShowDetailsBasicInfo extends android.support.v4.app.Fragmen
             entryId = extras.getString("entry_id_key");
         }
 
+        //Setup views
+        noImageText = view.findViewById(R.id.show_details_fragment_3_no_image_text_id);
+        imageGridView = view.findViewById(R.id.show_details_fragment_3_image_grid_view_id);
+
+        //Setup gridView
+        arrayOfImages = new ArrayList<>();
+        gridViewEntryAdapter = new ShowPicturesFragmentGridViewEntryAdapter(getContext(), arrayOfImages);
+        imageGridView.setAdapter(gridViewEntryAdapter);
 
 
-        //Setup views;
-        locationText = view.findViewById(R.id.show_details_fragment_1_location_text_id);
-        dateText = view.findViewById(R.id.show_details_fragment_1_date_text_id);
-        startText = view.findViewById(R.id.show_details_fragment_1_start_text_id);
-        endText = view.findViewById(R.id.show_details_fragment_1_end_text_id);
-        expText = view.findViewById(R.id.show_details_fragment_1_exp_text_id);
-        ratingBar = view.findViewById(R.id.show_details_fragment_1_rating_bar_id);
+        Cursor cursor = sqLiteDbImageDBContract.readEntry();
+        createLog("Curser Count: " + cursor.getCount());
+        if (cursor.getCount() < 0) {
+            return view;
+        } else {
+            creator = getBoulderEntry(entryId).getCreator();
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                if (cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_CREATOR)).equals(creator) &&
+                        cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_ENTRY_NUMBER)).equals(entryId)) {
+                    bitmap = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndex(ImageDB.COLUMN_NAME_IMAGE)));
+                    ImageGridViewItem gridViewItem = new ImageGridViewItem(bitmap);
+                    gridViewEntryAdapter.add(gridViewItem);
+                    gridViewEntryAdapter.notifyDataSetChanged();
+                    noImageText.setVisibility(View.INVISIBLE);
 
-        setupData();
+                }
+                cursor.moveToNext();
+            }
+
+        }
 
 
         return view;
-    }
-
-    public void setupData() {
-        Entry boulderEntry = getBoulderEntry(entryId);
-        locationText.setText(boulderEntry.getLocation());
-        dateText.setText(boulderEntry.getDate());
-        startText.setText(boulderEntry.getStartTime());
-        endText.setText(boulderEntry.getEndTime());
-        expText.setText(boulderEntry.getExp());
-        ratingBar.setRating(Float.parseFloat(boulderEntry.getRating()));
-
-
     }
 
 
@@ -105,4 +123,16 @@ public class FragmentShowDetailsBasicInfo extends android.support.v4.app.Fragmen
         }
         return null;
     }
+
+    public Bitmap byteArrayToBitmap(byte[] bytes) {
+
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+    }
+
+    public void createLog(String text) {
+        Log.d(LOGTAG, text);
+    }
+
+
 }

@@ -36,7 +36,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/halle_rLayout"
+            android:id="@+id/location_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/header_text"
@@ -69,10 +69,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/datum_rLayout"
+            android:id="@+id/date_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/halle_rLayout"
+            android:layout_below="@id/location_rLayout_id"
             android:layout_marginTop="15dp">
 
             <TextView
@@ -101,10 +101,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/start_rLayout"
+            android:id="@+id/start_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/datum_rLayout"
+            android:layout_below="@id/date_rLayout_id"
             android:layout_marginTop="15dp">
 
             <TextView
@@ -133,10 +133,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/ende_rLayout"
+            android:id="@+id/end_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/start_rLayout"
+            android:layout_below="@id/start_rLayout_id"
             android:layout_marginTop="15dp">
 
             <TextView
@@ -165,10 +165,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/erfahrung_rLayout"
+            android:id="@+id/exp_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ende_rLayout"
+            android:layout_below="@id/end_rLayout_id"
             android:layout_marginTop="15dp">
 
             <TextView

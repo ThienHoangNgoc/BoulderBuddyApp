@@ -30,7 +30,7 @@ public class SQLiteDbImageDBContract {
                             Bitmap image) {
 
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
-        int id = getNumberOfEntries(BoulderEntry.TABLE_NAME) + 1;
+        int id = getNumberOfEntries(ImageDB.TABLE_NAME) + 1;
         ContentValues values = new ContentValues();
         values.put(ImageDB.COLUMN_NAME_IMAGE_ID, id);
         values.put(ImageDB.COLUMN_NAME_CREATOR, creator);
@@ -40,7 +40,7 @@ public class SQLiteDbImageDBContract {
 
         long newRowID;
         newRowID = db.insert(
-                BoulderEntry.TABLE_NAME,
+                ImageDB.TABLE_NAME,
                 null,
                 values);
 
@@ -68,9 +68,9 @@ public class SQLiteDbImageDBContract {
                 ImageDB.COLUMN_NAME_IMAGE,
         };
 
-        String sortOrder = UserEntry.COLUMN_NAME_USER_ID + " ASC";
+        String sortOrder = ImageDB.COLUMN_NAME_IMAGE_ID + " ASC";
         Cursor c = db.query(
-                UserEntry.TABLE_NAME,
+                ImageDB.TABLE_NAME,
                 projection,
                 null,               //columns for the WHERE clause
                 null,               //values for the WHERE clause

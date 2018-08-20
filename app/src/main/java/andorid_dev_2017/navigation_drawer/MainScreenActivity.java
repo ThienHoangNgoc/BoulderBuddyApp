@@ -275,7 +275,7 @@ public class MainScreenActivity extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_SURPRISING)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXP)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING))
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR))
                 );
                 return entry;
             }

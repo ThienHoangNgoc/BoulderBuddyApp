@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsBasicInfo;
 import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsCharts;
-import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsMoreInfo;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentShowDetailsPictures;
 
 public class ShowDetailsActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class ShowDetailsActivity extends AppCompatActivity {
         //Adding Fragments
         adapter.AddFragment(new FragmentShowDetailsBasicInfo(),"Basic Info");
         adapter.AddFragment(new FragmentShowDetailsCharts(),"Chart");
-        adapter.AddFragment(new FragmentShowDetailsMoreInfo(), "Pictures");
+        adapter.AddFragment(new FragmentShowDetailsPictures(), "Pictures");
         //adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

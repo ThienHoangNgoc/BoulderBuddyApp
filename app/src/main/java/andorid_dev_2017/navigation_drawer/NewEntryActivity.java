@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
@@ -67,12 +66,12 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     private RatingBar ratingBar;
     private Button confirmBtn;
     private Button addGridItemBtn;
-    private GridView imageGridlayout;
+    private GridView imageGridView;
 
 
     private String loggedInUser;
 
-    private ArrayList<NewEntryGridViewItem> arrayOfEntryItems;
+    private ArrayList<ImageGridViewItem> arrayOfImages;
     private NewEntryGridViewEntryAdapter gridViewEntryAdapter;
 
 
@@ -111,13 +110,13 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         ratingBar = findViewById(R.id.step_4_ratingBar_id);
         confirmBtn = findViewById(R.id.new_entry_confirm_btn_id);
         addGridItemBtn = findViewById(R.id.step_3_image_grid_view_add_btn_id);
-        imageGridlayout = findViewById(R.id.step_3_image_grid_view_id);
+        imageGridView = findViewById(R.id.step_3_image_grid_view_id);
 
 
         //Setup GridView
-        arrayOfEntryItems = new ArrayList<>();
-        gridViewEntryAdapter = new NewEntryGridViewEntryAdapter(this, arrayOfEntryItems);
-        imageGridlayout.setAdapter(gridViewEntryAdapter);
+        arrayOfImages = new ArrayList<>();
+        gridViewEntryAdapter = new NewEntryGridViewEntryAdapter(this, arrayOfImages);
+        imageGridView.setAdapter(gridViewEntryAdapter);
 
 
         //location autocomplete setup
@@ -191,7 +190,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     }
 
     private void addImageToGrid(NewEntryGridViewEntryAdapter adapter, Bitmap bitmap) {
-        NewEntryGridViewItem gridViewItem = new NewEntryGridViewItem(bitmap);
+        ImageGridViewItem gridViewItem = new ImageGridViewItem(bitmap);
         adapter.add(gridViewItem);
         adapter.notifyDataSetChanged();
     }
@@ -445,6 +444,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public void addImageToDb(NewEntryGridViewEntryAdapter adapter) {
+
         for (int i = 0; i < adapter.getCount(); i++) {
             sqLiteDbImageDBContract.insertEntry(loggedInUser, getEntryNumber(), adapter.getItem(i).getBitmap());
         }
