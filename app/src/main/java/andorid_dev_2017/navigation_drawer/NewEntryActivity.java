@@ -66,7 +66,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     private RatingBar ratingBar;
     private Button confirmBtn;
     private Button addGridItemBtn;
-    private GridView imageGridView;
+    private ExpandableHeightGridView imageGridView;
 
 
     private String loggedInUser;
@@ -154,6 +154,8 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         addGridItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                location.clearFocus();
+                addGridItemBtn.requestFocus();
                 ActivityCompat.requestPermissions(
                         NewEntryActivity.this,
                         new String[]{
@@ -187,49 +189,6 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                 R.id.new_entry_dialog_surprising_select_btn_id, R.id.new_entry_dialog_surprising_cancel_btn_id, R.id.reset_btn_surprising);
 
 
-    }
-
-    private void addImageToGrid(NewEntryGridViewEntryAdapter adapter, Bitmap bitmap) {
-        ImageGridViewItem gridViewItem = new ImageGridViewItem(bitmap);
-        adapter.add(gridViewItem);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE_GALLERY) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CODE_GALLERY);
-            } else {
-                Toast.makeText(getApplicationContext(), " no permission", Toast.LENGTH_SHORT).show();
-            }
-            return;
-        }
-
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                addImageToGrid(gridViewEntryAdapter, bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //create a dialog with a numberPicker and a reset button to clear the content
@@ -289,47 +248,66 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-    public void onConfirmClick() {
-
-        if (getTextFromView(location).equals("") || getTextFromView(dateText).equals("")
-                || getTextFromView(startTime).equals("") || getTextFromView(endTime).equals("")) {
-            toastCreator("Fields from Step 1 must no be empty.");
-        } else if (getTextFromView(veryEasyEditText).equals("") && getTextFromView(easyEditText).equals("") &&
-                getTextFromView(advancedEditText).equals("") && getTextFromView(hardEditText).equals("") &&
-                getTextFromView(veryHardEditText).equals("") && getTextFromView(extremelyHardEditText).equals("") &&
-                getTextFromView(surprisingEditText).equals("")) {
-            toastCreator("At least 1 difficulty has to be filled.");
-        } else {
-            addExpToUser();
-            addImageToDb(gridViewEntryAdapter);
-            insertEntry();
-            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-            intent.putExtra("username_key", loggedInUser);
-            startActivity(intent);
-            finish();
-        }
-
-
+    private void addImageToGrid(NewEntryGridViewEntryAdapter adapter, Bitmap bitmap) {
+        ImageGridViewItem gridViewItem = new ImageGridViewItem(bitmap);
+        adapter.add(gridViewItem);
+        adapter.notifyDataSetChanged();
     }
 
-    public void insertEntry() {
-        sqLiteDbEntryContract.insertEntry(
-                getTextFromView(location),
-                getTextFromView(dateText),
-                getTextFromView(startTime),
-                getTextFromView(endTime),
-                getDiffFromView(veryEasyEditText),
-                getDiffFromView(easyEditText),
-                getDiffFromView(advancedEditText),
-                getDiffFromView(hardEditText),
-                getDiffFromView(veryHardEditText),
-                getDiffFromView(extremelyHardEditText),
-                getDiffFromView(surprisingEditText),
-                ratingBar.getRating() + "",
-                getExp() + "",
-                loggedInUser);
+    public void addImageToDb(NewEntryGridViewEntryAdapter adapter) {
+        for (int i = 0; i < adapter.getCount(); i++) {
+            sqLiteDbImageDBContract.insertEntry(loggedInUser, getEntryNumber(), adapter.getItem(i).getBitmap());
+        }
+    }
 
+    //get the last entry Number and adds 1 to get the current entry number
+    public String getEntryNumber() {
+        int lastEntry;
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        if (cursor.getCount() < 0) {
+            return "1";
+        } else {
+            cursor.moveToLast();
+            lastEntry = Integer.parseInt(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID))) + 1;
 
+        }
+        return lastEntry + "";
+    }
+
+    //get permission for gallery
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CODE_GALLERY);
+            } else {
+                Toast.makeText(getApplicationContext(), " no permission", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    //use object from gallery
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                addImageToGrid(gridViewEntryAdapter, bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //get the exp Values from all the difficulties
@@ -365,18 +343,58 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         return exp;
     }
 
-    //Gets the String from a EditText
-    public String getTextFromView(EditText editText) {
-        return editText.getText().toString();
+    public void insertEntry() {
+        sqLiteDbEntryContract.insertEntry(
+                getTextFromView(location),
+                getTextFromView(dateText),
+                getTextFromView(startTime),
+                getTextFromView(endTime),
+                getDiffFromView(veryEasyEditText),
+                getDiffFromView(easyEditText),
+                getDiffFromView(advancedEditText),
+                getDiffFromView(hardEditText),
+                getDiffFromView(veryHardEditText),
+                getDiffFromView(extremelyHardEditText),
+                getDiffFromView(surprisingEditText),
+                ratingBar.getRating() + "",
+                getExp() + "",
+                loggedInUser);
     }
 
-    //get number from diff
-    public String getDiffFromView(EditText editText) {
-        if (editText.getText().toString().equals("")) {
-            return "0";
+
+    public void onConfirmClick() {
+
+        if (getTextFromView(location).equals("") || getTextFromView(dateText).equals("")
+                || getTextFromView(startTime).equals("") || getTextFromView(endTime).equals("")) {
+            toastCreator("Fields from Step 1 must no be empty.");
+        } else if (getTextFromView(veryEasyEditText).equals("") && getTextFromView(easyEditText).equals("") &&
+                getTextFromView(advancedEditText).equals("") && getTextFromView(hardEditText).equals("") &&
+                getTextFromView(veryHardEditText).equals("") && getTextFromView(extremelyHardEditText).equals("") &&
+                getTextFromView(surprisingEditText).equals("")) {
+            toastCreator("At least 1 difficulty has to be filled.");
+        } else {
+            addExpToUser();
+            addImageToDb(gridViewEntryAdapter);
+            insertEntry();
+            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+            intent.putExtra("username_key", loggedInUser);
+            startActivity(intent);
+            finish();
         }
-        return editText.getText().toString();
+
+
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+        intent.putExtra("username_key", loggedInUser);
+        startActivity(intent);
+        finish();
+    }
+
+    //----Utility methods----
 
 
     //sets the text from the TimePicker
@@ -428,27 +446,19 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-
-    //get the last entry Number and adds 1 to get the current entry number
-    public String getEntryNumber() {
-        int lastEntry;
-        Cursor cursor = sqLiteDbEntryContract.readEntry();
-        if (cursor.getCount() < 0) {
-            return "1";
-        } else {
-            cursor.moveToLast();
-            lastEntry = Integer.parseInt(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID))) + 1;
-
+    //get number from difficulty
+    public String getDiffFromView(EditText editText) {
+        if (editText.getText().toString().equals("")) {
+            return "0";
         }
-        return lastEntry + "";
+        return editText.getText().toString();
     }
 
-    public void addImageToDb(NewEntryGridViewEntryAdapter adapter) {
-
-        for (int i = 0; i < adapter.getCount(); i++) {
-            sqLiteDbImageDBContract.insertEntry(loggedInUser, getEntryNumber(), adapter.getItem(i).getBitmap());
-        }
+    //Gets the String from a EditText
+    public String getTextFromView(EditText editText) {
+        return editText.getText().toString();
     }
+
 
     public void toastCreator(String toastText) {
         Toast.makeText(getApplicationContext(), toastText, toastDuration).show();

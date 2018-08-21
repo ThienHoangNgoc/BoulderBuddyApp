@@ -31,7 +31,7 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/current_exp_value"
+                    android:id="@+id/profile_total_exp_value_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -42,10 +42,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/current_exp_layout"
+                    android:id="@+id/profile_total_exp_layout_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/current_exp_value"
+                    android:layout_below="@id/profile_total_exp_value_text_id"
                     android:layout_centerInParent="true"
                     android:text="Sessions"
                     android:textColor="@color/colorWhite"

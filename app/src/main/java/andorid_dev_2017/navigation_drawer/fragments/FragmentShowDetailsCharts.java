@@ -127,7 +127,7 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_START_TIME)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_END_TIME)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EASY)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ADVANCED)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_HARD)),
                         cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_HARD)),

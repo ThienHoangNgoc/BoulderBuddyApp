@@ -74,7 +74,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 sqLiteDbEntryContract.deleteRow(getBoulderEntry(entryItem.getId()).getId());
                                 //call method from mainScreenActivity
-                                ((MainScreenActivity) getContext()).onDeleteClick();
+                                ((MainScreenActivity) getContext()).onDeleteClick(entryItem);
                                 Toast.makeText(getContext(), "Entry has been deleted.", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton("Cancel", null).create();

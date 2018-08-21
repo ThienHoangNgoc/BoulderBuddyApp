@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             toastCreator("Passwords are not matching");
         } else {
             sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
-                    "placement", "0", ((BitmapDrawable) dummyImageView.getDrawable()).getBitmap(), "logout");
+                    "Placement", "0", ((BitmapDrawable) dummyImageView.getDrawable()).getBitmap(), "logout");
             toastCreator("Your Account was successfully created.");
             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
             intent.putExtra("username_key", username);

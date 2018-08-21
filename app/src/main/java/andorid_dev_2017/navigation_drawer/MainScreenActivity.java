@@ -128,15 +128,12 @@ public class MainScreenActivity extends AppCompatActivity {
         setLastLogin();
 
 
-
-
     }
 
 
     //method called in EntryAdapter, when entry is deleted
-    public void onDeleteClick(){
-        entryAdapter.clear();
-        entryAdapter.addAll();
+    public void onDeleteClick(EntryItem entryItem) {
+        entryAdapter.remove(entryItem);
         entryAdapter.notifyDataSetChanged();
     }
 
@@ -157,6 +154,7 @@ public class MainScreenActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
                 break;
             case R.id.search:
@@ -216,72 +214,14 @@ public class MainScreenActivity extends AppCompatActivity {
             }
 
         }
+
+
         //newest entries first
-        for (int j = 0; j < entryList.size(); j++) {
+        for (int j = entryList.size() - 1; j > 0; j--) {
             entryAdapter.add(entryList.get(j));
         }
 
 
-    }
-
-
-
-
-    //gets a user from the db based on the id
-    public User getUserEntry(String username) {
-        User user;
-        Cursor cursor = sqLiteDbUserContract.readEntry();
-        cursor.moveToFirst();
-        for (int i = 0; i < cursor.getCount(); i++) {
-            if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)).equals(username)) {
-                user = new User(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USER_ID)),
-                        username,
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PASSWORD)),
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LAST_LOGIN)),
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
-                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
-                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
-                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
-                );
-                return user;
-            }
-            cursor.moveToNext();
-        }
-
-        return null;
-
-    }
-
-    //gets an entry from the db based on the id
-    public Entry getBoulderEntry(String id) {
-        Entry entry;
-        Cursor cursor = sqLiteDbEntryContract.readEntry();
-        cursor.moveToFirst();
-        for (int i = 0; i < cursor.getCount(); i++) {
-            if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)).equals(id)) {
-                entry = new Entry(id,
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_LOCATION)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_DATE)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_START_TIME)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_END_TIME)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ADVANCED)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_HARD)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_HARD)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXTREMELY_HARD)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_SURPRISING)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXP)),
-                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR))
-                );
-                return entry;
-            }
-            cursor.moveToNext();
-        }
-        return null;
     }
 
     //Set profile data
@@ -337,6 +277,64 @@ public class MainScreenActivity extends AppCompatActivity {
         String date = getCurrentDate();
         User user = getUserEntry(loggedInUser);
         sqLiteDbUserContract.updateOneColum(UserEntry.COLUMN_NAME_LAST_LOGIN, date, user.getId());
+    }
+
+
+    //gets a user from the db based on the username
+    public User getUserEntry(String username) {
+        User user;
+        Cursor cursor = sqLiteDbUserContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)).equals(username)) {
+                user = new User(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USER_ID)),
+                        username,
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PASSWORD)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LAST_LOGIN)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
+                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
+                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
+                );
+                return user;
+            }
+            cursor.moveToNext();
+        }
+
+        return null;
+
+    }
+
+    //gets an entry from the db based on the id
+    public Entry getBoulderEntry(String id) {
+        Entry entry;
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)).equals(id)) {
+                entry = new Entry(id,
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_LOCATION)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_DATE)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_START_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_END_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ADVANCED)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXTREMELY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_SURPRISING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXP)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR))
+                );
+                return entry;
+            }
+            cursor.moveToNext();
+        }
+        return null;
     }
 
 

@@ -5,14 +5,14 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rLayout_profile_1"
+        android:id="@+id/rLayout_profile_1_id"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/background">
 
 
         <Button
-            android:id="@+id/profile_edit_btn"
+            android:id="@+id/profile_edit_btn_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
@@ -43,7 +43,7 @@
 
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/profile_image_id"
+                    android:id="@+id/profile_card_view_image_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="50dp"
@@ -51,6 +51,7 @@
 
 
                     <ImageView
+                        android:id="@+id/profile_image_id"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
@@ -65,7 +66,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/lvl_id"
+                android:id="@+id/profile_lvl_text_view_id"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
@@ -81,7 +82,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/profile_name_id"
+            android:id="@+id/profile_name_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_view_image_id"
@@ -97,14 +98,14 @@
 
 
     <GridLayout
-        android:id="@+id/rLayout_profile_2"
+        android:id="@+id/profile_grid_layout_id"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_below="@id/rLayout_profile_1"
+        android:layout_below="@id/rLayout_profile_1_id"
         android:columnCount="2">
 
         <RelativeLayout
-            android:id="@+id/rLayout_Current_exp"
+            android:id="@+id/profile_rLayout_current_exp_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
@@ -116,22 +117,23 @@
                 android:layout_centerInParent="true">
 
                 <TextView
-                    android:id="@+id/current_exp_value"
+                    android:id="@+id/profile_total_exp_value_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
-                    android:text="345"
+                    android:text="3"
                     android:textColor="@color/colorWhite"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/current_exp_layout"
+                    android:id="@+id/profile_total_exp_layout_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/current_exp_value"
-                    android:text="Current Exp"
+                    android:layout_below="@id/profile_total_exp_value_text_id"
+                    android:layout_centerHorizontal="true"
+                    android:text="Total Exp"
                     android:textColor="@color/colorWhite"
                     android:textSize="10dp" />
 
@@ -142,7 +144,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rLayout_next_exp"
+            android:id="@+id/profile_rLayout_needed_exp_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
@@ -154,22 +156,23 @@
                 android:layout_centerInParent="true">
 
                 <TextView
-                    android:id="@+id/next_exp_value"
+                    android:id="@+id/profile_needed_exp_value_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
-                    android:text="5"
+                    android:text="3"
                     android:textColor="@color/colorWhite"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/next_exp_layout"
+                    android:id="@+id/profile_needed_exp_layout_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/next_exp_value"
-                    android:text="Exp for next LVL"
+                    android:layout_below="@id/profile_needed_exp_value_text_id"
+                    android:layout_centerHorizontal="true"
+                    android:text="Exp For Next Level"
                     android:textColor="@color/colorWhite"
                     android:textSize="10dp" />
 
@@ -183,16 +186,15 @@
     </GridLayout>
 
     <RelativeLayout
-        android:id="@+id/rLayout_profile_3"
+        android:id="@+id/profile_rLayout_rank_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rLayout_profile_2"
+        android:layout_below="@id/profile_grid_layout_id"
         android:background="@color/colorGrayDark">
 
 
-
         <Button
-            android:id="@+id/rank_info_btn"
+            android:id="@+id/profile_rank_info_btn_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
@@ -201,7 +203,7 @@
             android:background="@drawable/ic_info_outline_black_24dp" />
 
         <TextView
-            android:id="@+id/rank_text_id"
+            android:id="@+id/profile_rank_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -214,18 +216,18 @@
 
 
         <View
-            android:id="@+id/rank_symbol_id"
+            android:id="@+id/profile_rank_badge_id"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_below="@id/rank_text_id"
+            android:layout_below="@id/profile_rank_text_id"
             android:layout_centerInParent="true"
             android:background="@drawable/ic_spa_black_24dp" />
 
         <TextView
-            android:id="@+id/rank_tier_id"
+            android:id="@+id/profile_rank_tier_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rank_symbol_id"
+            android:layout_below="@id/profile_rank_badge_id"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
             android:text="Amethyst 3"
@@ -234,10 +236,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/rank_lp_id"
+            android:id="@+id/profile_rank_points_value_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rank_tier_id"
+            android:layout_below="@id/profile_rank_tier_text_id"
             android:layout_centerInParent="true"
             android:layout_marginTop="2dp"
             android:text="20 LP"
