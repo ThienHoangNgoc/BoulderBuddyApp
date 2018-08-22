@@ -144,14 +144,14 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="50dp"
             android:elevation="5dp"
-            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardBackgroundColor="@color/transparent"
             app:cardCornerRadius="20dp">
 
             <Button
                 android:id="@+id/register_register_btn_id"
                 android:layout_width="270dp"
                 android:layout_height="50dp"
-                android:background="@color/transparent"
+                android:background="@color/colorPrimary"
                 android:text="CREATE"
                 android:textColor="@color/colorWhite"
                 android:textSize="15dp"

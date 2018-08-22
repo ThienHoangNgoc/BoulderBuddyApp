@@ -2,14 +2,20 @@ package andorid_dev_2017.navigation_drawer;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -51,8 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
         dummyImageView.setImageResource(R.drawable.photo);
 
 
-
         //Setup onClickListener
+        buttonEffect(createAccBtn, R.color.colorPrimaryDark);
         createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,5 +118,26 @@ public class RegisterActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String date = df.format(Calendar.getInstance().getTime());
         return date;
+    }
+
+    public void buttonEffect(View button, final int colorId) {
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(ResourcesCompat.getColor(getResources(), colorId, null), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 }
