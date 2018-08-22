@@ -46,6 +46,14 @@ public class SQLiteDbImageDBContract {
 
     }
 
+    public void updateOneColumn(String columnName, String newValue, String rowID) {
+        SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(columnName, newValue);
+        db.update(ImageDB.TABLE_NAME, values, "Id=" + rowID, null);
+
+    }
+
     public void deleteRow(String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         db.delete(ImageDB.TABLE_NAME, "Id=" + rowID, null);

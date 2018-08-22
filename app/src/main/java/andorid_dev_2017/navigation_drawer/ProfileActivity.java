@@ -27,7 +27,9 @@ import java.io.InputStream;
 
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.ImageDB;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbImageDBContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.User;
 import andorid_dev_2017.navigation_drawer.sqlite_database.UserEntry;
@@ -52,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private SQLiteDbUserContract sqLiteDbUserContract;
     private SQLiteDbEntryContract sqLiteDbEntryContract;
+    private SQLiteDbImageDBContract sqLiteDbImageDBContract;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         //setup database
         sqLiteDbUserContract = new SQLiteDbUserContract(getApplicationContext());
         sqLiteDbEntryContract = new SQLiteDbEntryContract(getApplicationContext());
+        sqLiteDbImageDBContract = new SQLiteDbImageDBContract(getApplicationContext());
 
         //Get String from extra
         Bundle extras = getIntent().getExtras();
@@ -113,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
                             toastCreator("Username is already taken.");
                         } else {
                             sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_USERNAME, newUsername, getUserEntry(loggedInUser).getId());
+                            changeCreatorInImageDbOnUsernameChange(loggedInUser,newUsername);
                             changeCreatorOnUsernameChange(loggedInUser, newUsername);
                             usernameText.setText(newUsername);
                             loggedInUser = newUsername;
@@ -270,6 +275,25 @@ public class ProfileActivity extends AppCompatActivity {
                 if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(oldUsername)) {
                     sqLiteDbEntryContract.updateOneColumn(
                             BoulderEntry.COLUMN_NAME_CREATOR,
+                            newUsername,
+                            cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
+                }
+                cursor.moveToNext();
+            }
+
+
+        }
+    }
+
+    //changes the creator in all entries of the user to the new username
+    public void changeCreatorInImageDbOnUsernameChange(String oldUsername, String newUsername) {
+        Cursor cursor = sqLiteDbImageDBContract.readEntry();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                if (cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_CREATOR)).equals(oldUsername)) {
+                    sqLiteDbImageDBContract.updateOneColumn(
+                            ImageDB.COLUMN_NAME_CREATOR,
                             newUsername,
                             cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
                 }

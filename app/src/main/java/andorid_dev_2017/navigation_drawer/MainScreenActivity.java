@@ -216,7 +216,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
 
         //newest entries first
-        for (int j = entryList.size() - 1; j > 0; j--) {
+        for (int j = entryList.size() - 1; j >= 0; j--) {
             entryAdapter.add(entryList.get(j));
         }
 

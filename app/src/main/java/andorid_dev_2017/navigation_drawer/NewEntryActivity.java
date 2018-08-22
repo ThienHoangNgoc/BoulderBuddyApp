@@ -100,7 +100,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         startTime = findViewById(R.id.step_1_startTime_editText_id);
         endTime = findViewById(R.id.step_1_endTime_editText_id);
         easyEditText = findViewById(R.id.step_2_easy_editText_id);
-        veryEasyEditText = findViewById(R.id.step_2_veryHard_editText_id);
+        veryEasyEditText = findViewById(R.id.step_2_veryEasy_editText_id);
         advancedEditText = findViewById(R.id.step_2_advanced_editText_id);
         hardEditText = findViewById(R.id.step_2_hard_editText_id);
         veryHardEditText = findViewById(R.id.step_2_veryHard_editText_id);
@@ -123,7 +123,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, location_names);
         location.setAdapter(adapter);
 
-        //setup Datepicker
+        //setup DatePicker
         datepicker = new DatePicker(this, findViewById(R.id.step_1_date_editText_id).getId());
 
         //OnClickListeners
@@ -263,8 +263,10 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     //get the last entry Number and adds 1 to get the current entry number
     public String getEntryNumber() {
         int lastEntry;
+
         Cursor cursor = sqLiteDbEntryContract.readEntry();
-        if (cursor.getCount() < 0) {
+        createLog(" cursor count" + cursor.getCount());
+        if (cursor.getCount() <= 0) {
             return "1";
         } else {
             cursor.moveToLast();
