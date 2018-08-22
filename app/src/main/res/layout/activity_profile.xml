@@ -106,7 +106,7 @@
 
         <RelativeLayout
             android:id="@+id/profile_rLayout_current_exp_id"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
             android:background="@color/colorDark2">
@@ -145,7 +145,7 @@
 
         <RelativeLayout
             android:id="@+id/profile_rLayout_needed_exp_id"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_columnWeight="1"
             android:background="@color/colorBackground2">

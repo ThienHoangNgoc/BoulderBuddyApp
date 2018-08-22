@@ -31,7 +31,6 @@ import andorid_dev_2017.navigation_drawer.sqlite_database.UserEntry;
 public class EntryAdapter extends ArrayAdapter<EntryItem> {
 
     private SQLiteDbEntryContract sqLiteDbEntryContract = new SQLiteDbEntryContract(getContext());
-    private SQLiteDbUserContract sqLiteDbUserContract = new SQLiteDbUserContract(getContext());
 
 
     public EntryAdapter(Context context, ArrayList<EntryItem> entryList) {
@@ -45,6 +44,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
 
 
         final EntryItem entryItem = getItem(position);
+        String entryNumberString;
 
 
         if (convertView == null) {
@@ -68,14 +68,15 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
             @Override
             public void onClick(final View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                final AlertDialog dialog = builder.setMessage("Delete entry?")
+                final AlertDialog dialog = builder.setMessage("Delete entry #" + getBoulderEntry(entryItem.getId()).getId() + " ?")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                String entryNumberHolder = getBoulderEntry(entryItem.getId()).getId();
                                 sqLiteDbEntryContract.deleteRow(getBoulderEntry(entryItem.getId()).getId());
                                 //call method from mainScreenActivity
                                 ((MainScreenActivity) getContext()).onDeleteClick(entryItem);
-                                Toast.makeText(getContext(), "Entry has been deleted.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Entry #" + entryNumberHolder + " has been deleted.", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton("Cancel", null).create();
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -132,30 +133,6 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
             cursor.moveToNext();
         }
         return null;
-    }
-
-    //create Entries
-    public ArrayList<EntryItem> createEntries(String loggedInUser) {
-        ArrayList<EntryItem> entryList = new ArrayList<>();
-        Cursor cursor = sqLiteDbEntryContract.readEntry();
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            for (int i = 0; i < cursor.getCount(); i++) {
-                if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
-                    Entry boulderEntry = getBoulderEntry(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
-                    EntryItem entryItem = new EntryItem(boulderEntry.getId(), boulderEntry.getLocation(),
-                            boulderEntry.getDate(), Float.parseFloat(boulderEntry.getRating()));
-                    entryList.add(entryItem);
-                }
-                cursor.moveToNext();
-
-            }
-
-        }
-        //newest entries first
-        return entryList;
-
-
     }
 
 

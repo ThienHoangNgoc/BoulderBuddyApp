@@ -49,37 +49,10 @@ public class SQLiteDbUserContract {
 
     }
 
-    public void updateOneColum(String columnName, String newValue, String rowID) {
+    public void updateOneColumn(String columnName, String newValue, String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        String columnNameDB = "";
-        switch (columnName) {
-            case "Name":
-                columnNameDB = UserEntry.COLUMN_NAME_USERNAME;
-                break;
-            case "Password":
-                columnNameDB = UserEntry.COLUMN_NAME_PASSWORD;
-                break;
-            case "LastLogin":
-                columnNameDB = UserEntry.COLUMN_NAME_LAST_LOGIN;
-                break;
-            case "Exp":
-                columnNameDB = UserEntry.COLUMN_NAME_EXP;
-                break;
-            case "Rank":
-                columnNameDB = UserEntry.COLUMN_NAME_RANK;
-                break;
-            case "RankPoints":
-                columnNameDB = UserEntry.COLUMN_NAME_RANK_POINTS;
-                break;
-            case "LoginStatus":
-                columnNameDB = UserEntry.COLUMN_NAME_PROFILE_PICTURE;
-                break;
-            default:
-                columnNameDB = "invalid columnName";
-                break;
-        }
-        values.put(columnNameDB, newValue);
+        values.put(columnName, newValue);
         db.update(UserEntry.TABLE_NAME, values, "Id=" + rowID, null);
 
     }

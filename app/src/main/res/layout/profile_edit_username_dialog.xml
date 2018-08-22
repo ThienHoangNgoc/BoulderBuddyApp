@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/view_id"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDark2" />
+
+
+    <RelativeLayout
+        android:id="@+id/rLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_id">
+
+        <TextView
+            android:id="@+id/profile_edit_username_dialog_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Enter your new username:"
+            android:textColor="@color/colorBlack"
+            android:textSize="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/profile_edit_username_rLayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_edit_username_dialog_text_id"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/profile_edit_username_dialog_edit_view_id"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@color/transparent"
+                android:drawablePadding="12dp"
+                android:hint="New Username"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/semiTransparent"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/profile_reset_edit_username_btn_id"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/profile_edit_username_dialog_edit_view_id"
+                android:background="@drawable/profile_clear_username_dialog_icon_id" />
+
+            <View
+                android:layout_width="240dp"
+                android:layout_height="2dp"
+                android:layout_below="@id/profile_edit_username_dialog_edit_view_id"
+                android:background="@color/semiTransparent" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/view2_id"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rLayout_id"
+        android:background="@color/semiTransparent2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/view2_id"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/profile_edit_username_dialog_cancel_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="35dp"
+            android:background="@color/transparent"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/profile_edit_username_dialog_select_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="35dp"
+            android:background="@color/transparent"
+            android:text="Ok" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

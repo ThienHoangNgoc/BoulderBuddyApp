@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -109,7 +108,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), NewEntryActivity.class);
                 intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -244,6 +243,7 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         }
 
+
         //expCount is always greater than totalEXP or equal to totalEXP
         expForNextLvl = expCount - totalExp;
 
@@ -257,8 +257,10 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //get percentage as int *100
         if (expCount > totalExp) {
+            //percentage = exp that we already have * 100 / total exp that was needed to get to the next level
             percentage = (expForNextLvl * 100) / levelUpFunction(lvlCount + 1);
-            progressBar.setProgress((new Double(percentage)).intValue());
+            //100 - percentage = exp that the user already has as int percentage
+            progressBar.setProgress(100 - (new Double(percentage)).intValue());
         }
 
         //if totalExp equals 0. the users lvl is 1
@@ -276,7 +278,7 @@ public class MainScreenActivity extends AppCompatActivity {
     public void setLastLogin() {
         String date = getCurrentDate();
         User user = getUserEntry(loggedInUser);
-        sqLiteDbUserContract.updateOneColum(UserEntry.COLUMN_NAME_LAST_LOGIN, date, user.getId());
+        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_LAST_LOGIN, date, user.getId());
     }
 
 

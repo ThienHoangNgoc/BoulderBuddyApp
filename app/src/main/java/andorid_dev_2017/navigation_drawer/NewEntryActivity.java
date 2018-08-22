@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TimePicker;
@@ -101,7 +100,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         startTime = findViewById(R.id.step_1_startTime_editText_id);
         endTime = findViewById(R.id.step_1_endTime_editText_id);
         easyEditText = findViewById(R.id.step_2_easy_editText_id);
-        veryEasyEditText = findViewById(R.id.step_2_veryEasy_editText_id);
+        veryEasyEditText = findViewById(R.id.step_2_veryHard_editText_id);
         advancedEditText = findViewById(R.id.step_2_advanced_editText_id);
         hardEditText = findViewById(R.id.step_2_hard_editText_id);
         veryHardEditText = findViewById(R.id.step_2_veryHard_editText_id);
@@ -214,6 +213,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                     picker.setValue(Integer.parseInt(editText.getText().toString()));
                 }
                 picker.setDisplayedValues(data);
+
                 //initialize select and cancel Buttons with mView
                 Button sBtn = mView.findViewById(selectBtnId);
                 Button cBtn = mView.findViewById(cancelBtnId);
@@ -330,7 +330,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         createLog("exp gained: " + getExp());
         double newExp = 0.0;
         newExp = Double.parseDouble(user.getExp()) + (double) getExp();
-        sqLiteDbUserContract.updateOneColum(UserEntry.COLUMN_NAME_EXP, newExp + "", user.getId());
+        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_EXP, newExp + "", user.getId());
     }
 
     //checks if the EditText is not empty and gets the value as an int
@@ -367,6 +367,8 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         if (getTextFromView(location).equals("") || getTextFromView(dateText).equals("")
                 || getTextFromView(startTime).equals("") || getTextFromView(endTime).equals("")) {
             toastCreator("Fields from Step 1 must no be empty.");
+        } else if (!eligibleTime(getTextFromView(startTime), getTextFromView(endTime))) {
+            toastCreator("The end time has to be later than the start time.");
         } else if (getTextFromView(veryEasyEditText).equals("") && getTextFromView(easyEditText).equals("") &&
                 getTextFromView(advancedEditText).equals("") && getTextFromView(hardEditText).equals("") &&
                 getTextFromView(veryHardEditText).equals("") && getTextFromView(extremelyHardEditText).equals("") &&
@@ -385,14 +387,35 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-    @Override
+
+    public boolean eligibleTime(String startTime, String endTime) {
+        String[] startTimeParts = startTime.split(":");
+        String[] endTimeParts = endTime.split(":");
+
+        //end hour < start hour
+        if (getInt(endTimeParts[0]) < getInt(startTimeParts[0])) {
+            return false;
+        }
+        // end hour = start hour and end minutes < start minutes
+        if (getInt(endTimeParts[1]) == getInt(startTimeParts[1]) && getInt(endTimeParts[1]) < getInt(startTimeParts[1])) {
+            return false;
+        }
+
+        if (startTime.equals(endTime)) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+   /* @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
         intent.putExtra("username_key", loggedInUser);
         startActivity(intent);
-        finish();
-    }
+    }*/
 
     //----Utility methods----
 
@@ -466,6 +489,10 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     public void createLog(String text) {
         Log.d(LOGTAG, text);
+    }
+
+    public int getInt(String string) {
+        return Integer.parseInt(string);
     }
 
 

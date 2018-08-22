@@ -22,7 +22,7 @@
                 android:id="@+id/main_header_profile_image_card_view_id"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="37.5dp"
+                app:cardCornerRadius="40dp"
                 app:cardElevation="5dp">
 
 

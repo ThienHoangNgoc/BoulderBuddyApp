@@ -54,6 +54,7 @@
                 android:drawableLeft="@drawable/login_username_icon"
                 android:drawablePadding="10dp"
                 android:hint="Username"
+                android:maxLength="20"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"

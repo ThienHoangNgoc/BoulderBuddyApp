@@ -57,40 +57,40 @@ public class DatePicker implements View.OnClickListener, DatePickerDialog.OnDate
 
         switch (MONTH + 1) {
             case 1:
-                monthString = "Januar";
+                monthString = "Jan.";
                 break;
             case 2:
-                monthString = "Februar";
+                monthString = "Feb.";
                 break;
             case 3:
-                monthString = "März";
+                monthString = "Mar.";
                 break;
             case 4:
-                monthString = "April";
+                monthString = "Apr.";
                 break;
             case 5:
-                monthString = "Mai";
+                monthString = "May";
                 break;
             case 6:
-                monthString = "Juni";
+                monthString = "June";
                 break;
             case 7:
-                monthString = "Juli";
+                monthString = "Juy";
                 break;
             case 8:
-                monthString = "August";
+                monthString = "Aug.";
                 break;
             case 9:
-                monthString = "September";
+                monthString = "Sep.";
                 break;
             case 10:
-                monthString = "Oktober";
+                monthString = "Oct.";
                 break;
             case 11:
-                monthString = "November";
+                monthString = "Nov.";
                 break;
             case 12:
-                monthString = "Dezember";
+                monthString = "Dec.";
                 break;
             default:
                 break;
