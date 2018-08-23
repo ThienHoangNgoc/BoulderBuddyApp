@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -96,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Button cancelBtn;
                 Button resetBtn;
                 final EditText newUsernameEditText;
-                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this, android.R.style.Theme_Light_NoTitleBar);
                 View aView = getLayoutInflater().inflate(R.layout.profile_edit_username_dialog, null);
                 okBtn = aView.findViewById(R.id.profile_edit_username_dialog_select_btn_id);
                 cancelBtn = aView.findViewById(R.id.profile_edit_username_dialog_cancel_btn_id);
@@ -113,11 +114,13 @@ public class ProfileActivity extends AppCompatActivity {
                         String newUsername = newUsernameEditText.getText().toString();
                         Cursor cursor = sqLiteDbUserContract.readEntry();
                         cursor.moveToFirst();
-                        if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)).equals(newUsername)) {
+                        if (newUsernameEditText.getText().toString().equals("")) {
+                            toastCreator("Username cannot be empty.");
+                        } else if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)).equals(newUsername)) {
                             toastCreator("Username is already taken.");
                         } else {
                             sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_USERNAME, newUsername, getUserEntry(loggedInUser).getId());
-                            changeCreatorInImageDbOnUsernameChange(loggedInUser,newUsername);
+                            changeCreatorInImageDbOnUsernameChange(loggedInUser, newUsername);
                             changeCreatorOnUsernameChange(loggedInUser, newUsername);
                             usernameText.setText(newUsername);
                             loggedInUser = newUsername;
@@ -146,13 +149,11 @@ public class ProfileActivity extends AppCompatActivity {
         rankInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Light_NoTitleBar);
                 View aView = getLayoutInflater().inflate(R.layout.profile_rank_info_dialog, null);
                 builder.setView(aView);
                 AlertDialog dialog = builder.create();
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-                dialog.getWindow().setLayout(600, 600);
             }
         });
         profileImage.setOnClickListener(new View.OnClickListener() {

@@ -35,7 +35,8 @@ public class ShowPicturesFragmentGridViewEntryAdapter extends ArrayAdapter<Image
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                //Theme_Black_NoTitleBar -> Fullscreen but show statusBar
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext(), android.R.style.Theme_Black_NoTitleBar);
                 //in adapter
                 View aView = LayoutInflater.from(getContext()).inflate(R.layout.show_details_image_full_screen_dialog, null);
                 ImageView image = aView.findViewById(R.id.show_details_fullscreen_image_id);

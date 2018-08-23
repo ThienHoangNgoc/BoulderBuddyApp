@@ -183,6 +183,10 @@ public class MainScreenActivity extends AppCompatActivity {
 
     }
 
+    public void onLogoutClick(){
+
+    }
+
 
     //Setup Drawer Content
     private void setupDrawerContent(NavigationView navigationView) {

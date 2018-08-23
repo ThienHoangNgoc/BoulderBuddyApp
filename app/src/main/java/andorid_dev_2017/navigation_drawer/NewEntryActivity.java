@@ -8,13 +8,16 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -48,7 +51,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     final int REQUEST_CODE_GALLERY = 999;
     private int toastDuration = Toast.LENGTH_SHORT;
 
-    final static String LOGTAG = "NewEntryAct";
+    private final static String LOGTAG = "NewEntryAct";
 
 
     private AutoCompleteTextView location;
@@ -144,6 +147,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                 dialogFragment.show(getFragmentManager(), "time picker");
             }
         });
+        buttonEffect(confirmBtn,R.color.colorPrimaryDark);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -495,6 +499,27 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     public int getInt(String string) {
         return Integer.parseInt(string);
+    }
+
+    public void buttonEffect(View button, final int colorId) {
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(ResourcesCompat.getColor(getResources(), colorId, null), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
 

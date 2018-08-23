@@ -4,41 +4,46 @@
     android:layout_height="match_parent">
 
 
-    <View
-        android:id="@+id/view_id"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorDark2" />
-
-
     <RelativeLayout
         android:id="@+id/rLayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_id">
 
-        <TextView
-            android:id="@+id/profile_edit_username_dialog_text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="Enter your new username:"
-            android:textColor="@color/colorBlack"
-            android:textSize="15dp" />
+        <RelativeLayout
+            android:id="@+id/profile_edit_username_text_header_rLayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="10dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/profile_edit_username_dialog_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:text="Enter your new username."
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/profile_edit_username_rLayout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_edit_username_dialog_text_id"
+            android:layout_below="@id/profile_edit_username_text_header_rLayout_id"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
             android:gravity="center">
 
             <EditText
                 android:id="@+id/profile_edit_username_dialog_edit_view_id"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:background="@color/transparent"
                 android:drawablePadding="12dp"
@@ -57,7 +62,7 @@
                 android:background="@drawable/profile_clear_username_dialog_icon_id" />
 
             <View
-                android:layout_width="240dp"
+                android:layout_width="340dp"
                 android:layout_height="2dp"
                 android:layout_below="@id/profile_edit_username_dialog_edit_view_id"
                 android:background="@color/semiTransparent" />
@@ -72,14 +77,15 @@
         android:id="@+id/view2_id"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/rLayout_id"
+        android:layout_above="@id/profile_edit_btn_rLayout_id"
         android:background="@color/semiTransparent2" />
 
     <RelativeLayout
+        android:id="@+id/profile_edit_btn_rLayout_id"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/view2_id"
-        android:layout_marginTop="10dp">
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/profile_edit_username_dialog_cancel_btn_id"

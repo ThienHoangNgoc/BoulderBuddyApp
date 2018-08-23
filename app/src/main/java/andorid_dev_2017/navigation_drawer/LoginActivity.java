@@ -166,7 +166,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onCreateAccountClick() {
         startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-        finish();
     }
 
 

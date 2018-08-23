@@ -67,8 +67,8 @@ public class FragmentShowDetailsPictures extends android.support.v4.app.Fragment
         imageGridView.setAdapter(gridViewEntryAdapter);
 
 
+        //checks if there are any images, and then if the images are from the current user
         Cursor cursor = sqLiteDbImageDBContract.readEntry();
-        createLog("Curser Count: " + cursor.getCount());
         if (cursor.getCount() < 0) {
             return view;
         } else {
