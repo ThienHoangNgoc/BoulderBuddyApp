@@ -9,7 +9,7 @@
 
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/Statistic_appBar_id"
+        android:id="@+id/statistic_appBar_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimaryDark"
@@ -30,10 +30,10 @@
 
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/Statistic_table_layout_id"
+        android:id="@+id/statistic_table_layout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Statistic_appBar_id"
+        android:layout_below="@id/statistic_appBar_id"
         android:background="@color/colorBackground2"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorWhite"
@@ -46,10 +46,10 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/Statistic_viewPager_id"
+        android:id="@+id/statistic_viewPager_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/Statistic_table_layout_id"
+        android:layout_below="@id/statistic_table_layout_id"
         android:background="@color/colorDark2">
 
 

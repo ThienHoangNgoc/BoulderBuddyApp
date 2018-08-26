@@ -1,6 +1,8 @@
 package andorid_dev_2017.navigation_drawer;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class MainScreenActivity extends AppCompatActivity {
     private SQLiteDbEntryContract sqLiteDbEntryContract;
 
     private String loggedInUser;
+    private boolean logout;
 
     public EntryAdapter entryAdapter;
 
@@ -126,6 +130,9 @@ public class MainScreenActivity extends AppCompatActivity {
         //Update last login date ( for rank )
         setLastLogin();
 
+        //for logout
+        logout = false;
+
 
     }
 
@@ -158,6 +165,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 break;
             case R.id.search:
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
                 break;
             case R.id.achievements:
@@ -166,15 +174,16 @@ public class MainScreenActivity extends AppCompatActivity {
                 break;
             case R.id.statistics:
                 intent = new Intent(getApplicationContext(), StatisticsActivity.class);
+                intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
                 break;
             case R.id.settings:
                 intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
                 break;
             case R.id.logout:
-                intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                onLogoutClick();
                 break;
             default:
                 break;
@@ -183,7 +192,51 @@ public class MainScreenActivity extends AppCompatActivity {
 
     }
 
-    public void onLogoutClick(){
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.setMessage("Exit app?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onSuperBackPressed();
+                    }
+                }).setNegativeButton("No", null).create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorGrayDark));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorGrayDark));
+            }
+        });
+        dialog.show();
+
+    }
+
+    public void onSuperBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void onLogoutClick() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.setMessage("Logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_LOGIN_STATUS, "logout", getUserEntry(loggedInUser).getId());
+                    }
+                }).setNegativeButton("No", null).create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorGrayDark));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorGrayDark));
+            }
+        });
+        dialog.show();
 
     }
 
@@ -208,8 +261,11 @@ public class MainScreenActivity extends AppCompatActivity {
             for (int i = 0; i < cursor.getCount(); i++) {
                 if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
                     Entry boulderEntry = getBoulderEntry(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
-                    EntryItem entryItem = new EntryItem(boulderEntry.getId(), boulderEntry.getLocation(),
-                            boulderEntry.getDate(), Float.parseFloat(boulderEntry.getRating()));
+                    EntryItem entryItem = new EntryItem(
+                            boulderEntry.getId(),
+                            boulderEntry.getLocation(),
+                            boulderEntry.getDate(),
+                            Float.parseFloat(boulderEntry.getRating()));
                     entryList.add(entryItem);
                 }
                 cursor.moveToNext();
@@ -219,9 +275,19 @@ public class MainScreenActivity extends AppCompatActivity {
         }
 
 
-        //newest entries first
-        for (int j = entryList.size() - 1; j >= 0; j--) {
-            entryAdapter.add(entryList.get(j));
+        if (entryList.size() > 10) {
+            //only show the last 10 entries
+            for (int j = entryList.size() - 1; j > entryList.size() - 11; j--) {
+                entryAdapter.add(entryList.get(j));
+            }
+
+        } else {
+            //newest entries first
+            for (int j = entryList.size() - 1; j >= 0; j--) {
+                entryAdapter.add(entryList.get(j));
+            }
+
+
         }
 
 

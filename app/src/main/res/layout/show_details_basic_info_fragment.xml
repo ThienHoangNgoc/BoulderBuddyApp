@@ -39,7 +39,6 @@
             android:id="@+id/location_rLayout_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/header_text"
             android:layout_marginTop="40dp">
 
             <TextView

@@ -6,30 +6,93 @@
     android:background="@color/colorDark2">
 
     <RelativeLayout
+        android:id="@+id/settings_header_rLayout_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="center">
+        android:layout_height="60dp"
+        android:background="@color/semiTransparent"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp">
 
         <TextView
-            android:id="@+id/stay_logged_in_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Stay Logged In und password"
-            android:layout_marginRight="20dp"
-            android:textSize="20dp"
-            android:textColor="@color/colorWhite" />
+            android:text="Settings"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp"
+
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/settings_rLayout_1_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/settings_header_rLayout_id">
+
+        <TextView
+            android:id="@+id/settings_stay_logged_in_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="Stay Logged In"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
 
         <Switch
-            android:id="@+id/login_status_switch_btn_id"
+            android:id="@+id/setting_login_status_switch_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/SwitchCompatTheme"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/stay_logged_in_text_id" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:theme="@style/SwitchCompatTheme" />
+
+        <View
+            android:id="@+id/settings_view_1_id"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/semiTransparent" />
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/settings_rLayout_2_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/settings_rLayout_1_id">
+
+        <TextView
+            android:id="@+id/settings_change_password_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="Change Password"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/settings_change_password_btn_id"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/settings_open_setting_option_icon" />
+
+        <View
+            android:id="@+id/settings_view_2_id"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/semiTransparent" />
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

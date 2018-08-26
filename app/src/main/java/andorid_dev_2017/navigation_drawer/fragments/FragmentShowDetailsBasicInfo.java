@@ -25,7 +25,7 @@ public class FragmentShowDetailsBasicInfo extends android.support.v4.app.Fragmen
     TextView expText;
     RatingBar ratingBar;
 
-    String entryId;
+    private String entryId;
 
     SQLiteDbEntryContract sqLiteDbEntryContract;
 

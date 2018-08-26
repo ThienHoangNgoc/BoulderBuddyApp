@@ -11,12 +11,13 @@ import andorid_dev_2017.navigation_drawer.ViewPagerAdapter;
 import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsBasicInfo;
 import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsChartProgress;
 import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsRankProgress;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
 
 public class StatisticsActivity extends AppCompatActivity {
 
 
+
     private TabLayout tabLayout;
-    private AppBarLayout appBarLayout;
     private ViewPager viewPager;
 
     @Override
@@ -24,14 +25,17 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        tabLayout = (TabLayout) findViewById(R.id.Statistic_table_layout_id);
-        appBarLayout = (AppBarLayout) findViewById(R.id.Statistic_appBar_id);
-        viewPager = (ViewPager) findViewById(R.id.Statistic_viewPager_id);
+
+        //setup views
+        tabLayout = (TabLayout) findViewById(R.id.statistic_table_layout_id);
+        viewPager = (ViewPager) findViewById(R.id.statistic_viewPager_id);
+
+        //setup adapter
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //Adding Fragments
-        adapter.AddFragment(new FragmentStatisticsBasicInfo(),"Basic Stats");
-        adapter.AddFragment(new FragmentStatisticsChartProgress(),"Progress");
-        adapter.AddFragment(new FragmentStatisticsRankProgress(),"Rank");
+        adapter.AddFragment(new FragmentStatisticsBasicInfo(), "Stats");
+        adapter.AddFragment(new FragmentStatisticsChartProgress(), "Progress");
+        adapter.AddFragment(new FragmentStatisticsRankProgress(), "Rank");
 
 
         //adapter Setup

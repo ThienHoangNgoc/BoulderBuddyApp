@@ -1,5 +1,6 @@
 package andorid_dev_2017.navigation_drawer;
 
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,21 +9,38 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
+
 public class SearchActivity extends AppCompatActivity {
 
 
-    EditText editText;
-    Button searchBtn;
-    Button clearBtn;
-    Button backBtn;
-    final String LOGTAG = "SearchActivity";
-    private ListView listView;
-    private int duration = Toast.LENGTH_SHORT;
+    private final static String LOGTAG = "SearchActivity";
 
+    private int toastDuration = Toast.LENGTH_SHORT;
+    private String loggedInUser;
+    private int searchMonth;
+    private int searchYear;
+
+    private SQLiteDbEntryContract sqLiteDbEntryContract;
+    private SQLiteDbUserContract sqLiteDbUserContract;
+    public EntryAdapter entryAdapter;
+
+
+    private ListView searchResultListView;
+    private EditText searchEditText;
+    private TextView noEntriesText;
+    private Button searchBtn;
+    private Button searchClearBtn;
+    private Button searchBackBtn;
 
 
     @Override
@@ -30,8 +48,108 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        backBtn = findViewById(R.id.search_back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        //setup database
+        sqLiteDbEntryContract = new SQLiteDbEntryContract(getApplicationContext());
+        sqLiteDbUserContract = new SQLiteDbUserContract(getApplicationContext());
+
+
+        //Get String from extra
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            loggedInUser = extras.getString("username_key");
+        }
+
+        //setup views
+        searchResultListView = findViewById(R.id.search_list_view_id);
+        searchEditText = findViewById(R.id.search_edit_text_search_date_id);
+        searchBtn = findViewById(R.id.search_search_btn_id);
+        searchClearBtn = findViewById(R.id.search_reset_btn_id);
+        searchBackBtn = findViewById(R.id.search_back_btn_id);
+        noEntriesText = findViewById(R.id.search_no_entries_text_id);
+
+        //Setup EntryAdapter
+        ArrayList<EntryItem> arrayOfEntryItems = new ArrayList<>();
+        entryAdapter = new EntryAdapter(this, arrayOfEntryItems);
+
+
+        //setup OnClickListeners
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(SearchActivity.this);
+                final View mView = getLayoutInflater().inflate(R.layout.search_dialog, null);
+                final NumberPicker monthPicker = mView.findViewById(R.id.search_dialog_month_picker_id);
+                String[] data = getResources().getStringArray(R.array.monate);
+                monthPicker.setMinValue(0);
+                monthPicker.setMaxValue(data.length - 1);
+                monthPicker.setDisplayedValues(data);
+                ArrayList<String> numbers = new ArrayList<>();
+                for (int i = 1900; i <= 2200; i++) {
+                    numbers.add(i + "");
+                }
+                final NumberPicker yearPicker = mView.findViewById(R.id.search_dialog_year_picker_id);
+                String[] data2 = numbers.toArray(new String[numbers.size()]);
+                yearPicker.setMinValue(1900);
+                yearPicker.setMaxValue(2200);
+                yearPicker.setValue(2018);
+                yearPicker.setDisplayedValues(data2);
+
+                Button selectBtn = mView.findViewById(R.id.search_dialog_select_btn_id);
+                Button cancelBtn = mView.findViewById(R.id.search_dialog_cancel_btn_id);
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                selectBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        searchEditText.setText(intToMonth(monthPicker) + " " + yearPicker.getValue());
+                        searchMonth = monthPicker.getValue();
+                        searchYear = yearPicker.getValue();
+                        dialog.cancel();
+                    }
+                });
+
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+
+                    }
+                });
+
+            }
+        });
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getTextFromView(searchEditText).equals("")) {
+                    Toast.makeText(getApplicationContext(), "Pls enter a date.", toastDuration).show();
+                } else {
+                    createEmptyList(entryAdapter);
+                    createEntries(entryAdapter, getMonthYearDate(searchMonth, searchYear));
+                    if (entryAdapter.isEmpty()) {
+                        noEntriesText.setVisibility(View.VISIBLE);
+                    } else {
+                        searchResultListView.setAdapter(entryAdapter);
+                    }
+
+                }
+
+
+            }
+        });
+
+        searchClearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchEditText.setText("");
+            }
+        });
+
+        searchBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -39,142 +157,80 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
+    }
 
-        clearBtn = (Button) findViewById(R.id.reset_btn);
-        clearBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editText.setText("");
-            }
-        });
-
-        editText = findViewById(R.id.edit_text_search_date);
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(SearchActivity.this);
-                final View mView = getLayoutInflater().inflate(R.layout.search_dialog, null);
-                final NumberPicker picker = (NumberPicker) mView.findViewById(R.id.picker);
-                String[] data = getResources().getStringArray(R.array.monate);
-                picker.setMinValue(0);
-                picker.setMaxValue(data.length - 1);
-                picker.setDisplayedValues(data);
-
-                ArrayList<String> numbers = new ArrayList<>();
-                for (int i = 1900; i <= 2200; i++) {
-                    numbers.add(i + "");
-                }
-                final NumberPicker picker2 = (NumberPicker) mView.findViewById(R.id.picker2);
-                String[] data2 = numbers.toArray(new String[numbers.size()]);
-                picker2.setMinValue(1900);
-                picker2.setMaxValue(2200);
-                picker2.setValue(2018);
-                picker2.setDisplayedValues(data2);
-
-                Button btn = (Button) mView.findViewById(R.id.select_btn_1);
-                Button btn2 = (Button) mView.findViewById(R.id.cancel_btn_1);
-
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
-
-                //cancel has to be after create() and show().
-
-                btn2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
-
-                    }
-                });
-
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        editText.setText(intToMonth(picker) + " " + picker2.getValue() );
-                        dialog.cancel();
-                    }
-                });
-
-
-            }
-        });
-
-
-        searchBtn = (Button) findViewById(R.id.search_btn_go);
-
-
-        //create Entries
-
-        listView = (ListView) findViewById(R.id.search_list_view);
-        ArrayList<EntryItem> arrayOfEntryItems = new ArrayList<>();
-        final EntryAdapter entryAdapter = new EntryAdapter(this, arrayOfEntryItems);
-
-
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(editText.getText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(), "Pls enter a date.", duration).show();
-                }else{
-
-                    //empties the list
-                    createEmptyList(entryAdapter);
-                    listView.setAdapter(entryAdapter);
-
-
-                    createEntries(entryAdapter);
-                    listView.setAdapter(entryAdapter);
-                }
-
-
-
-            }
-        });
-
-
-
-
-
+    //call this in adapter
+    public void onDeleteClick(EntryItem entryItem) {
+        entryAdapter.remove(entryItem);
+        entryAdapter.notifyDataSetChanged();
     }
 
 
-
     //create dummy entries
+    public void createEntries(EntryAdapter entryAdapter, String date) {
+        ArrayList<EntryItem> entryList = new ArrayList<>();
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser) &&
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_DATE)).contains(date)) {
+                    Entry boulderEntry = getBoulderEntry(cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)));
+                    EntryItem entryItem = new EntryItem(boulderEntry.getId(), boulderEntry.getLocation(),
+                            boulderEntry.getDate(), Float.parseFloat(boulderEntry.getRating()));
+                    entryList.add(entryItem);
+                }
+                cursor.moveToNext();
 
-    public void createEntries(EntryAdapter entryAdapter) {
-        final ArrayList<EntryItem> entryCounter = new ArrayList<>();
+            }
 
-        EntryItem item1 = new EntryItem("1", "Südbloc", "28.01.17", 2.5f);
-        EntryItem item2 = new EntryItem("2", "Ostbloc", "04.03.17", 3f);
-        EntryItem item3 = new EntryItem("3", "Südbloc", "07.04.17", 3.5f);
-        EntryItem item4 = new EntryItem("4", "Südbloc", "28.04.17", 3f);
+        }
 
-        entryCounter.add(item1);
-        entryCounter.add(item2);
-        entryCounter.add(item3);
-        entryCounter.add(item4);
-
-
-        int j;
-        for (j = entryCounter.size() - 1; j >= 0; j--) {
-            entryAdapter.add(entryCounter.get(j));
+        for (int j = 0; j < entryList.size(); j++) {
+            entryAdapter.add(entryList.get(j));
         }
 
 
     }
 
-    public void createEmptyList(EntryAdapter entryAdapter){
+    public void createEmptyList(EntryAdapter entryAdapter) {
         entryAdapter.clear();
+    }
 
+    //gets an entry from the db based on the id
+    public Entry getBoulderEntry(String id) {
+        Entry entry;
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ENTRY_ID)).equals(id)) {
+                entry = new Entry(id,
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_LOCATION)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_DATE)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_START_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_END_TIME)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_EASY)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_ADVANCED)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_VERY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXTREMELY_HARD)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_SURPRISING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_RATING)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_EXP)),
+                        cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR))
+                );
+                return entry;
+            }
+            cursor.moveToNext();
+        }
+        return null;
     }
 
 
-    public String intToMonth(NumberPicker picker){
+    public String intToMonth(NumberPicker picker) {
         String date = "";
-
-        switch (picker.getValue() + 1){
+        switch (picker.getValue() + 1) {
             case 1:
                 date = "Januar";
                 break;
@@ -219,6 +275,65 @@ public class SearchActivity extends AppCompatActivity {
 
         return date;
 
+    }
 
+    public String getMonthYearDate(int month, int year) {
+        String monthString;
+
+        switch (month + 1) {
+            case 1:
+                monthString = "Jan.";
+                break;
+            case 2:
+                monthString = "Feb.";
+                break;
+            case 3:
+                monthString = "Mar.";
+                break;
+            case 4:
+                monthString = "Apr.";
+                break;
+            case 5:
+                monthString = "May";
+                break;
+            case 6:
+                monthString = "June";
+                break;
+            case 7:
+                monthString = "Juy";
+                break;
+            case 8:
+                monthString = "Aug.";
+                break;
+            case 9:
+                monthString = "Sep.";
+                break;
+            case 10:
+                monthString = "Oct.";
+                break;
+            case 11:
+                monthString = "Nov.";
+                break;
+            case 12:
+                monthString = "Dec.";
+                break;
+            default:
+                monthString = "";
+                break;
+
+        }
+
+        return monthString + " " + year;
+
+    }
+
+    //Gets the String from a EditText
+    public String getTextFromView(EditText editText) {
+        return editText.getText().toString();
+    }
+
+
+    public void toastCreator(String toastText) {
+        Toast.makeText(getApplicationContext(), toastText, toastDuration).show();
     }
 }

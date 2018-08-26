@@ -12,6 +12,7 @@
     <color name="colorProgressbar">#0d1522</color>
     <color name="colorProgressbarBackground">#e3e6f1</color>
     <color name="colorBlack">#000000</color>
+    <color name="editPasswordAndUsername">#919191</color>
     <color name="semiTransparent">#877f7f7f</color>
     <color name="semiTransparent2">#cb7f7f7f</color>
     <color name="semiTransparent3">#443c3c3c</color>

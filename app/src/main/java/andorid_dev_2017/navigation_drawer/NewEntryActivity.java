@@ -415,13 +415,6 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     }
 
-   /* @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-        intent.putExtra("username_key", loggedInUser);
-        startActivity(intent);
-    }*/
 
     //----Utility methods----
 

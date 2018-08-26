@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="2dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDark2"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/statistics_grid_item_text_value_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="120"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statistics_grid_item_text_label_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statistics_grid_item_text_value_id"
+                android:layout_centerHorizontal="true"
+                android:text="Sessions"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="10dp" />
+
+
+        </RelativeLayout>
+
+
+
+</RelativeLayout>

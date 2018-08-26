@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,12 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
                                 String entryNumberHolder = getBoulderEntry(entryItem.getId()).getId();
                                 sqLiteDbEntryContract.deleteRow(getBoulderEntry(entryItem.getId()).getId());
                                 //call method from mainScreenActivity
-                                ((MainScreenActivity) getContext()).onDeleteClick(entryItem);
+                                if (getContext() instanceof MainScreenActivity) {
+                                    ((MainScreenActivity) getContext()).onDeleteClick(entryItem);
+                                }
+                                if (getContext() instanceof SearchActivity) {
+                                    ((SearchActivity) getContext()).onDeleteClick(entryItem);
+                                }
                                 Toast.makeText(getContext(), "Entry #" + entryNumberHolder + " has been deleted.", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton("Cancel", null).create();

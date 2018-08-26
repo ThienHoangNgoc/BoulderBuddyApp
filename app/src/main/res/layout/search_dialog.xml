@@ -50,7 +50,7 @@
             />
 
         <NumberPicker
-            android:id="@+id/picker"
+            android:id="@+id/search_dialog_month_picker_id"
             android:layout_width="wrap_content"
             android:layout_height="163dp"
             android:layout_columnWeight="1"
@@ -63,7 +63,7 @@
         </NumberPicker>
 
         <NumberPicker
-            android:id="@+id/picker2"
+            android:id="@+id/search_dialog_year_picker_id"
             android:layout_width="wrap_content"
             android:layout_height="163dp"
             android:layout_columnWeight="1"
@@ -91,7 +91,7 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/cancel_btn_1"
+            android:id="@+id/search_dialog_cancel_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -101,7 +101,7 @@
             android:text="Cancel" />
 
         <Button
-            android:id="@+id/select_btn_1"
+            android:id="@+id/search_dialog_select_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
