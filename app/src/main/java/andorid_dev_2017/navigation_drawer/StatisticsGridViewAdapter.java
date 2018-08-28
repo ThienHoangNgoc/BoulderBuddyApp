@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class StatisticsFragmentGridViewAdapter extends ArrayAdapter<StatGridViewItem> {
+public class StatisticsGridViewAdapter extends ArrayAdapter<StatGridViewItem> {
 
 
-    public StatisticsFragmentGridViewAdapter(@NonNull Context context, @NonNull List<StatGridViewItem> objects) {
+    public StatisticsGridViewAdapter(@NonNull Context context, @NonNull List<StatGridViewItem> objects) {
         super(context, 0, objects);
     }
 

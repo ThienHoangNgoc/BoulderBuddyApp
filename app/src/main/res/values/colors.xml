@@ -26,11 +26,12 @@
     <color name="Diff2">#2d99ff</color>
     <color name="Diff3">#43ae5f</color>
     <color name="Diff4">#ff5050</color>
+    <color name="statsDividerColor">#585863</color>
     <color name="Diff5">#ababab</color>
     <color name="Diff6">#222222</color>
     <color name="Diff7">#b75f92</color>
     <color name="loginAndRegisterTextColorHint">#919191</color>
-
+    <color name="statsLabelColor">#877f7f7f</color>
 
 
 </resources>

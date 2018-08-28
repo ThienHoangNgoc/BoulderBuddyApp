@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 
 import andorid_dev_2017.navigation_drawer.R;
 
-public class FragmentStatisticsChartProgress extends Fragment{
+public class FragmentStatisticsYearChart extends Fragment{
 
     View view;
 
-    public FragmentStatisticsChartProgress(){
+    public FragmentStatisticsYearChart(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.statistics_chart_progress_fragment,container,false);
+        view = inflater.inflate(R.layout.statistics_year_chart_fragment,container,false);
         return view;
     }
 }
