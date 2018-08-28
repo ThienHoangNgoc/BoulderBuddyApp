@@ -4,47 +4,67 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
+    <RelativeLayout
+        android:id="@+id/search_header_search_rLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark">
+
+
+        <Button
+            android:id="@+id/search_back_btn_id"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ic_arrow_back_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Search Entries"
+            android:textColor="@color/colorWhite"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_no_entries_found_rLayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_header_search_rLayout_id"
+        android:background="@drawable/background5">
+
+        <TextView
+            android:id="@+id/search_no_entries_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No entries for searched date."
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/search_rLayout_main_search_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-
-
-        <RelativeLayout
-            android:id="@+id/search_header_search_rLayout_id"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorPrimaryDark">
-
-
-            <Button
-                android:id="@+id/search_back_btn_id"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_arrow_back_black_24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Search Entries"
-                android:textColor="@color/colorWhite"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-
-
-        </RelativeLayout>
+        android:layout_below="@id/search_header_search_rLayout_id"
+        android:background="@color/semiTransparent">
 
 
         <RelativeLayout
             android:id="@+id/search_rLayout_edit_date_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/search_header_search_rLayout_id"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp">
@@ -64,6 +84,7 @@
                 android:focusable="false"
                 android:hint="Date"
                 android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorDarkerWhite"
                 android:textSize="25dp" />
 
             <Button
@@ -96,26 +117,6 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/search_no_entries_found_rLayout_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/search_rLayout_main_search_id"
-        android:background="@drawable/background5">
-
-        <TextView
-            android:id="@+id/search_no_entries_text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="no entries for searched date"
-            android:textColor="@color/colorWhite"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/search_rLayout_search_list_view_id"

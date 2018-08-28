@@ -1,5 +1,6 @@
 package andorid_dev_2017.navigation_drawer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,6 +39,9 @@ public class MainScreenActivity extends AppCompatActivity {
 
     final static String LOGTAG = "MainScreenAct";
 
+    //create a reference object from MainScreenActivity for NewEntryActivity, to close app properly after creating a new entry
+    public static Activity mainScreenActivityReference;
+
     private DrawerLayout mDrawlayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView nView;
@@ -65,6 +69,9 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        mainScreenActivityReference = this;
 
         //Setup Database
         sqLiteDbEntryContract = new SQLiteDbEntryContract(getApplicationContext());
@@ -112,6 +119,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), NewEntryActivity.class);
                 intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
+
 
             }
         });

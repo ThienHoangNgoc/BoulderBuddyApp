@@ -147,7 +147,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                 dialogFragment.show(getFragmentManager(), "time picker");
             }
         });
-        buttonEffect(confirmBtn,R.color.colorPrimaryDark);
+        buttonEffect(confirmBtn, R.color.colorPrimaryDark);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,6 +387,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
             intent.putExtra("username_key", loggedInUser);
             startActivity(intent);
+            MainScreenActivity.mainScreenActivityReference.finish();
             finish();
         }
 

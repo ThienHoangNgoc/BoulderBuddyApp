@@ -443,6 +443,9 @@ public class StatisticsActivity extends AppCompatActivity {
         if (minutes != 0) {
             hoursText = minutes / 60 + "";
             minutesText = minutes % 60 + "";
+            if (minutesText.equals("0")) {
+                minutesText = "00";
+            }
             return hoursText + ":" + minutesText;
         }
 
