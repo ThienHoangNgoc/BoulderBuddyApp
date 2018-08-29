@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:background="@drawable/background6">
 
         <ImageView
             android:id="@+id/register_dummy_image_id"
@@ -119,7 +119,7 @@
                 android:background="@color/transparent"
                 android:drawableLeft="@drawable/login_password_icon"
                 android:drawablePadding="10dp"
-                android:hint="Password"
+                android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"

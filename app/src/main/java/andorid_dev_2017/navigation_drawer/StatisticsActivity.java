@@ -143,13 +143,13 @@ public class StatisticsActivity extends AppCompatActivity {
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
                 if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
-                    routesCounter = routesCounter + getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_VERY_EASY) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_EASY) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_ADVANCED) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_HARD) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_VERY_HARD) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_EXTREMELY_HARD) +
-                            getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_SURPRISING);
+                    routesCounter = routesCounter + getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_VERY_EASY) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_EASY) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_ADVANCED) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_HARD) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_VERY_HARD) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_EXTREMELY_HARD) +
+                            getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_SURPRISING);
                     counter++;
                 }
                 cursor.moveToNext();
@@ -227,13 +227,13 @@ public class StatisticsActivity extends AppCompatActivity {
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
                 if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
-                    diff1 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_VERY_EASY);
-                    diff2 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_EASY);
-                    diff3 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_ADVANCED);
-                    diff4 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_HARD);
-                    diff5 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_VERY_HARD);
-                    diff6 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_EXTREMELY_HARD);
-                    diff7 += getIntFromDb(cursor, BoulderEntry.COLUMN_NAME_SURPRISING);
+                    diff1 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_VERY_EASY);
+                    diff2 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_EASY);
+                    diff3 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_ADVANCED);
+                    diff4 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_HARD);
+                    diff5 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_VERY_HARD);
+                    diff6 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_EXTREMELY_HARD);
+                    diff7 += getIntFromDifficulty(cursor, BoulderEntry.COLUMN_NAME_SURPRISING);
                 }
                 cursor.moveToNext();
             }
@@ -395,7 +395,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
     //for number Strings if != "" return int else return 0 for dataSet1
-    public int getIntFromDb(Cursor cursor, String columnName) {
+    public int getIntFromDifficulty(Cursor cursor, String columnName) {
         String difficulty = cursor.getString(cursor.getColumnIndex(columnName));
         if (!difficulty.equals("")) {
             return Integer.parseInt(difficulty);

@@ -40,46 +40,6 @@
                     android:layout_columnWeight="1"
                     android:src="@drawable/ic_star_border_black_24dp" />
 
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_columnWeight="1"
-                    android:src="@drawable/ic_star_border_black_24dp" />
 
 
 

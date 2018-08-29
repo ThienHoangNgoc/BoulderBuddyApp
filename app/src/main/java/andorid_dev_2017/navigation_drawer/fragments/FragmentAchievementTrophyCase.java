@@ -39,7 +39,6 @@ public class FragmentAchievementTrophyCase extends Fragment {
                 //show the background color of the XML
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 //change dialog window size - width and height
-
                 dialog.show();
 
 

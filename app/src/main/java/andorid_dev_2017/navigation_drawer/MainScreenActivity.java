@@ -178,6 +178,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 break;
             case R.id.achievements:
                 intent = new Intent(getApplicationContext(), AchievementActivity.class);
+                intent.putExtra("username_key", loggedInUser);
                 startActivity(intent);
                 break;
             case R.id.statistics:
