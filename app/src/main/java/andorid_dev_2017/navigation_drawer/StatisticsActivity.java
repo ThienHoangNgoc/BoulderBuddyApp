@@ -136,6 +136,10 @@ public class StatisticsActivity extends AppCompatActivity {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
         ArrayList<StatisticsRecyclerViewItem> list = new ArrayList<>();
 
+        StatisticsRecyclerViewItem sessionQuantity;
+        StatisticsRecyclerViewItem routesQuantity;
+        StatisticsRecyclerViewItem averageRoutesSession;
+
         if (cursor.getCount() > 0) {
             //creating the items
             int counter = 0;
@@ -158,15 +162,22 @@ public class StatisticsActivity extends AppCompatActivity {
             if (counter == 0) {
                 counter = 1;
             }
-            StatisticsRecyclerViewItem sessionQuantity = new StatisticsRecyclerViewItem(getTotalSessions() + "", "Sessions");
-            StatisticsRecyclerViewItem routesQuantity = new StatisticsRecyclerViewItem(routesCounter + "", "Routes");
-            StatisticsRecyclerViewItem averageRoutesSession = new StatisticsRecyclerViewItem((routesCounter / counter) + "", "Routes/Session");
-            list.add(sessionQuantity);
-            list.add(routesQuantity);
-            list.add(averageRoutesSession);
 
+            sessionQuantity = new StatisticsRecyclerViewItem(getTotalSessions() + "", "Sessions");
+            routesQuantity = new StatisticsRecyclerViewItem(routesCounter + "", "Routes");
+            averageRoutesSession = new StatisticsRecyclerViewItem((routesCounter / counter) + "", "Routes/Session");
+
+        } else {
+
+            sessionQuantity = new StatisticsRecyclerViewItem("0", "Sessions");
+            routesQuantity = new StatisticsRecyclerViewItem("0", "Routes");
+            averageRoutesSession = new StatisticsRecyclerViewItem("0", "Routes/Session");
 
         }
+
+        list.add(sessionQuantity);
+        list.add(routesQuantity);
+        list.add(averageRoutesSession);
 
         return list;
 
@@ -175,6 +186,11 @@ public class StatisticsActivity extends AppCompatActivity {
 
     public void createEntriesGridViewSet2(StatisticsGridViewAdapter gridViewAdapter) {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
+
+        StatGridViewItem stat1;
+        StatGridViewItem stat2;
+        StatGridViewItem stat3;
+        StatGridViewItem stat4;
 
         if (cursor.getCount() > 0) {
             int totalTime = 0;
@@ -196,18 +212,25 @@ public class StatisticsActivity extends AppCompatActivity {
                 totalSessions = 1;
             }
 
-            StatGridViewItem stat1 = new StatGridViewItem(timeInHour(totalTime), "Total Time (in hours)");
-            StatGridViewItem stat2 = new StatGridViewItem(timeInHour(totalTime / totalSessions), "Average Time (in hours)");
-            StatGridViewItem stat3 = new StatGridViewItem(convertMinutesToTime(totalStartTime / totalSessions), "Average Start");
-            StatGridViewItem stat4 = new StatGridViewItem(convertMinutesToTime(totalEndTime / totalSessions), "Average End");
 
-            gridViewAdapter.add(stat1);
-            gridViewAdapter.add(stat2);
-            gridViewAdapter.add(stat3);
-            gridViewAdapter.add(stat4);
+            stat1 = new StatGridViewItem(timeInHour(totalTime), "Total Time (in hours)");
+            stat2 = new StatGridViewItem(timeInHour(totalTime / totalSessions), "Average Time (in hours)");
+            stat3 = new StatGridViewItem(convertMinutesToTime(totalStartTime / totalSessions), "Average Start");
+            stat4 = new StatGridViewItem(convertMinutesToTime(totalEndTime / totalSessions), "Average End");
 
+        } else {
+
+            stat1 = new StatGridViewItem("0", "Total Time (in hours)");
+            stat2 = new StatGridViewItem("0", "Average Time (in hours)");
+            stat3 = new StatGridViewItem("00:00", "Average Start");
+            stat4 = new StatGridViewItem("00:00", "Average End");
 
         }
+
+        gridViewAdapter.add(stat1);
+        gridViewAdapter.add(stat2);
+        gridViewAdapter.add(stat3);
+        gridViewAdapter.add(stat4);
 
 
     }
@@ -215,6 +238,14 @@ public class StatisticsActivity extends AppCompatActivity {
     public ArrayList<StatisticsRecyclerViewItem> createEntriesRecyclerViewSet3() {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
         ArrayList<StatisticsRecyclerViewItem> list = new ArrayList<>();
+
+        StatisticsRecyclerViewItem stat1;
+        StatisticsRecyclerViewItem stat2;
+        StatisticsRecyclerViewItem stat3;
+        StatisticsRecyclerViewItem stat4;
+        StatisticsRecyclerViewItem stat5;
+        StatisticsRecyclerViewItem stat6;
+        StatisticsRecyclerViewItem stat7;
 
         if (cursor.getCount() > 0) {
             int diff1 = 0;
@@ -238,23 +269,33 @@ public class StatisticsActivity extends AppCompatActivity {
                 cursor.moveToNext();
             }
 
-            StatisticsRecyclerViewItem stat1 = new StatisticsRecyclerViewItem(diff1 + "", "Very Easy");
-            StatisticsRecyclerViewItem stat2 = new StatisticsRecyclerViewItem(diff2 + "", "Easy");
-            StatisticsRecyclerViewItem stat3 = new StatisticsRecyclerViewItem(diff3 + "", "Advanced");
-            StatisticsRecyclerViewItem stat4 = new StatisticsRecyclerViewItem(diff4 + "", "Hard");
-            StatisticsRecyclerViewItem stat5 = new StatisticsRecyclerViewItem(diff5 + "", "Very Hard");
-            StatisticsRecyclerViewItem stat6 = new StatisticsRecyclerViewItem(diff6 + "", "Extremely Hard");
-            StatisticsRecyclerViewItem stat7 = new StatisticsRecyclerViewItem(diff7 + "", "Surprising");
+            stat1 = new StatisticsRecyclerViewItem(diff1 + "", "Very Easy");
+            stat2 = new StatisticsRecyclerViewItem(diff2 + "", "Easy");
+            stat3 = new StatisticsRecyclerViewItem(diff3 + "", "Advanced");
+            stat4 = new StatisticsRecyclerViewItem(diff4 + "", "Hard");
+            stat5 = new StatisticsRecyclerViewItem(diff5 + "", "Very Hard");
+            stat6 = new StatisticsRecyclerViewItem(diff6 + "", "Extremely Hard");
+            stat7 = new StatisticsRecyclerViewItem(diff7 + "", "Surprising");
 
-            list.add(stat1);
-            list.add(stat2);
-            list.add(stat3);
-            list.add(stat4);
-            list.add(stat5);
-            list.add(stat6);
-            list.add(stat7);
+        } else {
+
+            stat1 = new StatisticsRecyclerViewItem("0", "Very Easy");
+            stat2 = new StatisticsRecyclerViewItem("0", "Easy");
+            stat3 = new StatisticsRecyclerViewItem("0", "Advanced");
+            stat4 = new StatisticsRecyclerViewItem("0", "Hard");
+            stat5 = new StatisticsRecyclerViewItem("0", "Very Hard");
+            stat6 = new StatisticsRecyclerViewItem("0", "Extremely Hard");
+            stat7 = new StatisticsRecyclerViewItem("0", "Surprising");
 
         }
+
+        list.add(stat1);
+        list.add(stat2);
+        list.add(stat3);
+        list.add(stat4);
+        list.add(stat5);
+        list.add(stat6);
+        list.add(stat7);
 
         return list;
 
@@ -263,6 +304,10 @@ public class StatisticsActivity extends AppCompatActivity {
 
     public void createEntriesGridViewSet4(StatisticsGridViewAdapter gridViewAdapter) {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
+
+        StatGridViewItem stat1;
+        StatGridViewItem stat2;
+        StatGridViewItem stat3;
 
         if (cursor.getCount() > 0) {
             //String key , Integer value ( reverse ) if key is a duplicate increment the value
@@ -297,23 +342,30 @@ public class StatisticsActivity extends AppCompatActivity {
                 cursor.moveToNext();
             }
 
-            StatGridViewItem stat1 = new StatGridViewItem(getMostRepeatedComponent(weekDayCountMap).getKey(), "Most Active Weekday");
-            StatGridViewItem stat2 = new StatGridViewItem(getMostRepeatedComponent(monthCountMap).getKey(), "Most Active Month");
-            StatGridViewItem stat3 = new StatGridViewItem(getMostRepeatedComponent(yearCountMap).getKey(), "Most Active Year");
+            stat1 = new StatGridViewItem(getMostRepeatedComponent(weekDayCountMap).getKey(), "Most Active Weekday");
+            stat2 = new StatGridViewItem(getMostRepeatedComponent(monthCountMap).getKey(), "Most Active Month");
+            stat3 = new StatGridViewItem(getMostRepeatedComponent(yearCountMap).getKey(), "Most Active Year");
 
+        } else {
 
-            gridViewAdapter.add(stat1);
-            gridViewAdapter.add(stat2);
-            gridViewAdapter.add(stat3);
-
+            stat1 = new StatGridViewItem("No Data", "Most Active Weekday");
+            stat2 = new StatGridViewItem("No Data", "Most Active Month");
+            stat3 = new StatGridViewItem("No Data", "Most Active Year");
 
         }
+
+        gridViewAdapter.add(stat1);
+        gridViewAdapter.add(stat2);
+        gridViewAdapter.add(stat3);
 
 
     }
 
     public void createEntriesGridViewSet5(StatisticsGridViewAdapter gridViewAdapter) {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
+
+        StatGridViewItem stat1;
+        StatGridViewItem stat2;
 
         if (cursor.getCount() > 0) {
             HashMap<String, Integer> sessionRatingCountMap = new HashMap<>();
@@ -344,20 +396,27 @@ public class StatisticsActivity extends AppCompatActivity {
                 averageRating = averageRating.substring(0, 4);
             }
 
-            StatGridViewItem stat1 = new StatGridViewItem(averageRating + " / 5", "Average Rating");
-            StatGridViewItem stat2 = new StatGridViewItem(getMostRepeatedComponent(sessionRatingCountMap).getKey() + " / 5", "Most Given Rating");
+            stat1 = new StatGridViewItem(averageRating + " / 5", "Average Rating");
+            stat2 = new StatGridViewItem(getMostRepeatedComponent(sessionRatingCountMap).getKey() + " / 5", "Most Given Rating");
 
+        } else {
 
-            gridViewAdapter.add(stat1);
-            gridViewAdapter.add(stat2);
+            stat1 = new StatGridViewItem("No Data", "Average Rating");
+            stat2 = new StatGridViewItem("No Data", "Most Given Rating");
 
         }
+
+        gridViewAdapter.add(stat1);
+        gridViewAdapter.add(stat2);
 
 
     }
 
     public void createEntriesGridViewSet6(StatisticsGridViewAdapter gridViewAdapter) {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
+
+        StatGridViewItem stat1;
+        StatGridViewItem stat2;
 
         if (cursor.getCount() > 0) {
             HashMap<String, Integer> locationsCountMap = new HashMap<>();
@@ -380,15 +439,20 @@ public class StatisticsActivity extends AppCompatActivity {
             }
 
 
-            StatGridViewItem stat1 = new StatGridViewItem(getMostRepeatedComponent(locationsCountMap).getKey() + " (" + getMostRepeatedComponent(locationsCountMap).getValue() + ")", "Most Visited Location");
-            StatGridViewItem stat2 = new StatGridViewItem(locations.size() + "", "Different Visited Locations");
+            stat1 = new StatGridViewItem(getMostRepeatedComponent(locationsCountMap).getKey() + " (" + getMostRepeatedComponent(locationsCountMap).getValue() + ")", "Most Visited Location");
+            stat2 = new StatGridViewItem(locations.size() + "", "Different Visited Locations");
 
 
-            gridViewAdapter.add(stat1);
-            gridViewAdapter.add(stat2);
+        } else {
+
+            stat1 = new StatGridViewItem("No Data", "Most Visited Location");
+            stat2 = new StatGridViewItem("No Data", "Different Visited Locations");
 
 
         }
+
+        gridViewAdapter.add(stat1);
+        gridViewAdapter.add(stat2);
 
 
     }

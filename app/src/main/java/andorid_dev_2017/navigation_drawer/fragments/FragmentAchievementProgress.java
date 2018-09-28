@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import java.util.ArrayList;
 import andorid_dev_2017.navigation_drawer.AchievementProgressRecyclerViewAdapter;
 import andorid_dev_2017.navigation_drawer.AchievementProgressRecyclerViewItem;
 import andorid_dev_2017.navigation_drawer.R;
+import andorid_dev_2017.navigation_drawer.sqlite_database.Achievement;
+import andorid_dev_2017.navigation_drawer.sqlite_database.AchievementEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbAchievementContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
 
 public class FragmentAchievementProgress extends Fragment {
@@ -26,7 +30,10 @@ public class FragmentAchievementProgress extends Fragment {
 
     AchievementProgressRecyclerViewAdapter recyclerViewAdapter;
     SQLiteDbEntryContract sqLiteDbEntryContract;
+    SQLiteDbAchievementContract sqLiteDbAchievementContract;
     String loggedInUser;
+
+    static final String LOGTAG = "achievementProgress";
 
 
     public FragmentAchievementProgress() {
@@ -49,6 +56,7 @@ public class FragmentAchievementProgress extends Fragment {
 
         //setup database
         sqLiteDbEntryContract = new SQLiteDbEntryContract(getContext());
+        sqLiteDbAchievementContract = new SQLiteDbAchievementContract(getContext());
 
         //setup recyclerViewAdapter
         progressRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,25 +71,63 @@ public class FragmentAchievementProgress extends Fragment {
         ArrayList<AchievementProgressRecyclerViewItem> itemList = new ArrayList<>();
 
 
-        // in ein 2. array dann prüfen ob null wenn nein dann add
-        if (createFirstEntryAchievement() != null) {
-            itemList.add(createFirstEntryAchievement());
-        }
+        AchievementProgressRecyclerViewItem achievement1 = createFirstAchievement();
+        AchievementProgressRecyclerViewItem achievement2 = createSecondAchievement();
+
+
+        addIfNotNull(itemList, achievement1);
+        addIfNotNull(itemList, achievement2);
 
         return itemList;
     }
 
-    public AchievementProgressRecyclerViewItem createFirstEntryAchievement() {
+    //creates a  AchievementProgressRecyclerViewItem object and inserts into db if it doesnt already exists
+    //Create a Entry
+    public AchievementProgressRecyclerViewItem createFirstAchievement() {
         AchievementProgressRecyclerViewItem item = null;
         if (getTotalSessions() > 0) {
-            item = new AchievementProgressRecyclerViewItem("First Entry", 100, true);
-        } else {
-            item = new AchievementProgressRecyclerViewItem("First Entry", 0, false);
+            item = new AchievementProgressRecyclerViewItem("A New Journey", 100, true);
+            if (!isInAchievementDB("A New Journey", loggedInUser)) {
+                sqLiteDbAchievementContract.insertEntry("A New Journey", 1, loggedInUser);
+            }
         }
         return item;
     }
 
-    //get total Sessions for dataSet1 and dataSet2
+    //Complete 100 very Easy
+    public AchievementProgressRecyclerViewItem createSecondAchievement() {
+        AchievementProgressRecyclerViewItem item = null;
+        int count = getNumberOfDifficulty(BoulderEntry.COLUMN_NAME_VERY_EASY);
+        if (count > 0) {
+            if (count >= 100) {
+                item = new AchievementProgressRecyclerViewItem("Very Easy Grandmaster", 100, true);
+                if (!isInAchievementDB("Very Easy Grandmaster", loggedInUser)) {
+                    sqLiteDbAchievementContract.insertEntry("Very Easy Grandmaster", 1, loggedInUser);
+                } else {
+                    Achievement achievement = getAchievementEntryByName("Very Easy Grandmaster");
+                    sqLiteDbAchievementContract.updateStatusColumn(1, achievement.getId());
+                }
+            }
+            if (count < 100) {
+                item = new AchievementProgressRecyclerViewItem("Very Easy Grandmaster", count, false);
+                if (!isInAchievementDB("Very Easy Grandmaster", loggedInUser)) {
+                    sqLiteDbAchievementContract.insertEntry("Very Easy Grandmaster", 0, loggedInUser);
+
+                } else {
+                    Achievement achievement = getAchievementEntryByName("Very Easy Grandmaster");
+                    sqLiteDbAchievementContract.updateStatusColumn(0, achievement.getId());
+
+                }
+
+            }
+        }
+
+        return item;
+
+    }
+
+
+    //get total Sessions
     public int getTotalSessions() {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
         int counter = 0;
@@ -127,4 +173,103 @@ public class FragmentAchievementProgress extends Fragment {
         }
         return null;
     }
+
+    public int getNumberOfDifficulty(String columnName) {
+        Cursor cursor = sqLiteDbEntryContract.readEntry();
+        int count = 0;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; cursor.getCount() > i; i++) {
+                if (cursor.getString(cursor.getColumnIndex(BoulderEntry.COLUMN_NAME_CREATOR)).equals(loggedInUser)) {
+                    count += getIntFromDifficulty(cursor, columnName);
+                }
+                cursor.moveToNext();
+
+            }
+
+
+        }
+        return count;
+    }
+
+    //for number Strings if != "" return int else return 0 for dataSet1
+    public int getIntFromDifficulty(Cursor cursor, String columnName) {
+        String difficulty = cursor.getString(cursor.getColumnIndex(columnName));
+        if (!difficulty.equals("")) {
+            return Integer.parseInt(difficulty);
+        }
+        return 0;
+    }
+
+
+    //gets a achievementEntry based on the id
+    public Achievement getAchievementEntryById(String id) {
+        Achievement achievement = null;
+        Cursor cursor = sqLiteDbAchievementContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_ID)).equals(id)) {
+                achievement = new Achievement(
+                        id,
+                        cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_NAME_ID)),
+                        cursor.getInt(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_STATUS_ID)),
+                        cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_CREATOR_ID)));
+            }
+            cursor.moveToNext();
+        }
+
+        return achievement;
+
+    }
+
+    //gets a achievementEntry based on the name
+    public Achievement getAchievementEntryByName(String name) {
+        Achievement achievement = null;
+        Cursor cursor = sqLiteDbAchievementContract.readEntry();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+            if (cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_NAME_ID)).equals(name)) {
+                achievement = new Achievement(
+                        cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_ID)),
+                        name,
+                        cursor.getInt(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_STATUS_ID)),
+                        cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_CREATOR_ID)));
+                return achievement;
+            }
+            cursor.moveToNext();
+        }
+
+        return achievement;
+
+    }
+
+
+    public boolean isInAchievementDB(String achievementName, String currentUser) {
+        Cursor cursor = sqLiteDbAchievementContract.readEntry();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; cursor.getCount() > i; i++) {
+                Achievement achievement = getAchievementEntryById(cursor.getString(cursor.getColumnIndex(AchievementEntry.COLUMN_NAME_ACHIEVEMENT_ID)));
+                if (achievement.getName().equals(achievementName) && achievement.getCreator().equals(currentUser)) {
+                    return true;
+                }
+                cursor.moveToNext();
+
+            }
+        }
+        return false;
+    }
+
+    public void addIfNotNull(ArrayList<AchievementProgressRecyclerViewItem> list, AchievementProgressRecyclerViewItem item) {
+        if (item != null) {
+            list.add(item);
+        }
+
+    }
+
+    public void createLog(String text) {
+        Log.d(LOGTAG, text);
+    }
+
+
 }

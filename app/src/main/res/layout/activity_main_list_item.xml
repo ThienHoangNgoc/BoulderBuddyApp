@@ -74,7 +74,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/ic_delete_black_24dp" />
+                android:background="@drawable/trash_can_delete_icon" />
 
 
         </RelativeLayout>

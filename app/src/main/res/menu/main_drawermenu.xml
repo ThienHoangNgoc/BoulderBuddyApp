@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/drawe_menu_profile_icon"
         android:title="Profile" />
     <item
         android:id="@+id/search"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/drawer_menu_search_icon"
         android:title="Search" />
     <item
         android:id="@+id/achievements"
-        android:icon="@drawable/ic_star_border_black_24dp"
+        android:icon="@drawable/drawer_menu_achievements_icon"
         android:title="Achievements" />
     <item
         android:id="@+id/statistics"
-        android:icon="@drawable/ic_trending_up_black_24dp"
+        android:icon="@drawable/drawer_menu_statistics_icon"
         android:title="Statistics" />
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/drawer_menu_settings_icon"
         android:title="Settings" />
     <item
         android:id="@+id/logout"
-        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:icon="@drawable/drawer_menu_logout_icon"
         android:title="Logout" />
 
 

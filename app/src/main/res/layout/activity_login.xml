@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:background="@color/colorDark2">
 
         <ImageView
             android:id="@+id/login_app_icon_image_view_id"
@@ -16,7 +16,7 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:src="@drawable/photo" />
+            android:src="@drawable/app_icon_placeholder" />
 
         <TextView
             android:id="@+id/login_app_name_text_id"
@@ -50,7 +50,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/loginAndRegisterTextColorHint"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <View
@@ -83,7 +83,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/loginAndRegisterTextColorHint"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <View

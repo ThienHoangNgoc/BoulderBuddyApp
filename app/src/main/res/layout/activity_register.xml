@@ -58,7 +58,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/loginAndRegisterTextColorHint"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <View
@@ -91,7 +91,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/loginAndRegisterTextColorHint"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <View
@@ -124,7 +124,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/loginAndRegisterTextColorHint"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <View

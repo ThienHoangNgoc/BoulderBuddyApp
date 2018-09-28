@@ -17,7 +17,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/ic_arrow_back_black_24dp" />
+            android:background="@drawable/arrow_back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                 android:focusable="false"
                 android:hint="Date"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorDarkerWhite"
+                android:textColorHint="@color/textHintColor"
                 android:textSize="25dp" />
 
             <Button
@@ -93,7 +93,7 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/view_id_3"
                 android:layout_toRightOf="@id/search_edit_text_search_date_id"
-                android:background="@drawable/ic_close_black_24dp" />
+                android:background="@drawable/close_icon" />
 
             <Button
                 android:id="@+id/search_search_btn_id"
@@ -103,7 +103,7 @@
                 android:layout_marginLeft="-1dp"
                 android:layout_toRightOf="@id/search_reset_btn_id"
                 android:background="@color/colorDark2"
-                android:drawableStart="@drawable/ic_search2_black_24dp" />
+                android:drawableStart="@drawable/search_activity_search_icon" />
 
             <View
                 android:layout_width="230dp"

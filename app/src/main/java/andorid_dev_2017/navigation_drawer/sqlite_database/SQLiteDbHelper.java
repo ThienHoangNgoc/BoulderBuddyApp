@@ -6,12 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 14;
+    public static final int DATABASE_VERSION = 24;
     public static final String DATABASE_NAME = "boulder_entries.db";
 
     public static final String COMMA_SEP = ",";
     public static final String TEXT_TYPE = " TEXT";
     public static final String IMAGE_TYPE = " BLOB";
+    public static final String INTEGER_TYPE = " INTEGER";
 
 
     //Table for entries
@@ -58,6 +59,17 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                     " )";
 
 
+    //Create Table String for Achievement_db
+
+    public static final String SQL_CREATE_ACHIEVEMENT_DB =
+            "CREATE TABLE " + AchievementEntry.TABLE_NAME + " (" +
+                    AchievementEntry.COLUMN_NAME_ACHIEVEMENT_ID + " INTEGER PRIMARY KEY," +
+                    AchievementEntry.COLUMN_NAME_ACHIEVEMENT_NAME_ID + TEXT_TYPE + COMMA_SEP +
+                    AchievementEntry.COLUMN_NAME_ACHIEVEMENT_STATUS_ID + INTEGER_TYPE + COMMA_SEP +
+                    AchievementEntry.COLUMN_NAME_ACHIEVEMENT_CREATOR_ID + TEXT_TYPE +
+                    " )";
+
+
     //Delete Table String for entries
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + BoulderEntry.TABLE_NAME;
@@ -67,9 +79,13 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     public static final String SQL_DELETE_ENTRIES_USER =
             "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
 
-    //Delete Table String for User_entries
+    //Delete Table String for Image_entries
     public static final String SQL_DELETE_IMAGE_DB =
             "DROP TABLE IF EXISTS " + ImageDB.TABLE_NAME;
+
+    //Delete Table String for Achievement_entries
+    public static final String SQL_DELETE_ACHIEVEMENT_DB =
+            "DROP TABLE IF EXISTS " + AchievementEntry.TABLE_NAME;
 
 
     public SQLiteDbHelper(Context context) {
@@ -82,6 +98,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES_USER);
         db.execSQL(SQL_CREATE_IMAGE_DB);
+        db.execSQL(SQL_CREATE_ACHIEVEMENT_DB);
 
     }
 
@@ -90,6 +107,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ENTRIES_USER);
         db.execSQL(SQL_DELETE_ENTRIES);
         db.execSQL(SQL_DELETE_IMAGE_DB);
+        db.execSQL(SQL_DELETE_ACHIEVEMENT_DB);
         onCreate(db);
     }
 }

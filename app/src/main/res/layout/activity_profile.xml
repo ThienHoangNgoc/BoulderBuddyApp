@@ -18,7 +18,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_edit_black_24dp" />
+            android:background="@drawable/edit_icon" />
 
         <TextView
             android:id="@+id/profile_header_id"
@@ -200,7 +200,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_info_outline_black_24dp" />
+            android:background="@drawable/info_outline_circle_icon" />
 
         <TextView
             android:id="@+id/profile_rank_text_id"
@@ -221,7 +221,7 @@
             android:layout_height="140dp"
             android:layout_below="@id/profile_rank_text_id"
             android:layout_centerInParent="true"
-            android:background="@drawable/ic_spa_black_24dp" />
+            android:background="@drawable/rank_icon" />
 
         <TextView
             android:id="@+id/profile_rank_tier_text_id"

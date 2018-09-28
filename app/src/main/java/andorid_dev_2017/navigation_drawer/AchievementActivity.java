@@ -27,8 +27,8 @@ public class AchievementActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.achievement_viewPager_id);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         //Adding Fragments
-        adapter.AddFragment(new FragmentAchievementTrophyCase(),"Trophy Case");
-        adapter.AddFragment(new FragmentAchievementProgress(),"Progress");
+        adapter.AddFragment(new FragmentAchievementProgress(), "Progress");
+        adapter.AddFragment(new FragmentAchievementTrophyCase(), "Trophy Case");
 
         //adapter Setup
         viewPager.setAdapter(adapter);

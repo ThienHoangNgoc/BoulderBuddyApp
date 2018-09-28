@@ -4,15 +4,16 @@
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorBlue">#2e85ff</color>
-    <color name="colorDarkerWhite">#cbcbcb</color>
+    <color name="colorBlack">#000000</color>
+    <color name="iconColor1">#cbcbcb</color>
+    <color name="iconColor2">#ffffff</color>
+    <color name="iconColor3">#000000</color>
     <color name="colorDark2">#1f243e</color>
     <color name="colorBackground2">#080a20</color>
     <color name="colorGrayDark">#6c6c6c</color>
     <color name="colorProgressbar">#0d1522</color>
     <color name="colorProgressbarBackground">#e3e6f1</color>
-    <color name="colorBlack">#000000</color>
-    <color name="editPasswordAndUsername">#919191</color>
+    <color name="editPasswordAndUsernameColor">#919191</color>
     <color name="semiTransparent">#877f7f7f</color>
     <color name="semiTransparent2">#cb7f7f7f</color>
     <color name="semiTransparent3">#443c3c3c</color>
@@ -20,17 +21,18 @@
     <color name="transparent">#007f7f7f</color>
     <color name="transparentWhite">#64ffffff</color>
     <color name="popUpTransparent">#dadada</color>
-    <color name="StarColor">#ffffff</color>
-    <color name="StarColor2">#f1d710</color>
+    <color name="StarRatingColor">#ffffff</color>
+    <color name="StarRatingColor2">#f1d710</color>
+    <color name="SettingsSwitchColor">#2d99ff</color>
     <color name="Diff1">#ebdb1a</color>
     <color name="Diff2">#2d99ff</color>
     <color name="Diff3">#43ae5f</color>
     <color name="Diff4">#ff5050</color>
-    <color name="statsDividerColor">#585863</color>
     <color name="Diff5">#ababab</color>
     <color name="Diff6">#222222</color>
     <color name="Diff7">#b75f92</color>
-    <color name="loginAndRegisterTextColorHint">#919191</color>
+    <color name="statsDividerColor">#585863</color>
+    <color name="textHintColor">#919191</color>
     <color name="statsLabelColor">#877f7f7f</color>
 
 

@@ -199,7 +199,7 @@
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
                         android:id="@+id/statistics_stat_set_5_grid_view_id"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/view_4_id"
                         android:layout_marginTop="20dp"
                         android:numColumns="2" />
@@ -217,7 +217,7 @@
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
                         android:id="@+id/statistics_stat_set_6_grid_view_id"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/view_5_id"
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="20dp"

@@ -17,16 +17,16 @@
 
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/colorGrayDark</item>
-        <item name="colorControlActivated">@color/StarColor</item>
+        <item name="colorControlActivated">@color/StarRatingColor</item>
     </style>
 
     <style name="RatingBar2" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/colorGrayDark</item>
-        <item name="colorControlActivated">@color/StarColor2</item>
+        <item name="colorControlActivated">@color/StarRatingColor2</item>
     </style>
 
     <style name="SwitchCompatTheme">
-        <item name="colorControlActivated">@color/colorBlue</item>
+        <item name="colorControlActivated">@color/SettingsSwitchColor</item>
     </style>
 
 </resources>

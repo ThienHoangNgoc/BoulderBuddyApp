@@ -36,7 +36,7 @@
             android:layout_margin="20dp"
             android:elevation="10dp"
             android:scaleType="center"
-            android:src="@drawable/ic_add_black_24dp"
+            android:src="@drawable/add_icon"
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal" />
 
