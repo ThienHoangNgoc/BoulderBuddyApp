@@ -34,12 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/achievement_appBar_id"
-        android:background="@color/colorBackground2"
+        android:background="@color/backgroundColor2"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorWhite"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorWhite"
-        app:tabTextColor="@color/colorGrayDark">
+        app:tabTextColor="@color/defaultDialogBtnColor">
 
 
     </android.support.design.widget.TabLayout>
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/achievement_table_layout_id"
-        android:background="@color/colorDark2">
+        android:background="@color/backgroundColor1">
 
 
     </android.support.v4.view.ViewPager>

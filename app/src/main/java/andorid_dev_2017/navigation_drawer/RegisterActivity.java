@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         dummyImageView = findViewById(R.id.register_dummy_image_id);
 
         //Get dummy image for the dummyImageView for the user database entry
-        dummyImageView.setImageResource(R.drawable.photo);
+        dummyImageView.setImageResource(R.drawable.dummy_profile_picture);
 
 
         //Setup onClickListener

@@ -6,14 +6,14 @@
             <corners android:radius="10dip" />
             <gradient
                 android:angle="270"
-                android:centerColor="@color/colorProgressbarBackground"
+                android:centerColor="@color/progressbarBackgroundColor"
                 android:centerY="1.0"
-                android:endColor="@color/colorProgressbarBackground"
-                android:startColor="@color/colorProgressbarBackground" />
+                android:endColor="@color/progressbarBackgroundColor"
+                android:startColor="@color/progressbarBackgroundColor" />
 
             <stroke
                 android:width="1dp"
-                android:color="@color/colorProgressbarBackground" />
+                android:color="@color/progressbarBackgroundColor" />
         </shape>
     </item>
 
@@ -29,10 +29,10 @@
                 <corners android:radius="10dip" />
                 <gradient
                     android:angle="270"
-                    android:centerColor="@color/colorProgressbar"
+                    android:centerColor="@color/progressbarColor"
                     android:centerY="1.0"
-                    android:endColor="@color/colorProgressbar"
-                    android:startColor="@color/colorProgressbar" />
+                    android:endColor="@color/progressbarColor"
+                    android:startColor="@color/progressbarColor" />
             </shape>
         </scale>
     </item>

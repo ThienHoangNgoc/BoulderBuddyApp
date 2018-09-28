@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background2">
+        android:background="@color/backgroundColor1">
 
         <ListView
             android:id="@+id/main_latest_entries_listView_id"
@@ -51,8 +51,8 @@
         android:layout_gravity="start"
         android:background="@color/colorWhite"
         app:headerLayout="@layout/main_menu_header"
-        app:itemIconTint="@color/colorGrayDark"
-        app:itemTextColor="@color/colorGrayDark"
+        app:itemIconTint="@color/defaultDialogBtnColor"
+        app:itemTextColor="@color/defaultDialogBtnColor"
         app:menu="@menu/main_drawermenu">
 
 

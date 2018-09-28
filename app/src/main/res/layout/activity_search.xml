@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/search_header_search_rLayout_id"
-        android:background="@drawable/background5">
+        android:background="@color/backgroundColor1">
 
         <TextView
             android:id="@+id/search_no_entries_text_id"
@@ -102,7 +102,7 @@
                 android:layout_below="@id/view_id_3"
                 android:layout_marginLeft="-1dp"
                 android:layout_toRightOf="@id/search_reset_btn_id"
-                android:background="@color/colorDark2"
+                android:background="@color/backgroundColor1"
                 android:drawableStart="@drawable/search_activity_search_icon" />
 
             <View

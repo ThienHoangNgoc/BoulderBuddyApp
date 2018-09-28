@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
-import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
-import andorid_dev_2017.navigation_drawer.sqlite_database.User;
-import andorid_dev_2017.navigation_drawer.sqlite_database.UserEntry;
 
 public class EntryAdapter extends ArrayAdapter<EntryItem> {
 
@@ -88,8 +82,8 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
-                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getContext().getColor(R.color.colorGrayDark));
-                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getContext().getColor(R.color.colorGrayDark));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getContext().getColor(R.color.defaultDialogBtnColor));
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getContext().getColor(R.color.defaultDialogBtnColor));
                     }
                 });
 
