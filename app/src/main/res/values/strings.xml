@@ -35,24 +35,27 @@
         <item>Ostbloc</item>
         <item>BrightSide</item>
         <item>Bouldergarten</item>
-        <item>Boulderclub</item>
+        <item>Boulderklub</item>
+        <item>Kegel</item>
+        <item>Berta Block</item>
+
 
     </string-array>
 
     <string-array name="monate">
 
-        <item>Januar</item>
-        <item>Februar</item>
-        <item>März</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
         <item>April</item>
-        <item>Mai</item>
-        <item>Juni</item>
-        <item>Juli</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
         <item>August</item>
         <item>September</item>
-        <item>Oktober</item>
+        <item>October</item>
         <item>November</item>
-        <item>Dezember</item>
+        <item>December</item>
 
     </string-array>
 

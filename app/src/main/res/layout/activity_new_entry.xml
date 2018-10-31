@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor3"
+    android:background="@color/appBackgroundColor2"
     android:clickable="true"
     android:descendantFocusability="beforeDescendants"
     android:focusable="true"
@@ -14,7 +14,7 @@
         android:id="@+id/rLayout_new_entry_header_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimaryDark">
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/backgroundColor1"
+                app:cardBackgroundColor="@color/appBackgroundColor"
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout
@@ -224,12 +224,22 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/backgroundColor1"
+                app:cardBackgroundColor="@color/appBackgroundColor"
                 app:cardCornerRadius="10dp">
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/step_2_level_info_btn_id"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/info_outline_circle_icon" />
 
                     <TextView
                         android:id="@+id/step_2_text_header_id"
@@ -242,12 +252,15 @@
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
+
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_veryEasy_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/step_2_text_header_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
+                        android:background="@color/level1Color"
                         android:gravity="center">
 
                         <EditText
@@ -258,7 +271,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Very Easy"
+                            android:hint="Level 1"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -280,10 +293,12 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_easy_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_veryEasy_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+                        android:background="@color/level2Color"
                         android:gravity="center">
 
                         <EditText
@@ -294,7 +309,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Easy"
+                            android:hint="Level 2"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -316,10 +331,12 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_advanced_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_easy_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+                        android:background="@color/level3Color"
                         android:gravity="center">
 
                         <EditText
@@ -330,7 +347,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Advanced"
+                            android:hint="Level 3"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -352,10 +369,12 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_hard_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_advanced_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+                        android:background="@color/level4Color"
                         android:gravity="center">
 
                         <EditText
@@ -366,7 +385,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Hard"
+                            android:hint="Level 4"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -388,10 +407,12 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_veryHard_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_hard_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+                        android:background="@color/level5Color"
                         android:gravity="center">
 
                         <EditText
@@ -402,7 +423,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Very Hard"
+                            android:hint="Level 5"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -424,10 +445,12 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_extremelyHard_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_veryHard_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+                        android:background="@color/level6Color"
                         android:gravity="center">
 
                         <EditText
@@ -438,7 +461,7 @@
                             android:drawableLeft="@drawable/difficulty_icon"
                             android:drawablePadding="12dp"
                             android:focusable="false"
-                            android:hint="Extremely Hard"
+                            android:hint="Level 6"
                             android:textColor="@color/colorWhite"
                             android:textColorHint="@color/transparentWhite"
                             android:textSize="25dp" />
@@ -460,11 +483,13 @@
 
                     <RelativeLayout
                         android:id="@+id/rLayout_new_entry_surprising_id"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rLayout_new_entry_extremelyHard_id"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginBottom="50dp"
                         android:layout_marginTop="20dp"
+                        android:background="@color/SurprisingColor"
                         android:gravity="center">
 
                         <EditText
@@ -507,7 +532,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/backgroundColor1"
+                app:cardBackgroundColor="@color/appBackgroundColor"
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout
@@ -534,7 +559,7 @@
                         android:layout_marginBottom="50dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginTop="30dp">
 
 
                         <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
@@ -549,12 +574,11 @@
 
                         <Button
                             android:id="@+id/step_3_image_grid_view_add_btn_id"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_below="@id/step_3_image_grid_view_id"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="20dp"
-                            android:background="@drawable/add_circle_icon" />
+                            android:background="@drawable/add_icon" />
 
 
                     </RelativeLayout>
@@ -571,7 +595,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/backgroundColor1"
+                app:cardBackgroundColor="@color/appBackgroundColor"
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout

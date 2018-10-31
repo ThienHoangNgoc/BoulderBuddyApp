@@ -56,7 +56,7 @@ public class FragmentAchievementTrophyCase extends Fragment {
 
 
         setVisibilityIfEligible("A New Journey", achievementFirstEntry, R.layout.achievement_1_description_dialog);
-        setVisibilityIfEligible("Very Easy Grandmaster", achievementSecondEntry, R.layout.achievement_2_description_dialog);
+        setVisibilityIfEligible("Level 1 Prodigy", achievementSecondEntry, R.layout.achievement_2_description_dialog);
 
 
         return view;

@@ -37,7 +37,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private ListView searchResultListView;
     private EditText searchEditText;
-    private TextView noEntriesText;
+
     private Button searchBtn;
     private Button searchClearBtn;
     private Button searchBackBtn;
@@ -65,7 +65,7 @@ public class SearchActivity extends AppCompatActivity {
         searchBtn = findViewById(R.id.search_search_btn_id);
         searchClearBtn = findViewById(R.id.search_reset_btn_id);
         searchBackBtn = findViewById(R.id.search_back_btn_id);
-        noEntriesText = findViewById(R.id.search_no_entries_text_id);
+
 
         //Setup EntryAdapter
         ArrayList<EntryItem> arrayOfEntryItems = new ArrayList<>();
@@ -126,12 +126,12 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (getTextFromView(searchEditText).equals("")) {
-                    Toast.makeText(getApplicationContext(), "Pls enter a date.", toastDuration).show();
+                    toastCreator("Pls enter a date.");
                 } else {
                     createEmptyList(entryAdapter);
                     createEntries(entryAdapter, getMonthYearDate(searchMonth, searchYear));
                     if (entryAdapter.isEmpty()) {
-                        noEntriesText.setVisibility(View.VISIBLE);
+                        toastCreator("There are no entries for the given date.");
                     } else {
                         searchResultListView.setAdapter(entryAdapter);
                     }
@@ -232,25 +232,25 @@ public class SearchActivity extends AppCompatActivity {
         String date = "";
         switch (picker.getValue() + 1) {
             case 1:
-                date = "Januar";
+                date = "January";
                 break;
             case 2:
-                date = "Februar";
+                date = "February";
                 break;
             case 3:
-                date = "März";
+                date = "March";
                 break;
             case 4:
                 date = "April";
                 break;
             case 5:
-                date = "Mai";
+                date = "May";
                 break;
             case 6:
-                date = "Juni";
+                date = "June";
                 break;
             case 7:
-                date = "Juli";
+                date = "July";
                 break;
             case 8:
                 date = "August";
@@ -259,13 +259,13 @@ public class SearchActivity extends AppCompatActivity {
                 date = "September";
                 break;
             case 10:
-                date = "Oktober";
+                date = "October";
                 break;
             case 11:
                 date = "November";
                 break;
             case 12:
-                date = "Dezember";
+                date = "December";
                 break;
             default:
                 break;

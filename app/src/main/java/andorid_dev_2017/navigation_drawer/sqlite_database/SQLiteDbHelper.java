@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 26;
+    public static final int DATABASE_VERSION = 31;
     public static final String DATABASE_NAME = "boulder_entries.db";
 
     public static final String COMMA_SEP = ",";
     public static final String TEXT_TYPE = " TEXT";
-    public static final String IMAGE_TYPE = " BLOB";
+    public static final String IMAGE_TYPE = " MEDIUMBLOB";
     public static final String INTEGER_TYPE = " INTEGER";
 
 

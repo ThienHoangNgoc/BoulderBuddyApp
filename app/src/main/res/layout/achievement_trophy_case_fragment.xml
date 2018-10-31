@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/backgroundColor1">
+    android:background="@drawable/achievement_backgrund">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="3dp"
-            app:cardBackgroundColor="@color/semiTransparent2"
+            app:cardBackgroundColor="@color/transparentWhite"
             app:cardCornerRadius="10dp">
 
             <GridLayout
@@ -35,6 +35,33 @@
 
                 <ImageView
                     android:id="@+id/achievement_2_id"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/achievement_3_id"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/achievement_4_id"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/achievement_5_id"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"

@@ -54,7 +54,7 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
         RelativeLayout relativeLayout = convertView.findViewById(R.id.list_item_main_rLayout_id);
 
         ratingBar.setRating(entryItem.getRating());
-        entryNumber.setText("Eintrag #" + entryItem.getId());
+        entryNumber.setText(entryItem.getId());
         hallName.setText(entryItem.getHall());
         date.setText(entryItem.getDate());
 
@@ -134,6 +134,9 @@ public class EntryAdapter extends ArrayAdapter<EntryItem> {
         }
         return null;
     }
+
+
+
 
 
 }

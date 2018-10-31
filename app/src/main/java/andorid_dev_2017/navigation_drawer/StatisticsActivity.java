@@ -269,22 +269,22 @@ public class StatisticsActivity extends AppCompatActivity {
                 cursor.moveToNext();
             }
 
-            stat1 = new StatisticsRecyclerViewItem(diff1 + "", "Very Easy");
-            stat2 = new StatisticsRecyclerViewItem(diff2 + "", "Easy");
-            stat3 = new StatisticsRecyclerViewItem(diff3 + "", "Advanced");
-            stat4 = new StatisticsRecyclerViewItem(diff4 + "", "Hard");
-            stat5 = new StatisticsRecyclerViewItem(diff5 + "", "Very Hard");
-            stat6 = new StatisticsRecyclerViewItem(diff6 + "", "Extremely Hard");
+            stat1 = new StatisticsRecyclerViewItem(diff1 + "", "Level 1");
+            stat2 = new StatisticsRecyclerViewItem(diff2 + "", "Level 2");
+            stat3 = new StatisticsRecyclerViewItem(diff3 + "", "Level 3");
+            stat4 = new StatisticsRecyclerViewItem(diff4 + "", "Level 4");
+            stat5 = new StatisticsRecyclerViewItem(diff5 + "", "Level 5");
+            stat6 = new StatisticsRecyclerViewItem(diff6 + "", "Level 6");
             stat7 = new StatisticsRecyclerViewItem(diff7 + "", "Surprising");
 
         } else {
 
-            stat1 = new StatisticsRecyclerViewItem("0", "Very Easy");
-            stat2 = new StatisticsRecyclerViewItem("0", "Easy");
-            stat3 = new StatisticsRecyclerViewItem("0", "Advanced");
-            stat4 = new StatisticsRecyclerViewItem("0", "Hard");
-            stat5 = new StatisticsRecyclerViewItem("0", "Very Hard");
-            stat6 = new StatisticsRecyclerViewItem("0", "Extremely Hard");
+            stat1 = new StatisticsRecyclerViewItem("0", "Level 1");
+            stat2 = new StatisticsRecyclerViewItem("0", "Level 2");
+            stat3 = new StatisticsRecyclerViewItem("0", "Level 3");
+            stat4 = new StatisticsRecyclerViewItem("0", "Level 4");
+            stat5 = new StatisticsRecyclerViewItem("0", "Level 5");
+            stat6 = new StatisticsRecyclerViewItem("0", "Level 6");
             stat7 = new StatisticsRecyclerViewItem("0", "Surprising");
 
         }

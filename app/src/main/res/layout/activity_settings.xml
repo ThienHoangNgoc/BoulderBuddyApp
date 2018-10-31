@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/backgroundColor1">
+    android:background="@color/appBackgroundColor">
 
     <RelativeLayout
         android:id="@+id/settings_header_rLayout_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/semiTransparent"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center_vertical"
         android:paddingLeft="20dp">
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/defaultDialogBtnColor"
+    android:background="@color/appBackgroundColor2"
     android:descendantFocusability="beforeDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -64,7 +64,7 @@
                             android:id="@+id/statistic_viewPager_id"
                             android:layout_width="match_parent"
                             android:layout_height="340dp"
-                            android:background="@color/backgroundColor1">
+                            android:background="@color/appBackgroundColor">
 
                         </android.support.v4.view.ViewPager>
 
@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/statistics_view_pager_rLayour_id"
-                        android:background="@color/backgroundColor2"
+                        android:background="@color/colorPrimaryDark"
                         app:tabGravity="fill"
                         app:tabIndicatorColor="@color/colorWhite"
                         app:tabMode="fixed"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/statistics_tabLayout_viewPager_cardView_id"
                 android:layout_margin="20dp"
-                app:cardBackgroundColor="@color/backgroundColor1"
+                app:cardBackgroundColor="@color/appBackgroundColor"
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout
@@ -108,7 +108,7 @@
                         android:id="@+id/statistics_stats_header_rLayout_id"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:background="@color/statsDividerColor">
+                        android:background="@color/colorPrimaryDark">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/semiTransparent" />
+                        android:background="@color/transparentWhite" />
 
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
                         android:id="@+id/statistics_stat_set_2_grid_view_id"
@@ -156,7 +156,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/semiTransparent" />
+                        android:background="@color/transparentWhite" />
 
 
                     <android.support.v7.widget.RecyclerView
@@ -174,7 +174,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/semiTransparent" />
+                        android:background="@color/transparentWhite" />
 
 
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
@@ -193,7 +193,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/semiTransparent" />
+                        android:background="@color/transparentWhite" />
 
 
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
@@ -212,7 +212,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/semiTransparent" />
+                        android:background="@color/transparentWhite" />
 
                     <andorid_dev_2017.navigation_drawer.ExpandableHeightGridView
                         android:id="@+id/statistics_stat_set_6_grid_view_id"

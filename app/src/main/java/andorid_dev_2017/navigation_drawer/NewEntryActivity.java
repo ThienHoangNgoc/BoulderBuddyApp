@@ -68,6 +68,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     private RatingBar ratingBar;
     private Button confirmBtn;
     private Button addGridItemBtn;
+    private Button showLevelInfoBtn;
     private ExpandableHeightGridView imageGridView;
 
 
@@ -112,6 +113,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         ratingBar = findViewById(R.id.step_4_ratingBar_id);
         confirmBtn = findViewById(R.id.new_entry_confirm_btn_id);
         addGridItemBtn = findViewById(R.id.step_3_image_grid_view_add_btn_id);
+        showLevelInfoBtn = findViewById(R.id.step_2_level_info_btn_id);
         imageGridView = findViewById(R.id.step_3_image_grid_view_id);
 
 
@@ -166,6 +168,17 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                         }, REQUEST_CODE_GALLERY
 
                 );
+            }
+        });
+
+        showLevelInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
+                View mView = getLayoutInflater().inflate(R.layout.new_entry_level_info_dialog, null);
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
             }
         });
 

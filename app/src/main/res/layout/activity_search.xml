@@ -32,25 +32,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/search_no_entries_found_rLayout_id"
+        android:id="@+id/search_background_rLayout_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/search_header_search_rLayout_id"
-        android:background="@color/backgroundColor1">
-
-        <TextView
-            android:id="@+id/search_no_entries_text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="No entries for searched date."
-            android:textColor="@color/colorWhite"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-
-    </RelativeLayout>
+        android:background="@drawable/main_screen_background" />
 
 
     <RelativeLayout
@@ -58,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_header_search_rLayout_id"
-        android:background="@color/semiTransparent">
+        android:background="@color/searchFieldColor">
 
 
         <RelativeLayout
@@ -73,7 +59,7 @@
                 android:id="@+id/view_id_3"
                 android:layout_width="230dp"
                 android:layout_height="2dp"
-                android:background="@color/semiTransparent" />
+                android:background="@color/transparentWhite" />
 
             <EditText
                 android:id="@+id/search_edit_text_search_date_id"
@@ -82,9 +68,9 @@
                 android:layout_below="@id/view_id_3"
                 android:background="@color/transparent"
                 android:focusable="false"
-                android:hint="Date"
+                android:hint="date"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/textHintColor"
+                android:textColorHint="@color/hintTextColorSearch"
                 android:textSize="25dp" />
 
             <Button
@@ -102,14 +88,14 @@
                 android:layout_below="@id/view_id_3"
                 android:layout_marginLeft="-1dp"
                 android:layout_toRightOf="@id/search_reset_btn_id"
-                android:background="@color/backgroundColor1"
+                android:background="@color/colorPrimary"
                 android:drawableStart="@drawable/search_activity_search_icon" />
 
             <View
                 android:layout_width="230dp"
                 android:layout_height="2dp"
                 android:layout_below="@id/search_edit_text_search_date_id"
-                android:background="@color/semiTransparent" />
+                android:background="@color/transparentWhite" />
 
 
         </RelativeLayout>

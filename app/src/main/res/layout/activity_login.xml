@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background1">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor1">
+        android:background="@color/semiTransparent4">
 
         <ImageView
             android:id="@+id/login_app_icon_image_view_id"
@@ -16,16 +17,16 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:src="@drawable/app_icon_placeholder" />
+            android:src="@drawable/app_icon" />
 
         <TextView
             android:id="@+id/login_app_name_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/login_app_icon_image_view_id"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:text="BoulderBuddy"
-            android:layout_below="@id/login_app_icon_image_view_id"
             android:textColor="@color/colorWhite"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -50,7 +51,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/textHintColor"
+                android:textColorHint="@color/hintTextColorLoginRegister"
                 android:textSize="25dp" />
 
             <View
@@ -83,7 +84,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/textHintColor"
+                android:textColorHint="@color/hintTextColorLoginRegister"
                 android:textSize="25dp" />
 
             <View

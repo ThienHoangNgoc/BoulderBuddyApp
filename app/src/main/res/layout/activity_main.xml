@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor1">
+        android:background="@drawable/main_screen_background">
 
         <ListView
             android:id="@+id/main_latest_entries_listView_id"

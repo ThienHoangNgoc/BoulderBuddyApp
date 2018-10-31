@@ -100,21 +100,21 @@ public class FragmentAchievementProgress extends Fragment {
         int count = getNumberOfDifficulty(BoulderEntry.COLUMN_NAME_VERY_EASY);
         if (count > 0) {
             if (count >= 100) {
-                item = new AchievementProgressRecyclerViewItem("Very Easy Grandmaster", 100, true);
-                if (!isInAchievementDB("Very Easy Grandmaster", loggedInUser)) {
-                    sqLiteDbAchievementContract.insertEntry("Very Easy Grandmaster", 1, loggedInUser);
+                item = new AchievementProgressRecyclerViewItem("Level 1 Prodigy", 100, true);
+                if (!isInAchievementDB("Level 1 Prodigy", loggedInUser)) {
+                    sqLiteDbAchievementContract.insertEntry("Level 1 Prodigy", 1, loggedInUser);
                 } else {
-                    Achievement achievement = getAchievementEntryByName("Very Easy Grandmaster");
+                    Achievement achievement = getAchievementEntryByName("Level 1 Prodigy");
                     sqLiteDbAchievementContract.updateStatusColumn(1, achievement.getId());
                 }
             }
             if (count < 100) {
-                item = new AchievementProgressRecyclerViewItem("Very Easy Grandmaster", count, false);
-                if (!isInAchievementDB("Very Easy Grandmaster", loggedInUser)) {
-                    sqLiteDbAchievementContract.insertEntry("Very Easy Grandmaster", 0, loggedInUser);
+                item = new AchievementProgressRecyclerViewItem("Level 1 Prodigy", count, false);
+                if (!isInAchievementDB("Level 1 Prodigy", loggedInUser)) {
+                    sqLiteDbAchievementContract.insertEntry("Level 1 Prodigy", 0, loggedInUser);
 
                 } else {
-                    Achievement achievement = getAchievementEntryByName("Very Easy Grandmaster");
+                    Achievement achievement = getAchievementEntryByName("Level 1 Prodigy");
                     sqLiteDbAchievementContract.updateStatusColumn(0, achievement.getId());
 
                 }
