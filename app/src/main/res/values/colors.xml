@@ -2,16 +2,25 @@
 <resources>
 
 
-    <!-- Universal Colors -->
+    <!-- Static Colors -->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="transparentWhite">#64ffffff</color>
+
+
+    <!-- Base Design Colors -->
     <color name="colorPrimary">#795548</color>
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorBlack">#000000</color>
     <color name="appBackgroundColor">#a7907f</color>
     <color name="appBackgroundColor2">#d1d1d1</color>
+    <color name="baseIconColor">#ffffff</color>
+    <color name="drawerMenuIconColor">#000000</color>
+    <color name="customDividerColor">#877f7f7f</color>
 
-    <!-- Level Color New Entry -->
+
+    <!-- Colors of each Level in NewEntry -->
     <color name="level1Color">#78fafa01</color>
     <color name="level2Color">#784883e4</color>
     <color name="level3Color">#7868a54e</color>
@@ -20,7 +29,7 @@
     <color name="level6Color">#78000000</color>
     <color name="SurprisingColor">#78e13ca8</color>
 
-    <!-- Color for each level in the chart -->
+    <!-- Colors for each level in the chart -->
     <color name="Diff1">#ebdb1a</color>
     <color name="Diff2">#2d99ff</color>
     <color name="Diff3">#43ae5f</color>
@@ -29,36 +38,28 @@
     <color name="Diff6">#222222</color>
     <color name="Diff7">#b75f92</color>
 
-    <!-- Color in Styles -->
+    <!-- Colors in Styles -->
     <color name="StarRatingColor">#ffffff</color>
     <color name="StarRatingColor2">#f1d710</color>
     <color name="progressbarColor">#0d1522</color>
     <color name="progressbarBackgroundColor">#e3e6f1</color>
     <color name="SettingsSwitchColor">#2d99ff</color>
 
+    <!-- Text and Hint Colors -->
+    <color name="entryListItemTextColor">#ffffff</color>
+    <color name="fixedStatLabelTextColor">#a05d4037</color>
+    <color name="defaultDialogTextColor">#8d8d8d</color>
+    <color name="hintTextColor">#5affffff</color>
 
-    <color name="iconColor1">#cbcbcb</color>
-    <color name="iconColor2">#ffffff</color>
-    <color name="iconColor3">#000000</color>
-    <color name="itemListTextColor1">#ffffff</color>
-    <color name="itemListTextColor2">#ffffff</color>
-    <color name="defaultDialogBtnColor">#8d8d8d</color>
-    <color name="editPasswordAndUsernameColor">#5affffff</color>
-    <color name="entryItemBackgroundColor">#301e1e</color>
-    <color name="semiTransparent">#877f7f7f</color>
-    <color name="semiTransparent2">#cb7f7f7f</color>
-    <color name="semiTransparent3">#443c3c3c</color>
-    <color name="semiTransparent4">#656d6d6d</color>
+
+    <!-- Other Colors -->
+    <color name="deleteEntryListItemBackgroundColor">#443c3c3c</color>
+    <color name="entryListItemBackgroundColor">#656d6d6d</color>
     <color name="semiTransparentShowDetails">#77949494</color>
-    <color name="semiTransparentItemList">#00ffffff</color>
-    <color name="transparent">#00ffffff</color>
-    <color name="transparentWhite">#64ffffff</color>
-    <color name="popUpTransparent">#dadada</color>
-    <color name="hintTextColorSearch">#a3ffffff</color>
-    <color name="statsDividerColor">#585863</color>
+    <color name="autoCompletePopUpBackground">#dadada</color>
+    <color name="numberPickerDialogDividerColor">#cb7f7f7f</color>
+    <color name="loginAndRegisterOverlayBackgroundColor">#656d6d6d</color>
     <color name="searchFieldColor">#b23d3d3d</color>
-    <color name="hintTextColorLoginRegister">#919191</color>
-    <color name="statsLabelColor">#a05d4037</color>
 
 
 </resources>

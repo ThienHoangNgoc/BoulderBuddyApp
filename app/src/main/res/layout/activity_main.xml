@@ -51,8 +51,8 @@
         android:layout_gravity="start"
         android:background="@color/colorWhite"
         app:headerLayout="@layout/main_menu_header"
-        app:itemIconTint="@color/defaultDialogBtnColor"
-        app:itemTextColor="@color/defaultDialogBtnColor"
+        app:itemIconTint="@color/defaultDialogTextColor"
+        app:itemTextColor="@color/defaultDialogTextColor"
         app:menu="@menu/main_drawermenu">
 
 

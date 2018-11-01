@@ -82,7 +82,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/grid_layout"
         android:layout_marginTop="5dp"
-        android:background="@color/semiTransparent2" />
+        android:background="@color/numberPickerDialogDividerColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"

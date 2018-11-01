@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/semiTransparent4">
+        android:background="@color/loginAndRegisterOverlayBackgroundColor">
 
         <ImageView
             android:id="@+id/login_app_icon_image_view_id"
@@ -51,7 +51,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/hintTextColorLoginRegister"
+                android:textColorHint="@color/hintTextColor"
                 android:textSize="25dp" />
 
             <View
@@ -84,7 +84,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/hintTextColorLoginRegister"
+                android:textColorHint="@color/hintTextColor"
                 android:textSize="25dp" />
 
             <View

@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:background="@color/semiTransparent4">
+    android:background="@color/entryListItemBackgroundColor">
 
     <RelativeLayout
         android:id="@+id/list_item_main_rLayout_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/semiTransparentItemList">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/text_rLayout"
@@ -24,7 +23,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="270dp"
                 android:text="10"
-                android:textColor="@color/itemListTextColor2"
+                android:textColor="@color/entryListItemTextColor"
                 android:textSize="50dp" />
 
 
@@ -40,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/date_id"
                     android:text="Bouldergarten"
-                    android:textColor="@color/itemListTextColor1"
+                    android:textColor="@color/entryListItemTextColor"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
@@ -50,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="24. Mai 2017"
-                    android:textColor="@color/itemListTextColor1"
+                    android:textColor="@color/entryListItemTextColor"
                     android:textSize="15dp" />
 
                 <RatingBar
@@ -73,7 +72,7 @@
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/semiTransparent3"
+            app:cardBackgroundColor="@color/deleteEntryListItemBackgroundColor"
             app:cardCornerRadius="18dp">
 
             <RelativeLayout

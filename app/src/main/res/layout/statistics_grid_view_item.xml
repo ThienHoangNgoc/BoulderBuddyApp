@@ -23,7 +23,7 @@
         android:layout_below="@id/statistics_grid_item_text_value_id"
         android:layout_centerHorizontal="true"
         android:text="Sessions"
-        android:textColor="@color/statsLabelColor"
+        android:textColor="@color/fixedStatLabelTextColor"
         android:textSize="12dp"
         android:textStyle="bold" />
 

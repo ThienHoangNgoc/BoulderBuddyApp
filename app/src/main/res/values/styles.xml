@@ -16,12 +16,12 @@
 
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/defaultDialogBtnColor</item>
+        <item name="colorControlNormal">@color/defaultDialogTextColor</item>
         <item name="colorControlActivated">@color/StarRatingColor</item>
     </style>
 
     <style name="RatingBar2" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/defaultDialogBtnColor</item>
+        <item name="colorControlNormal">@color/defaultDialogTextColor</item>
         <item name="colorControlActivated">@color/StarRatingColor2</item>
     </style>
 

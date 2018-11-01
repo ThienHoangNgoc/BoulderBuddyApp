@@ -70,7 +70,7 @@
                 android:focusable="false"
                 android:hint="date"
                 android:textColor="@color/colorWhite"
-                android:textColorHint="@color/hintTextColorSearch"
+                android:textColorHint="@color/hintTextColor"
                 android:textSize="25dp" />
 
             <Button

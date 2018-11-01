@@ -45,7 +45,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/rLayout_id"
 
-        android:background="@color/semiTransparent2" />
+        android:background="@color/numberPickerDialogDividerColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"
