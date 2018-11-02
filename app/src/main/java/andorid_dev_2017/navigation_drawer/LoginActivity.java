@@ -1,6 +1,8 @@
 package andorid_dev_2017.navigation_drawer;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -89,6 +91,31 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.setMessage("Exit app?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onSuperBackPressed();
+                    }
+                }).setNegativeButton("No", null).create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+            }
+        });
+        dialog.show();
+    }
+
+    public void onSuperBackPressed() {
+        super.onBackPressed();
     }
 
     //gets a user from the db based on the id
