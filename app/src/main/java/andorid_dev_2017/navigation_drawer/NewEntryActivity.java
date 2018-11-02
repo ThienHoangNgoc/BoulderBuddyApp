@@ -331,13 +331,13 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     //get the exp Values from all the difficulties
     public int getExp() {
-        int exp = getExpValue(veryEasyEditText) +
-                (getExpValue(easyEditText) * 3) +
-                (getExpValue(advancedEditText) * 5) +
-                (getExpValue(hardEditText) * 10) +
-                (getExpValue(veryHardEditText) * 15) +
-                (getExpValue(extremelyHardEditText) * 25) +
-                (getExpValue(surprisingEditText) * 7);
+        int exp = getQuantityValue(veryEasyEditText) +
+                (getQuantityValue(easyEditText) * 3) +
+                (getQuantityValue(advancedEditText) * 5) +
+                (getQuantityValue(hardEditText) * 10) +
+                (getQuantityValue(veryHardEditText) * 15) +
+                (getQuantityValue(extremelyHardEditText) * 25) +
+                (getQuantityValue(surprisingEditText) * 7);
 
         return exp;
     }
@@ -352,15 +352,6 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_EXP, newExp + "", user.getId());
     }
 
-    //checks if the EditText is not empty and gets the value as an int
-    public int getExpValue(EditText editText) {
-        int exp = 0;
-        if (!getTextFromView(editText).equals("")) {
-            exp = Integer.parseInt(getTextFromView(editText));
-
-        }
-        return exp;
-    }
 
     public void insertEntry() {
         sqLiteDbEntryContract.insertEntry(
@@ -397,6 +388,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
             addExpToUser();
             addImageToDb(gridViewEntryAdapter);
             insertEntry();
+            rankUpdater();
             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
             intent.putExtra("username_key", loggedInUser);
             startActivity(intent);
@@ -417,7 +409,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
             return false;
         }
         // end hour = start hour and end minutes < start minutes
-        if (getInt(endTimeParts[1]) == getInt(startTimeParts[1]) && getInt(endTimeParts[1]) < getInt(startTimeParts[1])) {
+        if (getInt(endTimeParts[0]) == getInt(startTimeParts[0]) && getInt(endTimeParts[1]) < getInt(startTimeParts[1])) {
             return false;
         }
 
@@ -426,6 +418,283 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         }
 
         return true;
+
+    }
+
+
+    //updates the rank and adjusts it according to the users performance after the session
+    public void rankUpdater() {
+        User user = getUserEntry(loggedInUser);
+        String currentRank = user.getRank();
+        String currentRankPoints = user.getRankPoints();
+
+        //note: at league division 1 you need to meet the rank up condition for the next higher rank e.g. for silver 1 the rankIndex changes to 1
+        switch (currentRank) {
+            case "Placement":
+                placementCalculator();
+                break;
+            case "Silver 5":
+                rankCalculator(rankChecker(0), currentRank, currentRankPoints, "Silver 4", "LastRank");
+                break;
+            case "Silver 4":
+                rankCalculator(rankChecker(0), currentRank, currentRankPoints, "Silver 3", "Silver 5");
+                break;
+            case "Silver 3":
+                rankCalculator(rankChecker(0), currentRank, currentRankPoints, "Silver 2", "Silver 4");
+                break;
+            case "Silver 2":
+                rankCalculator(rankChecker(0), currentRank, currentRankPoints, "Silver 1", "Silver 3");
+                break;
+            case "Silver 1":
+                rankCalculator(rankChecker(1), currentRank, currentRankPoints, "Gold 5", "Silver 2");
+                break;
+            case "Gold 5":
+                rankCalculator(rankChecker(1), currentRank, currentRankPoints, "Gold 4", "Silver 1");
+                break;
+            case "Gold 4":
+                rankCalculator(rankChecker(1), currentRank, currentRankPoints, "Gold 3", "Gold 5");
+                break;
+            case "Gold 3":
+                rankCalculator(rankChecker(1), currentRank, currentRankPoints, "Gold 2", "Gold 4");
+                break;
+            case "Gold 2":
+                rankCalculator(rankChecker(1), currentRank, currentRankPoints, "Gold 1", "Gold 3");
+                break;
+            case "Gold 1":
+                rankCalculator(rankChecker(2), currentRank, currentRankPoints, "Amethyst 5", "Gold 2");
+                break;
+            case "Amethyst 5":
+                rankCalculator(rankChecker(2), currentRank, currentRankPoints, "Amethyst 4", "Gold 1");
+                break;
+            case "Amethyst 4":
+                rankCalculator(rankChecker(2), currentRank, currentRankPoints, "Amethyst 3", "Amethyst 5");
+                break;
+            case "Amethyst 3":
+                rankCalculator(rankChecker(2), currentRank, currentRankPoints, "Amethyst 2", "Amethyst 4");
+                break;
+            case "Amethyst 2":
+                rankCalculator(rankChecker(2), currentRank, currentRankPoints, "Amethyst 1", "Amethyst 3");
+                break;
+            case "Amethyst 1":
+                rankCalculator(rankChecker(3), currentRank, currentRankPoints, "Ruby 5", "Amethyst 2");
+                break;
+            case "Ruby 5":
+                rankCalculator(rankChecker(3), currentRank, currentRankPoints, "Ruby 4", "Amethyst 1");
+                break;
+            case "Ruby 4":
+                rankCalculator(rankChecker(3), currentRank, currentRankPoints, "Ruby 3", "Ruby 5");
+                break;
+            case "Ruby 3":
+                rankCalculator(rankChecker(3), currentRank, currentRankPoints, "Ruby 2", "Ruby 4");
+                break;
+            case "Ruby 2":
+                rankCalculator(rankChecker(3), currentRank, currentRankPoints, "Ruby 1", "Ruby 3");
+                break;
+            case "Ruby 1":
+                rankCalculator(rankChecker(4), currentRank, currentRankPoints, "Emerald 5", "Ruby 2");
+                break;
+            case "Emerald 5":
+                rankCalculator(rankChecker(4), currentRank, currentRankPoints, "Emerald 4", "Ruby 1");
+                break;
+            case "Emerald 4":
+                rankCalculator(rankChecker(4), currentRank, currentRankPoints, "Emerald 3", "Emerald 5");
+                break;
+            case "Emerald 3":
+                rankCalculator(rankChecker(4), currentRank, currentRankPoints, "Emerald 2", "Emerald 4");
+                break;
+            case "Emerald 2":
+                rankCalculator(rankChecker(4), currentRank, currentRankPoints, "Emerald 1", "Emerald 3");
+                break;
+            case "Emerald 1":
+                rankCalculator(rankChecker(5), currentRank, currentRankPoints, "Diamond", "Emerald 2");
+                break;
+            case "Diamond":
+                rankCalculator(rankChecker(5), currentRank, currentRankPoints, "HighestRank", "Emerald 1");
+                break;
+            default:
+                break;
+
+        }
+
+
+    }
+
+    public void rankCalculator(boolean rankChecker, String currentRank,
+                               String currentRankPoints,
+                               String rankUp, String rankDown) {
+
+        String newRankPoints;
+        String newRank;
+        User user = getUserEntry(loggedInUser);
+
+        if (rankChecker) {
+            if (currentRankPoints.equals("100")) {
+                if (rankUp.equals("HighestRank")) {
+                    newRankPoints = "100";
+                    newRank = "Diamond";
+                } else {
+                    newRankPoints = "0";
+                    newRank = rankUp;
+                }
+
+            } else {
+                newRankPoints = (Integer.parseInt(currentRankPoints) + 20) + "";
+                newRank = currentRank;
+            }
+        } else {
+            if (!currentRankPoints.equals("0")) {
+                newRankPoints = (Integer.parseInt(currentRankPoints) - 20) + "";
+                newRank = currentRank;
+            } else {
+                //for Silver 5, because there is no rank below Silver 5
+                if (rankDown.equals("LastRank")) {
+                    newRankPoints = "0";
+                    newRank = "Silver 5";
+                } else {
+                    newRankPoints = "80";
+                    newRank = rankDown;
+                }
+
+            }
+        }
+
+        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_RANK, newRank, user.getId());
+        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_RANK_POINTS, newRankPoints, user.getId());
+
+    }
+
+    //checks if the rankUp condition is met (complete at least 3 routes according to your rank or higher)
+    //index help: silver(0), gold(1), ..., diamond(5), surprising(6)
+    //only until the rank ruby(4)(excluding ruby) surprising counts towards a rankUP
+    public boolean rankChecker(int rankIndex) {
+        ArrayList<String> list = diffValueListCreator();
+        int count = 0;
+        if (rankIndex < 4) {
+            for (int i = rankIndex; i < list.size(); i++) {
+                count += Integer.parseInt(list.get(i));
+            }
+        } else {
+            for (int i = rankIndex; i < list.size() - 1; i++) {
+                count += Integer.parseInt(list.get(i));
+            }
+        }
+
+        if (count >= 3) {
+            return true;
+        }
+        return false;
+    }
+
+    //get the placement rank according to what you have completed after your first session
+    //for more info check placement notes.
+    public void placementCalculator() {
+        User user = getUserEntry(loggedInUser);
+        String rank = "";
+        int completedRoutes = getQuantityValue(veryEasyEditText) +
+                getQuantityValue(easyEditText) +
+                getQuantityValue(advancedEditText) +
+                getQuantityValue(hardEditText) +
+                getQuantityValue(veryHardEditText) +
+                getQuantityValue(extremelyHardEditText) +
+                getQuantityValue(surprisingEditText);
+
+        int placementValue = (getQuantityValue(veryEasyEditText) * 3) +
+                (getQuantityValue(easyEditText) * 8) +
+                (getQuantityValue(advancedEditText) * 13) +
+                (getQuantityValue(hardEditText) * 18) +
+                (getQuantityValue(veryHardEditText) * 23) +
+                (getQuantityValue(extremelyHardEditText) * 26) +
+                (getQuantityValue(surprisingEditText) * 14);
+
+        int placementIndex = (placementValue / completedRoutes);
+
+        switch (placementIndex) {
+            case 1:
+                rank = "Silver 5";
+                break;
+            case 2:
+                rank = "Silver 4";
+                break;
+            case 3:
+                rank = "Silver 3";
+                break;
+            case 4:
+                rank = "Silver 2";
+                break;
+            case 5:
+                rank = "Silver 1";
+                break;
+            case 6:
+                rank = "Gold 5";
+                break;
+            case 7:
+                rank = "Gold 4";
+                break;
+            case 8:
+                rank = "Gold 3";
+                break;
+            case 9:
+                rank = "Gold 2";
+                break;
+            case 10:
+                rank = "Gold 1";
+                break;
+            case 11:
+                rank = "Amethyst 5";
+                break;
+            case 12:
+                rank = "Amethyst 4";
+                break;
+            case 13:
+                rank = "Amethyst 3";
+                break;
+            case 14:
+                rank = "Amethyst 2";
+                break;
+            case 15:
+                rank = "Amethyst 1";
+                break;
+            case 16:
+                rank = "Ruby 5";
+                break;
+            case 17:
+                rank = "Ruby 4";
+                break;
+            case 18:
+                rank = "Ruby 3";
+                break;
+            case 19:
+                rank = "Ruby 2";
+                break;
+            case 20:
+                rank = "Ruby 1";
+                break;
+            case 21:
+                rank = "Emerald 5";
+                break;
+            case 22:
+                rank = "Emerald 4";
+                break;
+            case 23:
+                rank = "Emerald 3";
+                break;
+            case 24:
+                rank = "Emerald 2";
+                break;
+            case 25:
+                rank = "Emerald 1";
+                break;
+            case 26:
+                rank = "Diamond";
+                break;
+            default:
+                rank = "Placement";
+                break;
+
+        }
+
+        sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_RANK, rank, user.getId());
+
 
     }
 
@@ -490,6 +759,16 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         return editText.getText().toString();
     }
 
+    //checks if the EditText is empty and if not it gets the value as an int
+    public int getQuantityValue(EditText editText) {
+        int count = 0;
+        if (!getTextFromView(editText).equals("")) {
+            count = Integer.parseInt(getTextFromView(editText));
+
+        }
+        return count;
+    }
+
     //Gets the String from a EditText
     public String getTextFromView(EditText editText) {
         return editText.getText().toString();
@@ -498,6 +777,21 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
     public void toastCreator(String toastText) {
         Toast.makeText(getApplicationContext(), toastText, toastDuration).show();
+    }
+
+    public ArrayList<String> diffValueListCreator() {
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add(getDiffFromView(veryEasyEditText));
+        list.add(getDiffFromView(easyEditText));
+        list.add(getDiffFromView(advancedEditText));
+        list.add(getDiffFromView(hardEditText));
+        list.add(getDiffFromView(veryHardEditText));
+        list.add(getDiffFromView(extremelyHardEditText));
+        list.add(getDiffFromView(surprisingEditText));
+
+        return list;
+
     }
 
     public void createLog(String text) {

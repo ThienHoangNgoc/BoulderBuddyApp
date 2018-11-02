@@ -510,6 +510,9 @@ public class StatisticsActivity extends AppCompatActivity {
             if (minutesText.equals("0")) {
                 minutesText = "00";
             }
+            if(minutesText.length() == 1){
+                minutesText = "0" + minutesText;
+            }
             return hoursText + ":" + minutesText;
         }
 

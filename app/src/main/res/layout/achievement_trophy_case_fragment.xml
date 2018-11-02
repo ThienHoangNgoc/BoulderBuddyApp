@@ -22,51 +22,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:columnCount="5">
+                android:columnCount="4">
 
                 <ImageView
                     android:id="@+id/achievement_1_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:src="@drawable/achievement_1_icon"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/achievement_2_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:src="@drawable/achievement_1_icon"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/achievement_3_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:src="@drawable/achievement_1_icon"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/achievement_4_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:src="@drawable/achievement_1_icon"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/achievement_5_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="5dp"
-                    android:src="@drawable/drawer_menu_achievements_icon"
+                    android:src="@drawable/achievement_1_icon"
                     android:visibility="invisible" />
 
 

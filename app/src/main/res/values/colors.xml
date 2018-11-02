@@ -53,6 +53,7 @@
 
 
     <!-- Other Colors -->
+    <color name="achievementStarColor">#ffea7e</color>
     <color name="deleteEntryListItemBackgroundColor">#443c3c3c</color>
     <color name="entryListItemBackgroundColor">#656d6d6d</color>
     <color name="semiTransparentShowDetails">#77949494</color>
