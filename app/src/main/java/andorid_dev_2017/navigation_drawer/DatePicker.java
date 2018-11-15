@@ -72,10 +72,10 @@ public class DatePicker implements View.OnClickListener, DatePickerDialog.OnDate
                 monthString = "May";
                 break;
             case 6:
-                monthString = "June";
+                monthString = "Jun.";
                 break;
             case 7:
-                monthString = "July";
+                monthString = "Jul.";
                 break;
             case 8:
                 monthString = "Aug.";

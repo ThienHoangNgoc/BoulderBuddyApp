@@ -183,32 +183,19 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
         });
 
         //Dialog Setup for every Difficulty
-        alertBuilder(veryEasyEditText, R.layout.new_entry_very_easy_dialog, R.id.veryEasy_number_picker_id,
-                R.id.new_entry_dialog_veryEasy_select_btn_id, R.id.new_entry_dialog_veryEasy_cancel_btn_id, R.id.reset_btn_veryEasy);
-
-        alertBuilder(easyEditText, R.layout.new_entry_easy_dialog, R.id.easy_number_picker_id,
-                R.id.new_entry_dialog_easy_select_btn_id, R.id.new_entry_dialog_easy_cancel_btn_id, R.id.reset_btn_easy);
-
-        alertBuilder(advancedEditText, R.layout.new_entry_advanced_dialog, R.id.advanced_number_picker_id,
-                R.id.new_entry_dialog_advanced_select_btn_id, R.id.new_entry_dialog_advanced_cancel_btn_id, R.id.reset_btn_advanced);
-
-        alertBuilder(hardEditText, R.layout.new_entry_hard_dialog, R.id.hard_number_picker_id,
-                R.id.new_entry_dialog_hard_select_btn_id, R.id.new_entry_dialog_hard_cancel_btn_id, R.id.reset_btn_hard);
-
-        alertBuilder(veryHardEditText, R.layout.new_entry_very_hard_dialog, R.id.very_hard_number_picker_id,
-                R.id.new_entry_dialog_very_hard_select_btn_id, R.id.new_entry_dialog_very_hard_cancel_btn_id, R.id.reset_btn_veryHard);
-
-        alertBuilder(extremelyHardEditText, R.layout.new_entry_extremely_hard_dialog, R.id.extremely_hard_number_picker_id,
-                R.id.new_entry_dialog_extremely_hard_select_btn_id, R.id.new_entry_dialog_extremely_hard_cancel_btn_id, R.id.reset_btn_extremelyHard);
-
-        alertBuilder(surprisingEditText, R.layout.new_entry_surprising_dialog, R.id.surprising_number_picker_id,
-                R.id.new_entry_dialog_surprising_select_btn_id, R.id.new_entry_dialog_surprising_cancel_btn_id, R.id.reset_btn_surprising);
+        alertBuilder(veryEasyEditText, R.id.reset_btn_veryEasy);
+        alertBuilder(easyEditText, R.id.reset_btn_easy);
+        alertBuilder(advancedEditText, R.id.reset_btn_advanced);
+        alertBuilder(hardEditText, R.id.reset_btn_hard);
+        alertBuilder(veryHardEditText, R.id.reset_btn_veryHard);
+        alertBuilder(extremelyHardEditText, R.id.reset_btn_surprising);
+        alertBuilder(surprisingEditText, R.id.reset_btn_surprising);
 
 
     }
 
     //create a dialog with a numberPicker and a reset button to clear the content
-    public void alertBuilder(EditText editTextView, final int rlayoutId, final int numberPickerId, final int selectBtnId, final int cancelBtnId, int resetBtnId) {
+    public void alertBuilder(EditText editTextView, int resetBtnId) {
         final EditText editText = editTextView;
         Button btn = findViewById(resetBtnId);
 
@@ -216,8 +203,8 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(NewEntryActivity.this);
-                final View mView = getLayoutInflater().inflate(rlayoutId, null);
-                final NumberPicker picker = mView.findViewById(numberPickerId);
+                final View mView = getLayoutInflater().inflate(R.layout.new_entry_difficulty_quantity_dialog, null);
+                final NumberPicker picker = mView.findViewById(R.id.new_entry_quantity_number_picker_id);
                 //create the range for the NumberPicker
                 ArrayList<String> numbers = new ArrayList<>();
                 for (int i = 0; i <= 100; i++) {
@@ -232,8 +219,8 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                 picker.setDisplayedValues(data);
 
                 //initialize select and cancel Buttons with mView
-                Button sBtn = mView.findViewById(selectBtnId);
-                Button cBtn = mView.findViewById(cancelBtnId);
+                Button sBtn = mView.findViewById(R.id.new_entry_dialog_select_btn_id);
+                Button cBtn = mView.findViewById(R.id.new_entry_dialog_cancel_btn_id);
                 //create the Dialog
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();

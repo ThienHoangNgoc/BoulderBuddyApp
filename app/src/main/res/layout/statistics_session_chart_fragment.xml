@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/appBackgroundColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/statistics_session_chart_fragment_RLayout_edit_date_id"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chart_title_id"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="1dp"
+            android:layout_marginTop="10dp">
+
+
+            <EditText
+                android:id="@+id/statistics_session_chart_fragment_edit_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/transparent"
+                android:focusable="false"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="2018"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/statistics_session_chart_fragment_edit_text_id"
+                android:background="@color/transparentWhite" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/chart_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Completed Sessions"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statistics_session_chart_fragment_RLayout_edit_date_id"
+            android:layout_margin="10dp">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/statistics_sessions_line_chart_id"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

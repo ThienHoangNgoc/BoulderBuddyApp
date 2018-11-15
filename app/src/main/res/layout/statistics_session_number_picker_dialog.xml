@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/header_id"
+        android:id="@+id/session_chart_header_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Select Quantity"
+        android:text="Selecet Year"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -16,46 +16,61 @@
         android:id="@+id/view_id"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/header_id"
+        android:layout_below="@id/session_chart_header_id"
         android:layout_marginTop="3dp"
         android:background="@color/colorBlack" />
 
 
     <RelativeLayout
-        android:id="@+id/rLayout_id"
-        android:layout_width="match_parent"
+        android:id="@+id/RLayout_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view_id">
+        android:layout_below="@id/view_id"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp">
+
+
+        <TextView
+            android:id="@+id/statistics_session_dialog_year_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Year"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
 
         <NumberPicker
-            android:id="@+id/very_hard_number_picker_id"
-            android:layout_width="wrap_content"
+            android:id="@+id/statistics_session_chart_fragment_dialog_year_picker_id"
+            android:layout_width="80dp"
             android:layout_height="163dp"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@id/statistics_session_dialog_year_text_id"
+            android:layout_marginTop="5dp"
             android:descendantFocusability="blocksDescendants">
+
 
         </NumberPicker>
 
+
     </RelativeLayout>
 
-
     <View
-        android:id="@+id/view2_id"
+        android:id="@+id/view_id2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/rLayout_id"
-
+        android:layout_below="@id/RLayout_layout"
+        android:layout_marginTop="5dp"
         android:background="@color/numberPickerDialogDividerColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@id/view2_id"
+        android:layout_below="@id/view_id2"
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/new_entry_dialog_very_hard_cancel_btn_id"
+            android:id="@+id/statistics_session_chart_fragment_dialog_cancel_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -65,7 +80,7 @@
             android:text="Cancel" />
 
         <Button
-            android:id="@+id/new_entry_dialog_very_hard_select_btn_id"
+            android:id="@+id/statistics_session_chart_fragment_dialog_select_btn_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

@@ -61,6 +61,8 @@
     <color name="numberPickerDialogDividerColor">#cb7f7f7f</color>
     <color name="loginAndRegisterOverlayBackgroundColor">#656d6d6d</color>
     <color name="searchFieldColor">#b23d3d3d</color>
+    <color name="sessionChartYearEditTextBackgroundColor">#6c5d52</color>
+
 
 
 </resources>

@@ -3,11 +3,12 @@ package andorid_dev_2017.navigation_drawer.fragments;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.BarChart;
+
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -86,7 +87,7 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
                 R.color.Diff5, R.color.Diff6,
                 R.color.Diff7}, view.getContext());
         BarData horiBarData = new BarData(horiBarDataSet);
-        horiBarData.setValueTextColor(getResources().getColor(R.color.colorWhite));
+        horiBarData.setValueTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
         horiBarData.setBarWidth(0.6f);
         horiBarData.setValueTextSize(15f);
         horiBarData.setValueFormatter(new YAxisValueFormatter());
@@ -107,6 +108,7 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
         yAxis.setDrawGridLines(false);
         yAxis.setDrawAxisLine(false);
         yAxis.setDrawLabels(false);
+        yAxis.setAxisMinimum(0f);
 
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getAxisRight().setDrawLabels(false);

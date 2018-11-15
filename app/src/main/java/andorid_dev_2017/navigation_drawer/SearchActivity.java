@@ -297,10 +297,10 @@ public class SearchActivity extends AppCompatActivity {
                 monthString = "May";
                 break;
             case 6:
-                monthString = "June";
+                monthString = "Jun.";
                 break;
             case 7:
-                monthString = "Juy";
+                monthString = "Jul.";
                 break;
             case 8:
                 monthString = "Aug.";

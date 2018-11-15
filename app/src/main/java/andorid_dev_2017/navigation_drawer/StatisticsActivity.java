@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsMonthChart;
+import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsSessionChart;
 import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsYearChart;
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
@@ -84,7 +84,7 @@ public class StatisticsActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         //Adding Fragments
-        adapter.AddFragment(new FragmentStatisticsMonthChart(), "Monthly");
+        adapter.AddFragment(new FragmentStatisticsSessionChart(), "Monthly");
         adapter.AddFragment(new FragmentStatisticsYearChart(), "Yearly");
 
         //adapter Setup
