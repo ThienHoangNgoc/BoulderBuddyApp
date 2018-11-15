@@ -101,7 +101,7 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
         xAxis1.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis1.setValueFormatter(new XAxisFormatter(xd));
         xAxis1.setDrawAxisLine(false);
-        xAxis1.setTextColor(getResources().getColor(R.color.colorWhite));
+        xAxis1.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
         xAxis1.setTextSize(15f);
 
         YAxis yAxis = barChart.getAxisLeft();

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import andorid_dev_2017.navigation_drawer.LineChartValueFormatter;
 import andorid_dev_2017.navigation_drawer.R;
 import andorid_dev_2017.navigation_drawer.XAxisFormatter;
 import andorid_dev_2017.navigation_drawer.YAxisValueFormatter;
@@ -82,10 +83,16 @@ public class FragmentStatisticsSessionChart extends Fragment {
         //get the highest value in the chart and setup its data
         int highestValue = setUpData(lineChartEntries, Integer.parseInt(yearPickerEditText.getText().toString()));
 
+        //modify the data curve
         LineDataSet lineDataSet = new LineDataSet(lineChartEntries, "LineChart Data");
+        lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        lineDataSet.setDrawCircles(false);
+        lineDataSet.setColor(getColorValue(R.color.colorPrimaryDark));
+        lineDataSet.setLineWidth(2f);
+
         LineData lineData = new LineData(lineDataSet);
         lineData.setValueTextColor(getColorValue(R.color.colorWhite));
-        lineData.setValueFormatter(new YAxisValueFormatter());
+        lineData.setValueFormatter(new LineChartValueFormatter());
         lineChart.setData(lineData);
 
         String xAxisStringLabel[] = new String[]{"Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
