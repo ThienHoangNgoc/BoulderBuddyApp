@@ -31,24 +31,24 @@ import andorid_dev_2017.navigation_drawer.XAxisFormatter;
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
 
-
-public class FragmentStatisticsSessionChart extends Fragment {
+public class FragmentStatisticsRoutesChart extends Fragment {
 
     View view;
+
     private String loggedInUser;
     private SQLiteDbEntryContract sqLiteDbEntryContract;
     private LineChart lineChart;
+    private EditText levelPickerEditText;
     private EditText yearPickerEditText;
 
-    public FragmentStatisticsSessionChart() {
+    public FragmentStatisticsRoutesChart() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.statistics_session_chart_fragment, container, false);
-
+        view = inflater.inflate(R.layout.statistics_year_chart_fragment, container, false);
 
         //setup database
         sqLiteDbEntryContract = new SQLiteDbEntryContract(getContext());
@@ -60,13 +60,30 @@ public class FragmentStatisticsSessionChart extends Fragment {
         }
 
         //setup views
-        lineChart = view.findViewById(R.id.statistics_sessions_line_chart_id);
-        yearPickerEditText = view.findViewById(R.id.statistics_sessions_fragment_edit_text_date_id);
+        lineChart = view.findViewById(R.id.statistics_routes_line_chart_id);
+        levelPickerEditText = view.findViewById(R.id.statistics_routes_fragment_edit_text_level_id);
+        yearPickerEditText = view.findViewById(R.id.statistics_routes_fragment_edit_text_date_id);
+
 
         //other setups
+        levelPickerEditText.setText("Level 1");
         yearPickerEditText.setText(getCurrentYear() + "");
         setupChartEntries(lineChart);
-        setupOnClickListener(yearPickerEditText);
+
+        //setup for clickListener
+        String[] levelData = getResources().getStringArray(R.array.level);
+        ArrayList<String> yearList = new ArrayList<>();
+        for (int i = 2000; i <= 2300; i++) {
+            yearList.add(i + "");
+        }
+        String[] yearData = yearList.toArray(new String[yearList.size()]);
+
+
+        //clickListener
+        setupOnClickListener(levelPickerEditText, "Select Level", "Level",
+                levelData, 0, levelData.length - 1, 0);
+        setupOnClickListener(yearPickerEditText, "Select Year", "Year",
+                yearData, 2000, 2300, stringToInt(yearPickerEditText.getText().toString()));
 
 
         return view;
@@ -80,14 +97,15 @@ public class FragmentStatisticsSessionChart extends Fragment {
 
         ArrayList<Entry> lineChartEntries = new ArrayList<>();
 
-        //get the highest value in the chart and setup its data
-        int highestValue = setUpData(lineChartEntries, getStringFromView(yearPickerEditText));
+        //data setup
+        setUpData(lineChartEntries, getStringFromView(levelPickerEditText), getStringFromView(yearPickerEditText));
 
         //modify the data curve
         LineDataSet lineDataSet = new LineDataSet(lineChartEntries, "LineChart Data");
         lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         lineDataSet.setDrawCircles(false);
-        lineDataSet.setColor(getColorValue(R.color.colorPrimaryDark));
+        //changes curve depending on the level
+        lineDataSet.setColor(getColorValue(getLevelColor(levelPickerEditText.getText().toString())));
         lineDataSet.setLineWidth(3f);
 
         LineData lineData = new LineData(lineDataSet);
@@ -124,70 +142,100 @@ public class FragmentStatisticsSessionChart extends Fragment {
         yAxisLeft.setAxisLineColor(getColorValue(R.color.colorBlack));
         yAxisLeft.setTextColor(getColorValue(R.color.colorWhite));
         yAxisLeft.setLabelCount(10);
-        if (highestValue <= 10) {
-            yAxisLeft.setAxisMaximum(10f);
-        }
 
 
     }
 
-    //gets Data based on year and returns the highest value in order to format the lineChart correctly
-    public int setUpData(ArrayList<Entry> dataList, String year) {
+    //gets Data based on year and difficulty
+    public void setUpData(ArrayList<Entry> dataList, String level, String year) {
         ArrayList<String> monthList = new ArrayList<>(Arrays.asList("Jan. ", "Feb. ", "Mar. ", "Apr. ", "May ", "Jun. ",
                 "Jul. ", "Aug. ", "Sep. ", "Oct. ", "Nov. ", "Dec. "));
-        int highestValue = 0;
-        int sessionQuantity;
+        int routeQuantity;
         for (int i = 0; i < monthList.size(); i++) {
-            sessionQuantity = getNumberOfSession(year, monthList.get(i));
-            dataList.add(new Entry(i, sessionQuantity));
-            if (sessionQuantity > highestValue) {
-                highestValue = sessionQuantity;
-            }
+            routeQuantity = getNumberOfLevel(level, year, monthList.get(i));
+            dataList.add(new Entry(i, routeQuantity));
+
         }
-        return highestValue;
+
     }
 
-
-    public int getNumberOfSession(String year, String month) {
+    //get the number of all routes of a specific month and level
+    public int getNumberOfLevel(String level, String year, String month) {
         Cursor cursor = sqLiteDbEntryContract.readEntry();
-        int sessionCount = 0;
+        int routeCount = 0;
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             for (int i = 0; cursor.getCount() > i; i++) {
                 if (getStringFromDbCursor(cursor, BoulderEntry.COLUMN_NAME_DATE).contains(month + year) &&
                         getStringFromDbCursor(cursor, BoulderEntry.COLUMN_NAME_CREATOR).equals(loggedInUser)) {
-                    sessionCount++;
+                    routeCount += getQuantityOfDifficulty(cursor, level);
                 }
                 cursor.moveToNext();
             }
         }
-        return sessionCount;
+        return routeCount;
+
     }
 
+    //returns the quantity of the difficulty at the current cursor position
+    public int getQuantityOfDifficulty(Cursor cursor, String level) {
+        int numberOfDifficulty = 0;
+        String columnName = "";
 
-    public void setupOnClickListener(EditText editText) {
+        switch (level) {
+            case "Level 1":
+                columnName = BoulderEntry.COLUMN_NAME_VERY_EASY;
+                break;
+            case "Level 2":
+                columnName = BoulderEntry.COLUMN_NAME_EASY;
+                break;
+            case "Level 3":
+                columnName = BoulderEntry.COLUMN_NAME_ADVANCED;
+                break;
+            case "Level 4":
+                columnName = BoulderEntry.COLUMN_NAME_HARD;
+                break;
+            case "Level 5":
+                columnName = BoulderEntry.COLUMN_NAME_VERY_HARD;
+                break;
+            case "Level 6":
+                columnName = BoulderEntry.COLUMN_NAME_EXTREMELY_HARD;
+                break;
+            case "Surprising":
+                columnName = BoulderEntry.COLUMN_NAME_SURPRISING;
+                break;
+            default:
+                break;
+
+        }
+
+        if (!columnName.equals("")) {
+            numberOfDifficulty = Integer.parseInt(getStringFromDbCursor(cursor, columnName));
+        }
+
+        return numberOfDifficulty;
+    }
+
+    public void setupOnClickListener(final EditText editText, final String headerText, final String textLabel,
+                                     final String[] dataSet, final int minValue, final int maxValue, final int presetValue) {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView headerText;
-                TextView textLabel;
+                TextView headerTextView;
+                TextView labelTextView;
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 view = getLayoutInflater().inflate(R.layout.statistics_number_picker_dialog, null);
-                headerText = view.findViewById(R.id.statistics_number_picker_dialog_text_header_id);
-                textLabel = view.findViewById(R.id.statistics_number_picker_dialog_text_label_id);
-                headerText.setText("Select Year");
-                textLabel.setText("Year");
-                final NumberPicker yearPicker = view.findViewById(R.id.statistics_number_picker_dialog_picker_id);
-                ArrayList<String> yearList = new ArrayList<>();
-                for (int i = 2000; i <= 2300; i++) {
-                    yearList.add(i + "");
-                }
+                headerTextView = view.findViewById(R.id.statistics_number_picker_dialog_text_header_id);
+                labelTextView = view.findViewById(R.id.statistics_number_picker_dialog_text_label_id);
+                headerTextView.setText(headerText);
+                labelTextView.setText(textLabel);
 
-                String[] yearData = yearList.toArray(new String[yearList.size()]);
-                yearPicker.setMinValue(2000);
-                yearPicker.setMaxValue(2300);
-                yearPicker.setValue(getCurrentYear());
-                yearPicker.setDisplayedValues(yearData);
+                final NumberPicker picker = view.findViewById(R.id.statistics_number_picker_dialog_picker_id);
+
+                picker.setMinValue(minValue);
+                picker.setMaxValue(maxValue);
+                picker.setValue(presetValue);
+                picker.setDisplayedValues(dataSet);
 
                 Button selectBtn = view.findViewById(R.id.statistics_session_chart_fragment_dialog_select_btn_id);
                 Button cancelBtn = view.findViewById(R.id.statistics_session_chart_fragment_dialog_cancel_btn_id);
@@ -199,7 +247,11 @@ public class FragmentStatisticsSessionChart extends Fragment {
                 selectBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        yearPickerEditText.setText(yearPicker.getValue() + "");
+                        if (textLabel.equals("Level")) {
+                            editText.setText(intToLevel(picker.getValue()));
+                        } else {
+                            editText.setText(picker.getValue() + "");
+                        }
                         //refresh chart if data changed
                         lineChart.notifyDataSetChanged();
                         lineChart.invalidate();
@@ -215,15 +267,78 @@ public class FragmentStatisticsSessionChart extends Fragment {
 
                     }
                 });
-
             }
         });
+    }
 
+    public String intToLevel(int pickerIndex) {
+        String level = "";
+        switch (pickerIndex) {
+            case 0:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 1:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 2:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 3:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 4:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 5:
+                level = "Level " + (pickerIndex + 1);
+                break;
+            case 6:
+                level = "Surprising";
+                break;
+        }
+        return level;
+    }
+
+    public int getLevelColor(String level) {
+        int color;
+        switch (level) {
+            case "Level 1":
+                color = R.color.Diff1;
+                break;
+            case "Level 2":
+                color = R.color.Diff2;
+                break;
+            case "Level 3":
+                color = R.color.Diff3;
+                break;
+            case "Level 4":
+                color = R.color.Diff4;
+                break;
+            case "Level 5":
+                color = R.color.Diff5;
+                break;
+            case "Level 6":
+                color = R.color.Diff6;
+                break;
+            case "Surprising":
+                color = R.color.Diff7;
+                break;
+            default:
+                color = R.color.colorPrimaryDark;
+                break;
+        }
+
+        return color;
+    }
+
+    public int stringToInt(String number) {
+        return Integer.parseInt(number);
     }
 
     public String getStringFromView(EditText editText) {
         return editText.getText().toString();
     }
+
 
     public String getStringFromDbCursor(Cursor cursor, String columnName) {
         return cursor.getString(cursor.getColumnIndex(columnName));
@@ -236,6 +351,5 @@ public class FragmentStatisticsSessionChart extends Fragment {
     public int getColorValue(int colorID) {
         return ResourcesCompat.getColor(getResources(), colorID, null);
     }
-
 
 }

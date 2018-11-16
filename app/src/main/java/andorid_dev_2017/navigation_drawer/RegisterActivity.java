@@ -1,5 +1,7 @@
 package andorid_dev_2017.navigation_drawer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
@@ -22,6 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbAchievementContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
+import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbImageDBContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbUserContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.UserEntry;
 
@@ -36,6 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
     private int toastDuration = Toast.LENGTH_SHORT;
 
     SQLiteDbUserContract sqLiteDbUserContract;
+    SQLiteDbEntryContract sqLiteDbEntryContract;
+    SQLiteDbAchievementContract sqLiteDbAchievementContract;
+    SQLiteDbImageDBContract sqLiteDbImageDBContract;
 
 
     @Override
@@ -45,6 +53,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Setup user database
         sqLiteDbUserContract = new SQLiteDbUserContract(getApplicationContext());
+        sqLiteDbEntryContract = new SQLiteDbEntryContract(getApplicationContext());
+        sqLiteDbAchievementContract = new SQLiteDbAchievementContract(getApplicationContext());
+        sqLiteDbImageDBContract = new SQLiteDbImageDBContract(getApplicationContext());
 
         //Setup views
         usernameEditText = findViewById(R.id.register_username_edit_text_id);
@@ -70,9 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onCreateClick() {
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String confirmedPassword = passwordConfirmEditText.getText().toString();
+        final String username = usernameEditText.getText().toString();
+        final String password = passwordEditText.getText().toString();
+        final String confirmedPassword = passwordConfirmEditText.getText().toString();
         Cursor cursor = sqLiteDbUserContract.readEntry();
         ArrayList<String> nameList = new ArrayList<>();
 
@@ -98,13 +109,30 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!password.equals(confirmedPassword)) {
             toastCreator("Passwords are not matching");
         } else {
-            sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
-                    "Placement", "0", ((BitmapDrawable) dummyImageView.getDrawable()).getBitmap(), "logout");
-            toastCreator("Your Account was successfully created.");
-            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-            intent.putExtra("username_key", username);
-            startActivity(intent);
-            finish();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final AlertDialog dialog = builder.setMessage("By creating a new account you will loose your old one. Are you sure?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteALL();
+                            sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
+                                    "Placement", "0", ((BitmapDrawable) dummyImageView.getDrawable()).getBitmap(), "logout");
+                            toastCreator("Your Account was successfully created.");
+                            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                            intent.putExtra("username_key", username);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).setNegativeButton("No", null).create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialogInterface) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+                }
+            });
+            dialog.show();
 
         }
 
@@ -140,4 +168,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    //offline version -> reset db and add alert dialog
+    public void deleteALL() {
+        sqLiteDbImageDBContract.deleteAllEntires();
+        sqLiteDbAchievementContract.deleteAllEntires();
+        sqLiteDbEntryContract.deleteAllEntries();
+        sqLiteDbUserContract.deleteAllEntires();
+    }
+
+
 }

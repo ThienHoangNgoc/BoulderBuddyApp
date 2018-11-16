@@ -2,17 +2,107 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBackgroundColor"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@color/appBackgroundColor">
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No Data"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/chart_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Completed Routes"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/statistics_routes_edit_text_RLayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chart_title_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/statistics_routes_fragment_RLayout_date_id"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/statistics_routes_fragment_RLayout_level_id">
+
+                <EditText
+                    android:id="@+id/statistics_routes_fragment_edit_text_date_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/transparent"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="2018"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/statistics_routes_fragment_edit_text_date_id"
+                    android:background="@color/transparentWhite" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/statistics_routes_fragment_RLayout_level_id"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="100dp">
+
+                <EditText
+                    android:id="@+id/statistics_routes_fragment_edit_text_level_id"
+                    android:layout_width="95dp"
+                    android:layout_height="30dp"
+                    android:background="@color/transparent"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Level 1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="95dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/statistics_routes_fragment_edit_text_level_id"
+                    android:background="@color/transparentWhite" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statistics_routes_edit_text_RLayout_id"
+            android:layout_margin="10dp">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/statistics_routes_line_chart_id"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp">
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

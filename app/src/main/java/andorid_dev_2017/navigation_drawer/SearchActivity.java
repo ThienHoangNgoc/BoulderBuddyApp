@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -79,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(SearchActivity.this);
                 final View mView = getLayoutInflater().inflate(R.layout.search_dialog, null);
                 final NumberPicker monthPicker = mView.findViewById(R.id.search_dialog_month_picker_id);
-                String[] data = getResources().getStringArray(R.array.monate);
+                String[] data = getResources().getStringArray(R.array.months);
                 monthPicker.setMinValue(0);
                 monthPicker.setMaxValue(data.length - 1);
                 monthPicker.setDisplayedValues(data);
@@ -266,8 +264,6 @@ public class SearchActivity extends AppCompatActivity {
                 break;
             case 12:
                 date = "December";
-                break;
-            default:
                 break;
 
 

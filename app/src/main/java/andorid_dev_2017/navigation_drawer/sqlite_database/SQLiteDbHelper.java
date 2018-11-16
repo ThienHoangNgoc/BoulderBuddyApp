@@ -74,7 +74,6 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + BoulderEntry.TABLE_NAME;
 
-
     //Delete Table String for User_entries
     public static final String SQL_DELETE_ENTRIES_USER =
             "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;

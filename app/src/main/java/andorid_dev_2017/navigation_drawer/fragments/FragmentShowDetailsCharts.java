@@ -94,12 +94,13 @@ public class FragmentShowDetailsCharts extends android.support.v4.app.Fragment {
 
         barChart.setData(horiBarData);
 
-        String xd[] = new String[]{"Very Easy", "Easy", "Advanced", "Hard", "Very Hard", "Extremely Hard", "Surprising"};
+        String level[] = new String[]{"Level 1", "Level 2", "Level 3", "Level 4",
+                "Level 5", "Level 6", "Surprising"};
         XAxis xAxis1 = barChart.getXAxis();
         xAxis1.setGranularity(1f);
         xAxis1.setDrawGridLines(false);
         xAxis1.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis1.setValueFormatter(new XAxisFormatter(xd));
+        xAxis1.setValueFormatter(new XAxisFormatter(level));
         xAxis1.setDrawAxisLine(false);
         xAxis1.setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorWhite, null));
         xAxis1.setTextSize(15f);

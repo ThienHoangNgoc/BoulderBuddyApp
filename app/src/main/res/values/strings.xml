@@ -42,7 +42,7 @@
 
     </string-array>
 
-    <string-array name="monate">
+    <string-array name="months">
 
         <item>January</item>
         <item>February</item>
@@ -56,6 +56,19 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
+
+    </string-array>
+
+    <string-array name="level">
+
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Surprising</item>
+
 
     </string-array>
 

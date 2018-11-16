@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/session_chart_header_id"
+        android:id="@+id/statistics_number_picker_dialog_text_header_id"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:text="Selecet Year"
+        android:text="Select Label"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -16,7 +16,7 @@
         android:id="@+id/view_id"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/session_chart_header_id"
+        android:layout_below="@id/statistics_number_picker_dialog_text_header_id"
         android:layout_marginTop="3dp"
         android:background="@color/colorBlack" />
 
@@ -31,21 +31,21 @@
 
 
         <TextView
-            android:id="@+id/statistics_session_dialog_year_text_id"
+            android:id="@+id/statistics_number_picker_dialog_text_label_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="Year"
+            android:text="Label"
             android:textSize="20dp"
             android:textStyle="bold" />
 
 
         <NumberPicker
-            android:id="@+id/statistics_session_chart_fragment_dialog_year_picker_id"
+            android:id="@+id/statistics_number_picker_dialog_picker_id"
             android:layout_width="80dp"
             android:layout_height="163dp"
-            android:layout_below="@id/statistics_session_dialog_year_text_id"
+            android:layout_below="@id/statistics_number_picker_dialog_text_label_id"
             android:layout_marginTop="5dp"
             android:descendantFocusability="blocksDescendants">
 
