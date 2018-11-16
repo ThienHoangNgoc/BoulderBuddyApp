@@ -182,7 +182,9 @@ public class ProfileActivity extends AppCompatActivity {
         if (profileDataChanged) {
             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
             intent.putExtra("username_key", loggedInUser);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+
         }
     }
 
@@ -225,7 +227,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void updateProfilePicture() {
-
         Cursor cursor = sqLiteDbUserContract.readEntry();
         int i;
         if (cursor.getCount() <= 0) return;
