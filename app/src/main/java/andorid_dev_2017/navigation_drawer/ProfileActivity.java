@@ -1,33 +1,34 @@
 package andorid_dev_2017.navigation_drawer;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
-import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.ImageDB;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbImageDBContract;
@@ -40,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String loggedInUser;
     final int REQUEST_CODE_GALLERY = 999;
     private int toastDuration = Toast.LENGTH_SHORT;
+    private static final String LOGTAG = "profileActivity";
 
     private ImageView profileImage;
     private TextView usernameText;
@@ -83,10 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
         rankPointsText = findViewById(R.id.profile_rank_points_value_text_id);
         rankInfoBtn = findViewById(R.id.profile_rank_info_btn_id);
         editUserNameBtn = findViewById(R.id.profile_edit_btn_id);
-
-
-        //checks whether main has to be reloaded or not
-        profileDataChanged = false;
 
 
         //onClickListeners
@@ -194,9 +192,14 @@ public class ProfileActivity extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                //resize image
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2;
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
                 profileImage.setImageBitmap(bitmap);
                 updateProfilePicture();
+
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -233,7 +236,8 @@ public class ProfileActivity extends AppCompatActivity {
         for (i = 0; i < cursor.getCount(); i++) {
             if (cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)).equals(loggedInUser)) {
                 Bitmap bitmap = ((BitmapDrawable) profileImage.getDrawable()).getBitmap();
-                sqLiteDbUserContract.updateImage(bitmap, cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USER_ID)));
+                String imagePath = getImagePath(bitmap);
+                sqLiteDbUserContract.updateOneColumn(UserEntry.COLUMN_NAME_PROFILE_PICTURE, imagePath, getUserEntry(loggedInUser).getId());
             }
             cursor.moveToNext();
         }
@@ -254,8 +258,7 @@ public class ProfileActivity extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
-                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
-                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
                 );
                 return user;
@@ -331,11 +334,15 @@ public class ProfileActivity extends AppCompatActivity {
             expForNextLvl = levelUpFunction(lvlCount);
         } else {
             //expCount is always greater than totalEXP or equal to totalEXP
-            expForNextLvl = expForNextLvl = expCount - totalExp;
+            expForNextLvl = expCount - totalExp;
         }
 
-
-        profileImage.setImageBitmap(user.getProfileImage());
+        if (user.getImagePath().equals("")) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy_profile_picture);
+            profileImage.setImageBitmap(bitmap);
+        } else {
+            profileImage.setImageBitmap(getBitmapFromImagePath(user.getImagePath()));
+        }
         usernameText.setText(loggedInUser);
         levelText.setText(lvlCount + "");
         totalExpText.setText(((int) totalExp) + "");
@@ -354,5 +361,40 @@ public class ProfileActivity extends AppCompatActivity {
     public void toastCreator(String toastText) {
         Toast.makeText(getApplicationContext(), toastText, toastDuration).show();
     }
+
+    public void createLog(String text) {
+        Log.d(LOGTAG, text);
+    }
+
+
+    public Bitmap getBitmapFromImagePath(String imagePath) {
+        File img = new File(imagePath);
+        Bitmap bitmap = null;
+
+        if (img.exists()) {
+            bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+        }
+
+        return bitmap;
+    }
+
+    public String getImagePath(Bitmap bitmap) {
+        return getRealPathFromURI(getImageUri(getApplicationContext(), bitmap));
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
+
 
 }

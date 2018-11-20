@@ -9,15 +9,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -117,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             deleteALL();
                             sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
-                                    "Placement", "0", ((BitmapDrawable) dummyImageView.getDrawable()).getBitmap(), "logout");
+                                    "Placement", "0", "", "logout");
                             toastCreator("Your Account was successfully created.");
                             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
                             intent.putExtra("username_key", username);
@@ -174,7 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
         sqLiteDbImageDBContract.deleteAllEntires();
         sqLiteDbAchievementContract.deleteAllEntires();
         sqLiteDbEntryContract.deleteAllEntries();
-        sqLiteDbUserContract.deleteAllEntires();
+        sqLiteDbUserContract.deleteAllEntries();
     }
 
 

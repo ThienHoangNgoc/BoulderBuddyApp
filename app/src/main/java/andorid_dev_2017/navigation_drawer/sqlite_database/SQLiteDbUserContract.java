@@ -26,7 +26,7 @@ public class SQLiteDbUserContract {
     }
 
     public void insertEntry(String name, String password, String lastLogin, String exp,
-                            String rank, String rankPoints, Bitmap bitmap, String loginStatus) {
+                            String rank, String rankPoints, String imagePath, String loginStatus) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         int id = getNumberOfEntries(UserEntry.TABLE_NAME) + 1;
         ContentValues values = new ContentValues();
@@ -37,7 +37,7 @@ public class SQLiteDbUserContract {
         values.put(UserEntry.COLUMN_NAME_EXP, exp);
         values.put(UserEntry.COLUMN_NAME_RANK, rank);
         values.put(UserEntry.COLUMN_NAME_RANK_POINTS, rankPoints);
-        values.put(UserEntry.COLUMN_NAME_PROFILE_PICTURE, getBitmapAsByteArray(bitmap));
+        values.put(UserEntry.COLUMN_NAME_PROFILE_PICTURE, imagePath);
         values.put(UserEntry.COLUMN_NAME_LOGIN_STATUS, loginStatus);
 
 
@@ -57,12 +57,6 @@ public class SQLiteDbUserContract {
 
     }
 
-    public void updateImage(Bitmap img, String rowID) {
-        SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(UserEntry.COLUMN_NAME_PROFILE_PICTURE, getBitmapAsByteArray(img));
-        db.update(UserEntry.TABLE_NAME, values, "Id=" + rowID, null);
-    }
 
     public void deleteRow(String rowID) {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
@@ -70,7 +64,7 @@ public class SQLiteDbUserContract {
 
     }
 
-    public void deleteAllEntires() {
+    public void deleteAllEntries() {
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         db.execSQL(SQLiteDbHelper.SQL_DELETE_ENTRIES_USER);
         db.execSQL(SQLiteDbHelper.SQL_CREATE_ENTRIES_USER);
@@ -101,18 +95,6 @@ public class SQLiteDbUserContract {
                 sortOrder
         );
         return c;
-    }
-
-
-    //Bitmap to ByteArray for BLOB
-    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        } else {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-            return outputStream.toByteArray();
-        }
     }
 
 

@@ -725,8 +725,7 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
-                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
-                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
                 );
                 return user;

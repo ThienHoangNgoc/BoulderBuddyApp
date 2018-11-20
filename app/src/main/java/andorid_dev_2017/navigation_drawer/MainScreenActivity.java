@@ -7,7 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,6 +26,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -348,7 +353,13 @@ public class MainScreenActivity extends AppCompatActivity {
 
         usernameTextView.setText(user.getUsername());
         userLvlTextView.setText(lvlCount + "");
-        userProfileImageView.setImageBitmap(user.getProfileImage());
+        if (user.getImagePath().equals("")) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dummy_profile_picture);
+            userProfileImageView.setImageBitmap(bitmap);
+        }else{
+            userProfileImageView.setImageBitmap(getBitmapFromImagePath(user.getImagePath()));
+
+        }
 
 
     }
@@ -374,8 +385,7 @@ public class MainScreenActivity extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_EXP)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_RANK_POINTS)),
-                        BitmapFactory.decodeByteArray(cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)), 0,
-                                (cursor.getBlob(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)).length)),
+                        cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PROFILE_PICTURE)),
                         cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_LOGIN_STATUS))
                 );
                 return user;
@@ -427,6 +437,35 @@ public class MainScreenActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String date = df.format(Calendar.getInstance().getTime());
         return date;
+    }
+
+    public Bitmap getBitmapFromImagePath(String imagePath) {
+        File img = new File(imagePath);
+        Bitmap bitmap = null;
+
+        if (img.exists()) {
+            bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+        }
+
+        return bitmap;
+    }
+
+    public String getImagePath(Bitmap bitmap) {
+        return getRealPathFromURI(getImageUri(getApplicationContext(), bitmap));
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 
     public void createLog(String text) {
