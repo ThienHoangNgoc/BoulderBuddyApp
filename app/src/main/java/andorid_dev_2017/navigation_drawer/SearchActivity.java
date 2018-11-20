@@ -12,6 +12,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.Entry;
@@ -38,7 +39,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private Button searchBtn;
     private Button searchClearBtn;
-    private Button searchBackBtn;
 
 
     @Override
@@ -62,7 +62,6 @@ public class SearchActivity extends AppCompatActivity {
         searchEditText = findViewById(R.id.search_edit_text_search_date_id);
         searchBtn = findViewById(R.id.search_search_btn_id);
         searchClearBtn = findViewById(R.id.search_reset_btn_id);
-        searchBackBtn = findViewById(R.id.search_back_btn_id);
 
 
         //Setup EntryAdapter
@@ -80,6 +79,7 @@ public class SearchActivity extends AppCompatActivity {
                 String[] data = getResources().getStringArray(R.array.months);
                 monthPicker.setMinValue(0);
                 monthPicker.setMaxValue(data.length - 1);
+                monthPicker.setValue(getCurrentMonth());
                 monthPicker.setDisplayedValues(data);
                 ArrayList<String> numbers = new ArrayList<>();
                 for (int i = 1900; i <= 2200; i++) {
@@ -89,7 +89,7 @@ public class SearchActivity extends AppCompatActivity {
                 String[] data2 = numbers.toArray(new String[numbers.size()]);
                 yearPicker.setMinValue(1900);
                 yearPicker.setMaxValue(2200);
-                yearPicker.setValue(2018);
+                yearPicker.setValue(getCurrentYear());
                 yearPicker.setDisplayedValues(data2);
 
                 Button selectBtn = mView.findViewById(R.id.search_dialog_select_btn_id);
@@ -144,13 +144,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 searchEditText.setText("");
-            }
-        });
-
-        searchBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
             }
         });
 
@@ -331,5 +324,13 @@ public class SearchActivity extends AppCompatActivity {
 
     public void toastCreator(String toastText) {
         Toast.makeText(getApplicationContext(), toastText, toastDuration).show();
+    }
+
+    public int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    public int getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH);
     }
 }
