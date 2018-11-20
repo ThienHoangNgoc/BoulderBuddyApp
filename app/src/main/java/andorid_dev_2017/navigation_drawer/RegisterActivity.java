@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
     public void onCreateClick() {
         final String username = usernameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
@@ -106,29 +107,42 @@ public class RegisterActivity extends AppCompatActivity {
             toastCreator("Passwords are not matching");
         } else {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            final AlertDialog dialog = builder.setMessage("By creating a new account you will loose your old one. Are you sure?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            deleteALL();
-                            sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
-                                    "Placement", "0", "", "logout");
-                            toastCreator("Your Account was successfully created.");
-                            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-                            intent.putExtra("username_key", username);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("No", null).create();
-            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialogInterface) {
-                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
-                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
-                }
-            });
-            dialog.show();
+            if (cursor.getCount() > 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                final AlertDialog dialog = builder.setMessage("By creating a new account you will loose your old one. Are you sure?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteALL();
+                                sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
+                                        "Placement", "0", "", "logout");
+                                toastCreator("Your Account was successfully created.");
+                                Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                                intent.putExtra("username_key", username);
+                                finishAffinity();
+                                startActivity(intent);
+
+                            }
+                        }).setNegativeButton("No", null).create();
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.defaultDialogTextColor));
+                    }
+                });
+                dialog.show();
+            } else {
+                sqLiteDbUserContract.insertEntry(username, password, getCurrentDate(), "0",
+                        "Placement", "0", "", "logout");
+                toastCreator("Your Account was successfully created.");
+                Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                intent.putExtra("username_key", username);
+                finishAffinity();
+                startActivity(intent);
+
+            }
+
 
         }
 

@@ -49,4 +49,6 @@ public class ShowPicturesFragmentGridViewEntryAdapter extends ArrayAdapter<Image
 
         return convertView;
     }
+
+
 }

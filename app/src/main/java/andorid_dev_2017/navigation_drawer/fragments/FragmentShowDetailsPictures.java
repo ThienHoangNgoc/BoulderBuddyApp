@@ -1,9 +1,12 @@
 package andorid_dev_2017.navigation_drawer.fragments;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 import andorid_dev_2017.navigation_drawer.ImageGridViewItem;
@@ -27,7 +32,6 @@ public class FragmentShowDetailsPictures extends android.support.v4.app.Fragment
     View view;
     String entryId;
     String creator;
-    Bitmap bitmap;
     TextView noImageText;
     GridView imageGridView;
     SQLiteDbImageDBContract sqLiteDbImageDBContract;
@@ -77,8 +81,7 @@ public class FragmentShowDetailsPictures extends android.support.v4.app.Fragment
             for (int i = 0; i < cursor.getCount(); i++) {
                 if (cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_CREATOR)).equals(creator) &&
                         cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_ENTRY_NUMBER)).equals(entryId)) {
-                    bitmap = byteArrayToBitmap(cursor.getBlob(cursor.getColumnIndex(ImageDB.COLUMN_NAME_IMAGE)));
-                    ImageGridViewItem gridViewItem = new ImageGridViewItem(bitmap);
+                    ImageGridViewItem gridViewItem = new ImageGridViewItem(getBitmapFromImagePath(cursor.getString(cursor.getColumnIndex(ImageDB.COLUMN_NAME_IMAGE))));
                     gridViewEntryAdapter.add(gridViewItem);
                     gridViewEntryAdapter.notifyDataSetChanged();
                     noImageText.setVisibility(View.INVISIBLE);
@@ -124,11 +127,35 @@ public class FragmentShowDetailsPictures extends android.support.v4.app.Fragment
         return null;
     }
 
-    public Bitmap byteArrayToBitmap(byte[] bytes) {
+    public Bitmap getBitmapFromImagePath(String imagePath) {
+        File img = new File(imagePath);
+        Bitmap bitmap = null;
 
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        if (img.exists()) {
+            bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+        }
 
+        return bitmap;
     }
+
+    public String getImagePath(Bitmap bitmap) {
+        return getRealPathFromURI(getImageUri(getContext(), bitmap));
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getActivity().getApplicationContext().getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
+
 
     public void createLog(String text) {
         Log.d(LOGTAG, text);

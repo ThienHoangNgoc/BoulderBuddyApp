@@ -3,6 +3,7 @@ package andorid_dev_2017.navigation_drawer;
 import android.Manifest;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -28,6 +30,8 @@ import android.widget.RatingBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -259,8 +263,10 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
     }
 
     public void addImageToDb(NewEntryGridViewEntryAdapter adapter) {
+
         for (int i = 0; i < adapter.getCount(); i++) {
-            sqLiteDbImageDBContract.insertEntry(loggedInUser, getEntryNumber(), adapter.getItem(i).getBitmap());
+            String imgPath = getImagePath(adapter.getItem(i).getBitmap());
+            sqLiteDbImageDBContract.insertEntry(loggedInUser, getEntryNumber(), imgPath);
         }
     }
 
@@ -305,7 +311,10 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
 
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                //resize image
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 2;
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream, null, options);
                 addImageToGrid(gridViewEntryAdapter, bitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -807,6 +816,35 @@ public class NewEntryActivity extends AppCompatActivity implements TimePickerDia
                 return false;
             }
         });
+    }
+
+    public Bitmap getBitmapFromImagePath(String imagePath) {
+        File img = new File(imagePath);
+        Bitmap bitmap = null;
+
+        if (img.exists()) {
+            bitmap = BitmapFactory.decodeFile(img.getAbsolutePath());
+        }
+
+        return bitmap;
+    }
+
+    public String getImagePath(Bitmap bitmap) {
+        return getRealPathFromURI(getImageUri(getApplicationContext(), bitmap));
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
     }
 
 

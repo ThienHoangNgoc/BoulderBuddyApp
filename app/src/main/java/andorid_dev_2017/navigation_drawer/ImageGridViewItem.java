@@ -7,7 +7,7 @@ public class ImageGridViewItem {
 
     Bitmap bitmap;
 
-    public ImageGridViewItem(Bitmap bitmap){
+    public ImageGridViewItem(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
 

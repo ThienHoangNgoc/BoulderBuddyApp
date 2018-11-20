@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import andorid_dev_2017.navigation_drawer.sqlite_database.StatisticsRecyclerViewItem;
-
 public class StatisticsRecyclerViewAdapter extends RecyclerView.Adapter<StatisticsRecyclerViewAdapter.ViewHolder> {
 
     private List<StatisticsRecyclerViewItem> listData;

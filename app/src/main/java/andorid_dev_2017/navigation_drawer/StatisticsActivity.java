@@ -22,7 +22,6 @@ import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsSessionCha
 import andorid_dev_2017.navigation_drawer.fragments.FragmentStatisticsRoutesChart;
 import andorid_dev_2017.navigation_drawer.sqlite_database.BoulderEntry;
 import andorid_dev_2017.navigation_drawer.sqlite_database.SQLiteDbEntryContract;
-import andorid_dev_2017.navigation_drawer.sqlite_database.StatisticsRecyclerViewItem;
 
 public class StatisticsActivity extends AppCompatActivity {
 

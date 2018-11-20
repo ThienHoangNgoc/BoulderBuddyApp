@@ -1,4 +1,4 @@
-package andorid_dev_2017.navigation_drawer.sqlite_database;
+package andorid_dev_2017.navigation_drawer;
 
 public class StatisticsRecyclerViewItem {
 

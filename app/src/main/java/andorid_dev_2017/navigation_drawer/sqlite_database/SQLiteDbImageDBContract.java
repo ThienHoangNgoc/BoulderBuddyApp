@@ -27,7 +27,7 @@ public class SQLiteDbImageDBContract {
     }
 
     public void insertEntry(String creator, String entryNumber,
-                            Bitmap image) {
+                            String imagePath) {
 
         SQLiteDatabase db = sqLiteDbHelper.getWritableDatabase();
         int id = getNumberOfEntries(ImageDB.TABLE_NAME) + 1;
@@ -35,7 +35,7 @@ public class SQLiteDbImageDBContract {
         values.put(ImageDB.COLUMN_NAME_IMAGE_ID, id);
         values.put(ImageDB.COLUMN_NAME_CREATOR, creator);
         values.put(ImageDB.COLUMN_NAME_ENTRY_NUMBER, entryNumber);
-        values.put(ImageDB.COLUMN_NAME_IMAGE, getBitmapAsByteArray(image));
+        values.put(ImageDB.COLUMN_NAME_IMAGE, imagePath);
 
 
         long newRowID;
@@ -90,16 +90,7 @@ public class SQLiteDbImageDBContract {
     }
 
 
-    //Bitmap to ByteArray for BLOB
-    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        } else {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-            return outputStream.toByteArray();
-        }
-    }
+
 
 
 }

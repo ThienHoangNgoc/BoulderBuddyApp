@@ -6,12 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 35;
+    public static final int DATABASE_VERSION = 36;
     public static final String DATABASE_NAME = "boulder_entries.db";
 
     public static final String COMMA_SEP = ",";
     public static final String TEXT_TYPE = " TEXT";
-    public static final String IMAGE_TYPE = " MEDIUMBLOB";
     public static final String INTEGER_TYPE = " INTEGER";
 
 
@@ -45,7 +44,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                     UserEntry.COLUMN_NAME_EXP + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_RANK + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_RANK_POINTS + TEXT_TYPE + COMMA_SEP +
-                    UserEntry.COLUMN_NAME_PROFILE_PICTURE + IMAGE_TYPE + COMMA_SEP +
+                    UserEntry.COLUMN_NAME_PROFILE_PICTURE + TEXT_TYPE + COMMA_SEP +
                     UserEntry.COLUMN_NAME_LOGIN_STATUS + TEXT_TYPE +
                     " )";
 
@@ -55,7 +54,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                     ImageDB.COLUMN_NAME_IMAGE_ID + " INTEGER PRIMARY KEY," +
                     ImageDB.COLUMN_NAME_CREATOR + TEXT_TYPE + COMMA_SEP +
                     ImageDB.COLUMN_NAME_ENTRY_NUMBER + TEXT_TYPE + COMMA_SEP +
-                    ImageDB.COLUMN_NAME_IMAGE + IMAGE_TYPE +
+                    ImageDB.COLUMN_NAME_IMAGE + TEXT_TYPE +
                     " )";
 
 
